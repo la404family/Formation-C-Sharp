@@ -27,7 +27,7 @@ Le framework .NET est installé avec Windows, tandis que le .NET Core doit être
 
 1. Télécharger et installer Visual Studio Code ou Visual Studio
 2. Télécharger et installer le SDK .NET Core
-3. Télécharger et installer l'extension C# pour Visual Studio Code et les extensions recommandées
+3. Installer l'extension C# pour Visual Studio Code et les extensions recommandées
 
 _SDK signifie : Software Development Kit = Kit de développement logiciel_
 
