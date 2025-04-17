@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\MyConsoleApp01\\MyConsoleApp01.csproj",
-      "projectName": "MyConsoleApp01",
-      "projectPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\MyConsoleApp01\\MyConsoleApp01.csproj",
+      "projectUniqueName": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\000. Les bases du C-Sharp\\000. Les bases du C-Sharp.csproj",
+      "projectName": "000. Les bases du C-Sharp",
+      "projectPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\000. Les bases du C-Sharp\\000. Les bases du C-Sharp.csproj",
       "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-      "outputPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\MyConsoleApp01\\obj\\",
+      "outputPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\000. Les bases du C-Sharp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
