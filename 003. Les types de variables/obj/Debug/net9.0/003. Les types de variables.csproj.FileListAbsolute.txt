@@ -1,0 +1,15 @@
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.GeneratedMSBuildEditorConfig.editorconfig
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.AssemblyInfoInputs.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.AssemblyInfo.cs
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.csproj.CoreCompileInputs.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.sourcelink.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\bin\Debug\net9.0\003. Les types de variables.exe
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\bin\Debug\net9.0\003. Les types de variables.deps.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\bin\Debug\net9.0\003. Les types de variables.runtimeconfig.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\bin\Debug\net9.0\003. Les types de variables.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\bin\Debug\net9.0\003. Les types de variables.pdb
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\refint\003. Les types de variables.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.pdb
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\003. Les types de variables.genruntimeconfig.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\003. Les types de variables\obj\Debug\net9.0\ref\003. Les types de variables.dll
