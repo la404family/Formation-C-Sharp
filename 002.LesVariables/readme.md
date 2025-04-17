@@ -43,10 +43,12 @@ Spécifier le type de la variable lors de sa déclaration permet de définir la 
 Exemple de programme utilisant des variables en C# :
 
 ```csharp
+// Déclaration des espaces de noms utilisés
 using System;
-
+// Déclaration de l'espace de nom du projet
 namespace LesVariables
 {
+    // Déclaration de la classe du projet
     class Program
     {
         static void Main(string[] args)
@@ -75,3 +77,67 @@ const string MESSAGE = "Bonjour, monde !";
 ```
 
 Dans cet exemple, nous avons déclaré deux constantes : `PI` de type `double` et `MESSAGE` de type `string`. Les constantes doivent être initialisées lors de leur déclaration et ne peuvent pas être modifiées par la suite.
+
+Exemple de programme utilisant des constantes en C# :
+
+```csharp
+// Déclaration des espaces de noms utilisés
+using System;
+// Déclaration de l'espace de nom du projet
+namespace LesVariables
+{
+    // Déclaration de la classe du projet
+    class Program
+    {
+        static void Main()
+        {
+            // Déclaration d'une variable de type entier
+            int entier = 10;
+            Console.WriteLine("entier = " + entier);
+
+            // Déclaration d'une variable nombre à virgule
+            float reel = 3.14f;
+            Console.WriteLine("nombre à virgule = " + reel);
+
+            // Déclaration d'une variable de type caractère
+            char caractere = 'A';
+            Console.WriteLine("caractere = " + caractere);
+
+            // Déclaration d'une variable de type chaîne de caractères
+            string chaine = "Hello World!";
+            Console.WriteLine("chaine = " + chaine);
+
+            // Déclaration d'une variable de type booléen (true ou false)
+            bool booleen = true;
+            Console.WriteLine("booleen = " + booleen);
+
+            // Déclaration d'une constante
+            const double PI = 3.14159;
+            Console.WriteLine("PI = " + PI);
+        }
+    }
+}
+```
+
+## La concaténation de chaînes en C-Sharp
+
+En C#, vous pouvez concaténer des chaînes en utilisant l'opérateur `+`. Voici un exemple de concaténation de chaînes en C# :
+
+```csharp
+string prenom = "Jean";
+string nom = "Dupont";
+string nomComplet = prenom + " " + nom;
+Console.WriteLine("Nom complet : " + nomComplet);
+```
+
+Stocker une valeur donnée par l'utilisateur dans une variable :
+
+```csharp
+Console.WriteLine("Entrez votre nom : ");
+string nom = Console.ReadLine();
+Console.WriteLine("Bonjour, " + nom + " !");
+```
+
+## Les types de données en C-Sharp
+
+En C#, les types de données sont des catégories de valeurs que les variables peuvent stocker. Les types de données déterminent la taille de l'espace mémoire alloué pour stocker la valeur de la variable, ainsi que les opérations qui peuvent être effectuées sur cette valeur. Voici les principaux types de données en C# :
