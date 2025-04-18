@@ -1,4 +1,4 @@
-# Les opérateurs en C
+# Les opérateurs en C-Sharp
 
 Les opérateurs sont des symboles qui effectuent des opérations sur des variables et des valeurs. Ils permettent de manipuler des données, de comparer des valeurs et de contrôler le flux d'exécution d'un programme.
 

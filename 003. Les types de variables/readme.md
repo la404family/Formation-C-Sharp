@@ -83,3 +83,14 @@ string message = $"Bonjour, {prenom} {nom}!"; // Interpolation de chaîne
 Console.WriteLine(message);
 
 ```
+
+## Convertir une chaîne en entier
+
+Pour convertir une chaîne de caractères en entier, vous pouvez utiliser la méthode `int.Parse()` ou `Convert.ToInt32()`.
+Il faudra passer la chaine de caractères dans une nouvelle variable de type entier.
+
+```csharp
+string chaine = "123";
+int entier = int.Parse(chaine); // Conversion de chaîne en entier
+Console.WriteLine(entier); // Affiche 123
+```
