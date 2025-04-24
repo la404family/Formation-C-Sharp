@@ -32,3 +32,16 @@ Le framework .NET est installé avec Windows, tandis que le .NET Core doit être
 SDK signifie : _Software Development Kit = Kit de développement logiciel_
 
 ---
+
+## sommaire
+
+- [0. Les bases du C-Sharp](000.%20Les%20bases%20du%20C-Sharp/readme.md)
+- [1. Les Application En Console](001.LesApplicationEnConsole/readme.md)
+- [2. Les Variables](002.LesVariables/readme.md)
+- [3. Les types de variables](003.%20Les%20types%20de%20variables/readme.md)
+- [4. Les opérateurs](004.%20Les%20opérateurs/readme.md)
+- [5. Les comparateurs](005.%20Les%20comparateurs/readme.md)
+- [6. Les structures de données](006.%20Les%20structures%20de%20données/readme.md)
+- [7. Les boucles](007.%20Les%20boucles/readme.md)
+- [8. La gestion des erreurs](008.%20La%20gestions%20des%20erreurs/readme.md)
+- [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
