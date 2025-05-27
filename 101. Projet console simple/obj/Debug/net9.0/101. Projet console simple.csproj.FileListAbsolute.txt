@@ -1,0 +1,15 @@
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\bin\Debug\net9.0\101. Projet console simple.exe
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\bin\Debug\net9.0\101. Projet console simple.deps.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\bin\Debug\net9.0\101. Projet console simple.runtimeconfig.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\bin\Debug\net9.0\101. Projet console simple.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\bin\Debug\net9.0\101. Projet console simple.pdb
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.GeneratedMSBuildEditorConfig.editorconfig
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.AssemblyInfoInputs.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.AssemblyInfo.cs
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.csproj.CoreCompileInputs.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.sourcelink.json
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\refint\101. Projet console simple.dll
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.pdb
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\101. Projet console simple.genruntimeconfig.cache
+C:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\101. Projet console simple\obj\Debug\net9.0\ref\101. Projet console simple.dll
