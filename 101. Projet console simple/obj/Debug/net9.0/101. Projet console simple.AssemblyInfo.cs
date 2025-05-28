@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("101. Projet console simple")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7eeb946511840b11ee78c4c73fca3019d01a9e83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdc44e18fe0568706023c22c549c597a1773dd20")]
 [assembly: System.Reflection.AssemblyProductAttribute("101. Projet console simple")]
 [assembly: System.Reflection.AssemblyTitleAttribute("101. Projet console simple")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
