@@ -33,7 +33,7 @@ SDK signifie : _Software Development Kit = Kit de développement logiciel_
 
 ---
 
-## sommaire
+## Sommaire de formation
 
 - [0. Les bases du C-Sharp](000.%20Les%20bases%20du%20C-Sharp/readme.md)
 - [1. Les Application En Console](001.LesApplicationEnConsole/readme.md)
@@ -46,3 +46,7 @@ SDK signifie : _Software Development Kit = Kit de développement logiciel_
 - [8. La gestion des erreurs](008.%20La%20gestions%20des%20erreurs/readme.md)
 - [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
 - [10. La programmation orientée objet](010.%20La%20programmation%20orientée%20objet/readme.md)
+
+## Les projets
+
+- [101. Projet console simple](101.%20Projet%20console%20simple/readme.md)
