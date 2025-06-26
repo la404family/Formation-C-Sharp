@@ -1,52 +1,141 @@
-# Formation C-Sharp
+# Les fonctions relatives aux ints en csharp
 
-Formation au langage de programmation C#. est un langage de programmation orienté objet développé par Microsoft.  
-Il est utilisé pour le développement d'applications Windows, Mac, Web, mobiles, de jeux vidéo, etc. Il est fortement typé et supporte le polymorphisme, l'encapsulation, l'héritage, les interfaces, les délégués, les événements, les collections, les exceptions, les attributs, les propriétés, les indexeurs, les opérateurs, les expressions lambda, les expressions régulières, les LINQ, etc.
+Les fonctions relatives aux ints sont des fonctions qui permettent de manipuler des entiers. Elles sont très utiles pour effectuer des opérations mathématiques, des conversions, des comparaisons, etc.
 
----
+## Exemples de fonctions relatives aux ints
 
-Le code source est écrit dans des fichiers texte avec l'extension .cs.  
-Il est ensuite compilé en code intermédiaire (bytecode) par le compilateur C# (csc.exe) de Microsoft.  
-Ce bytecode est ensuite interprété par la machine virtuelle .NET (CLR) de Microsoft.  
-Le code source peut être écrit dans un simple éditeur de texte ou dans un environnement de développement intégré (IDE) comme Visual Studio, Visual Studio Code, MonoDevelop, SharpDevelop, etc.
+### Abs : retourne la valeur absolue d'un entier
 
----
+```csharp
+int a = -5;
+Console.WriteLine(Math.Abs(a)); // Affiche 5
+```
 
-Le langage C# est fourni avec une bibliothèque standard appelée .NET Framework.  
-Il fournit des classes et des méthodes pour gérer les entrées/sorties, les fichiers, les réseaux, les threads, les collections, les bases de données, les graphiques, les XML, les services Web, etc.  
-Il fournit également des classes et des méthodes pour gérer les formulaires, les contrôles, les composants, les ressources, les événements, les messages, etc.
+### Max : retourne le maximum de deux entiers
 
----
+```csharp
+int a = 5;
+int b = 10;
+Console.WriteLine(Math.Max(a, b)); // Affiche 10
+```
 
-La différence entre le framework .NET et le .NET Core est que le framework .NET est une plateforme de développement Windows uniquement, tandis que le .NET Core est une plateforme de développement multiplateforme (Windows, Mac, Linux).  
-Le framework .NET est installé avec Windows, tandis que le .NET Core doit être installé séparément.
+### Min : retourne le minimum de deux entiers
 
----
+```csharp
+int a = 5;
+int b = 10;
+Console.WriteLine(Math.Min(a, b)); // Affiche 5
+```
 
-## Installation pour la programmation en C-Sharp
+### Pow : retourne la puissance d'un entier
 
-1. Télécharger et installer Visual Studio Code ou Visual Studio
-2. Télécharger et installer le SDK .NET Core
-3. Installer l'extension C# pour Visual Studio Code et les extensions recommandées
+```csharp
+int a = 2;
+int b = 3;
+Console.WriteLine(Math.Pow(a, b)); // Affiche 8
+```
 
-SDK signifie : _Software Development Kit = Kit de développement logiciel_
+### Sqrt : retourne la racine carrée d'un entier
 
----
+```csharp
+int a = 16;
+Console.WriteLine(Math.Sqrt(a)); // Affiche 4
+```
 
-## Sommaire de formation
+### Round : arrondit un entier
 
-- [0. Les bases du C-Sharp](000.%20Les%20bases%20du%20C-Sharp/readme.md)
-- [1. Les Application En Console](001.LesApplicationEnConsole/readme.md)
-- [2. Les Variables](002.LesVariables/readme.md)
-- [3. Les types de variables](003.%20Les%20types%20de%20variables/readme.md)
-- [4. Les opérateurs](004.%20Les%20opérateurs/readme.md)
-- [5. Les comparateurs](005.%20Les%20comparateurs/readme.md)
-- [6. Les structures de données](006.%20Les%20structures%20de%20données/readme.md)
-- [7. Les boucles](007.%20Les%20boucles/readme.md)
-- [8. La gestion des erreurs](008.%20La%20gestions%20des%20erreurs/readme.md)
-- [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
-- [10. La programmation orientée objet](010.%20La%20programmation%20orientée%20objet/readme.md)
+```csharp
+double a = 5.5;
+Console.WriteLine(Math.Round(a)); // Affiche 6
+```
 
-## Les projets
+### ToString : convertit un entier en chaîne de caractères
 
-- [101. Projet console simple](101.%20Projet%20console%20simple/readme.md)
+```csharp
+int a = 5;
+Console.WriteLine(a.ToString()); // Affiche "5"
+```
+
+### Parse : convertit une chaîne de caractères en entier
+
+```csharp
+string str = "5";
+int a = int.Parse(str);
+Console.WriteLine(a); // Affiche 5
+```
+
+### TryParse : tente de convertir une chaîne de caractères en entier
+
+```csharp
+string str = "5";
+int a;
+if (int.TryParse(str, out a))
+{
+    Console.WriteLine(a); // Affiche 5
+}
+else
+{
+    Console.WriteLine("Conversion échouée");
+}
+```
+
+### Compare : compare deux entiers
+
+```csharp
+int a = 5;
+int b = 10;
+if (Math.Compare(a, b) < 0)
+{
+    Console.WriteLine("a est inférieur à b");
+}
+else if (Math.Compare(a, b) > 0)
+{
+    Console.WriteLine("a est supérieur à b");
+}
+else
+{
+    Console.WriteLine("a est égal à b");
+}
+```
+
+### Clamp : limite une valeur entre deux bornes
+
+```csharp
+int a = 5;
+int min = 1;
+int max = 10;
+Console.WriteLine(Math.Clamp(a, min, max)); // Affiche 5
+```
+
+### Sign : retourne le signe d'un entier
+
+```csharp
+int a = -5;
+Console.WriteLine(Math.Sign(a)); // Affiche -1
+```
+
+### IsEven : vérifie si un entier est pair
+
+```csharp
+int a = 4;
+Console.WriteLine(a % 2 == 0 ? "Pair" : "Impair");
+```
+
+### IsOdd : vérifie si un entier est impair
+
+```csharp
+int a = 5;
+Console.WriteLine(a % 2 != 0 ? "Impair" : "Pair");
+```
+
+### Factorial : calcule la factorielle d'un entier
+
+```csharp
+int Factorial(int n)
+{
+    if (n < 0) throw new ArgumentException("Le nombre doit être positif");
+    if (n == 0) return 1;
+    return n * Factorial(n - 1);
+}
+Console.WriteLine(Factorial(5)); // Affiche 120
+```
