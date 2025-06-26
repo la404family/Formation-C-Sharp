@@ -47,6 +47,8 @@ SDK signifie : _Software Development Kit = Kit de développement logiciel_
 - [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
 - [9a. les fonctions relatives aux strings](009a.%20Les%20fonctions%20relatives%20aux%20strings/readme.md)
 - [9b. les fonctions relatives aux ints](009b.%20Les%20fonctions%20relatives%20aux%20ints/readme.md)
+- [9c. les fonctions relatives aux collections](009c.%20les%20fonctions%20relatives%20aux%20collections/readme.md)
+- [9x. la surcharge de fonction](009x.%20La%20surcharge%20de%20fonction/readme.md)
 - [10. La programmation orientée objet](010.%20La%20programmation%20orientée%20objet/readme.md)
 
 ## Les projets
