@@ -1,8 +1,12 @@
-﻿// Titre de la console : Le Pendu
+﻿// ------------------- LOGIQUE DU JEU DU PENDU -------------------
+using System;
+using System.Linq;
+
+// Titre de la console : Le Pendu
 Console.Title = "Le Pendu";
 // Remplacer les lettres par des ascii art
 
-strint asciiA = @"
+string asciiA = @"
  █████╗
 ██╔══██╗
 ███████║ 
@@ -300,4 +304,121 @@ string[] aliments = new string[]
     "Washington", "Chicago", "Los Angeles", "San Francisco", "Miami", "Houston", "Atlanta", "Boston", "Seattle", "Denver",
     "Phoenix", "Philadelphie", "Détroit", "Minneapolis", "Las Vegas", "Anchorage", "Honolulu", "Reykjavik", "Tallinn", "Vilnius"
 };
+
+
+// Fonction pour afficher le pendu selon le nombre d'erreurs
+void AfficherPendu(int erreurs)
+{
+    string[] pendu = new string[]
+    {
+        "\n\n\n\n\n\n\n",
+        "\n\n\n\n\n\n____\n",
+        " |\n |\n |\n |\n |\n_|___\n",
+        " _______\n |/      |\n |\n |\n |\n_|___\n",
+        " _______\n |/      |\n |      (_)\n |\n |\n_|___\n",
+        " _______\n |/      |\n |      (_)\n |      /|\\\n |\n_|___\n",
+        " _______\n |/      |\n |      (_)\n |      /|\\\n |      / \\\n_|___\n"
+    };
+    Console.WriteLine(pendu[Math.Min(erreurs, pendu.Length - 1)]);
+}
+
+// Fonction pour afficher le mot avec les lettres trouvées
+void AfficherMot(string mot, bool[] lettresTrouvees)
+{
+    for (int i = 0; i < mot.Length; i++)
+    {
+        char c = mot[i];
+        if (char.IsLetter(c))
+        {
+            if (lettresTrouvees[i])
+                Console.Write(c + " ");
+            else
+                Console.Write("_ ");
+        }
+        else
+        {
+            Console.Write(c + " "); // Affiche les espaces ou tirets
+        }
+    }
+    Console.WriteLine();
+}
+
+// Fonction principale du jeu
+void JouerPendu()
+{
+    var rand = new Random();
+    string motADeviner = aliments[rand.Next(aliments.Length)].ToUpperInvariant();
+    bool[] lettresTrouvees = new bool[motADeviner.Length];
+    int essaisRestants = 6;
+    string lettresEssayees = "";
+    bool gagne = false;
+
+    while (essaisRestants > 0 && !gagne)
+    {
+        Console.Clear();
+        Console.WriteLine("==== Jeu du Pendu ====");
+        AfficherPendu(6 - essaisRestants);
+        Console.WriteLine($"Essais restants : {essaisRestants}");
+        Console.Write("Mot à deviner : ");
+        AfficherMot(motADeviner, lettresTrouvees);
+        Console.WriteLine($"Lettres essayées : {lettresEssayees}");
+        Console.Write("Proposez une lettre : ");
+        string saisie = Console.ReadLine().ToUpperInvariant();
+        if (string.IsNullOrWhiteSpace(saisie) || saisie.Length != 1 || !char.IsLetter(saisie[0]))
+        {
+            Console.WriteLine("Veuillez entrer une seule lettre.");
+            Console.ReadKey();
+            continue;
+        }
+        char lettre = saisie[0];
+        if (lettresEssayees.Contains(lettre))
+        {
+            Console.WriteLine("Vous avez déjà essayé cette lettre.");
+            Console.ReadKey();
+            continue;
+        }
+        lettresEssayees += lettre + " ";
+        bool trouve = false;
+        for (int i = 0; i < motADeviner.Length; i++)
+        {
+            if (motADeviner[i] == lettre)
+            {
+                lettresTrouvees[i] = true;
+                trouve = true;
+            }
+        }
+        if (!trouve)
+            essaisRestants--;
+        // Vérifier si toutes les lettres ont été trouvées
+        gagne = true;
+        for (int i = 0; i < motADeviner.Length; i++)
+        {
+            if (char.IsLetter(motADeviner[i]) && !lettresTrouvees[i])
+            {
+                gagne = false;
+                break;
+            }
+        }
+    }
+    Console.Clear();
+    if (gagne)
+    {
+        Console.WriteLine("Bravo ! Vous avez trouvé le mot : " + motADeviner);
+    }
+    else
+    {
+        AfficherPendu(6);
+        Console.WriteLine("Dommage ! Le mot était : " + motADeviner);
+    }
+}
+
+// Boucle principale pour rejouer
+while (true)
+{
+    JouerPendu();
+    Console.WriteLine("Voulez-vous rejouer ? (O/N)");
+    string reponse = Console.ReadLine().Trim().ToUpperInvariant();
+    if (reponse != "O")
+        break;
+}
 

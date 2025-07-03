@@ -141,3 +141,129 @@ Console.WriteLine("Bonjour, " + nom + " !");
 ## Les types de données en C-Sharp
 
 En C#, les types de données sont des catégories de valeurs que les variables peuvent stocker. Les types de données déterminent la taille de l'espace mémoire alloué pour stocker la valeur de la variable, ainsi que les opérations qui peuvent être effectuées sur cette valeur. Voici les principaux types de données en C# :
+
+## Portée des variables en C-Sharp
+
+La portée d'une variable détermine où elle peut être utilisée dans le code. En C#, il existe plusieurs types de portée :
+
+- **Variable locale** : déclarée à l'intérieur d'une méthode, accessible uniquement dans cette méthode.
+- **Champ de classe** : déclarée dans une classe mais en dehors des méthodes, accessible dans toute la classe.
+- **Variable statique** : partagée par toutes les instances de la classe.
+
+```csharp
+using System;
+
+class ExemplePortee
+{
+    int champClasse = 5; // Champ de classe
+    static int champStatique = 10; // Champ statique
+
+    void Methode()
+    {
+        int variableLocale = 2; // Variable locale
+        Console.WriteLine(variableLocale);
+        Console.WriteLine(champClasse);
+        Console.WriteLine(champStatique);
+    }
+}
+```
+
+## Variables implicites : `var` et `dynamic`
+
+- **`var`** : le type est déterminé à la compilation, il ne peut pas changer par la suite.
+- **`dynamic`** : le type est déterminé à l'exécution, il peut changer par la suite.
+
+```csharp
+var nombre = 42; // Le compilateur comprend que c'est un int
+var texte = "Bonjour"; // string
+// nombre = "texte"; // Erreur de compilation
+
+dynamic valeur = 10;
+valeur = "Maintenant une chaîne"; // Pas d'erreur à la compilation
+Console.WriteLine(valeur);
+```
+
+Voici ce que ça implique :
+
+- Le type réel de la variable dynamic est résolu au moment de l’exécution, pas à la compilation.
+
+-Tu peux lui assigner une valeur de n’importe quel type, puis lui réassigner une autre valeur d’un type complètement différent.
+
+- Cela permet une grande flexibilité, mais au détriment de la sécurité de type à la compilation.
+
+## Variables non initialisées et valeurs par défaut
+
+En C#, les variables locales doivent être initialisées avant d'être utilisées. Les champs de classe reçoivent une valeur par défaut.
+
+```csharp
+class ExempleDefaut
+{
+    int champClasse; // Par défaut : 0
+    bool estActif;   // Par défaut : false
+
+    void Afficher()
+    {
+        int local;
+        // Console.WriteLine(local); // Erreur : la variable locale n'est pas initialisée
+        Console.WriteLine(champClasse); // Affiche 0
+        Console.WriteLine(estActif);    // Affiche False
+    }
+}
+```
+
+## Conversion de types (casting)
+
+Il est parfois nécessaire de convertir une variable d'un type à un autre.
+
+```csharp
+int entier = 10;
+double reel = entier; // Conversion implicite (int vers double)
+
+// Conversion explicite (cast)
+double d = 9.7;
+int i = (int)d; // i vaut 9, la partie décimale est perdue
+
+// Conversion de string vers int
+string texte = "123";
+int nombre = int.Parse(texte); // nombre vaut 123
+// int nombre2 = int.Parse("abc"); // Provoque une exception
+```
+
+## Bonnes pratiques et erreurs courantes
+
+- Toujours initialiser les variables locales avant utilisation.
+- Utiliser des noms de variables explicites et significatifs.
+- Privilégier `var` pour les types évidents, mais éviter pour les types ambigus.
+- Attention à la casse : `maVariable` et `mavariable` sont différents.
+
+```csharp
+// Mauvaise pratique :
+int a = 1, b = 2, c = 3; // Peu lisible
+
+// Bonne pratique :
+int nombreApples = 1;
+int nombreOranges = 2;
+int nombreBananes = 3;
+```
+
+// Erreur courante : utiliser une variable non initialisée
+
+```csharp
+int x;
+// Console.WriteLine(x); // Erreur de compilation
+```
+
+// Erreur courante : confusion entre affectation (=) et comparaison (==)
+
+```csharp
+int y = 5;
+if (y == 5) // Comparaison correcte
+{
+    Console.WriteLine("y vaut 5");
+}
+// if (y = 5) // Erreur : affectation au lieu de comparaison
+```
+
+---
+
+Ces notions avancées sur les variables vous permettront d'écrire un code plus robuste et plus lisible en C#.
