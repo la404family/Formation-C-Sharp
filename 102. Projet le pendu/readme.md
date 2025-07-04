@@ -15,7 +15,6 @@ Ce projet est un jeu de pendu en C# qui permet de jouer contre l'ordinateur.
 ## Code
 
 ```csharp
-
 // ==================== JEU DU PENDU - PROGRAMME PRINCIPAL ====================
 // Ce programme implémente le jeu classique du pendu en C#
 // Le joueur doit deviner un mot en proposant des lettres une par une
@@ -154,6 +153,25 @@ string[] aliments = new string[]
 };
 
 // ==================== FONCTIONS UTILITAIRES ====================
+
+/// <summary>
+/// Normalise un caractère pour la comparaison (ex: ç => c, â/ä => a, etc.)
+/// </summary>
+char NormalizeChar(char c)
+{
+    c = char.ToUpperInvariant(c);
+    switch (c)
+    {
+        case 'À': case 'Â': case 'Ä': return 'A';
+        case 'Ç': return 'C';
+        case 'É': case 'È': case 'Ê': case 'Ë': return 'E';
+        case 'Î': case 'Ï': return 'I';
+        case 'Ô': case 'Ö': return 'O';
+        case 'Ù': case 'Û': case 'Ü': return 'U';
+        case 'Ÿ': return 'Y';
+        default: return c;
+    }
+}
 
 /// <summary>
 /// Affiche le dessin du pendu selon le nombre d'erreurs commises
@@ -297,11 +315,11 @@ void JouerPendu()
 
         // ==================== VÉRIFICATION DE LA LETTRE ====================
         bool trouve = false; // Variable pour indiquer si la lettre a été trouvée
-
+        char lettreNorm = NormalizeChar(lettre);
         // Parcourir le mot pour chercher la lettre proposée
         for (int i = 0; i < motADeviner.Length; i++)
         {
-            if (motADeviner[i] == lettre)
+            if (char.IsLetter(motADeviner[i]) && NormalizeChar(motADeviner[i]) == lettreNorm)
             {
                 // Marquer cette position comme trouvée
                 lettresTrouvees[i] = true;
@@ -364,7 +382,4 @@ while (true)
 
 // ==================== FIN DU PROGRAMME ====================
 // Le programme se termine ici quand le joueur ne veut plus rejouer
-
-
-
 ```
