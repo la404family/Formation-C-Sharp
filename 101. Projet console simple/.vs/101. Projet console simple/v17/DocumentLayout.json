@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\101. Projet console simple\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9877B3BF-9F04-4102-A57C-3420FA7B4D16}|101. Projet console simple.csproj|c:\\documents perso\\0000site internet\\du chevreuil\\formation c-sharp\\101. projet console simple\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9877B3BF-9F04-4102-A57C-3420FA7B4D16}|101. Projet console simple.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\101. Projet console simple\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,12 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,

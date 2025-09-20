@@ -174,7 +174,7 @@ void AfficherPendu(int erreurs)
         " _______\n |/      |\n |      (_)\n |      /|\\\n |\n_|___\n", // 5 erreurs : corps
         " _______\n |/      |\n |      (_)\n |      /|\\\n |      / \\\n_|___\n" // 6 erreurs : pendu complet
     };
-    
+
     // Affiche le dessin correspondant au nombre d'erreurs
     // Math.Min garantit qu'on ne dépasse pas la taille du tableau
     Console.WriteLine(pendu[Math.Min(erreurs, pendu.Length - 1)]);
@@ -189,15 +189,15 @@ void AfficherMot(string mot, bool[] lettresTrouvees)
 {
     // Sauvegarder la couleur actuelle pour pouvoir la restaurer après
     ConsoleColor couleurActuelle = Console.ForegroundColor;
-    
+
     // Changer la couleur en blanc pour mettre le mot en évidence
     Console.ForegroundColor = ConsoleColor.White;
-    
+
     // Parcourir chaque caractère du mot
     for (int i = 0; i < mot.Length; i++)
     {
         char c = mot[i]; // Caractère actuel
-        
+
         // Vérifier si c'est une lettre (pas un espace, tiret, etc.)
         if (char.IsLetter(c))
         {
@@ -215,7 +215,7 @@ void AfficherMot(string mot, bool[] lettresTrouvees)
         }
     }
     Console.WriteLine(); // Retour à la ligne après le mot
-    
+
     // Restaurer la couleur jaune pour le reste de l'interface
     Console.ForegroundColor = couleurActuelle;
 }
@@ -229,21 +229,21 @@ void JouerPendu()
 {
     // Initialisation du générateur de nombres aléatoires
     var rand = new Random();
-    
+
     // Sélection aléatoire d'un mot dans la base de données
     // ToUpperInvariant() convertit le mot en majuscules pour faciliter la comparaison
     string motADeviner = aliments[rand.Next(aliments.Length)].ToUpperInvariant();
-    
+
     // Tableau booléen pour suivre quelles lettres ont été trouvées
     // La taille correspond à la longueur du mot
     bool[] lettresTrouvees = new bool[motADeviner.Length];
-    
+
     // Nombre d'essais restants (le joueur perd après 6 erreurs)
     int essaisRestants = 6;
-    
+
     // Chaîne pour stocker les lettres déjà essayées par le joueur
     string lettresEssayees = "";
-    
+
     // Variable pour indiquer si le joueur a gagné
     bool gagne = false;
 
@@ -253,27 +253,27 @@ void JouerPendu()
     {
         // Effacer l'écran pour une interface propre
         Console.Clear();
-        
+
         // Affichage de l'interface de jeu
         Console.WriteLine("==== Jeu du Pendu ====");
-        
+
         // Afficher le pendu avec le nombre d'erreurs actuelles
         AfficherPendu(6 - essaisRestants);
-        
+
         // Afficher le nombre d'essais restants
         Console.WriteLine($"Essais restants : {essaisRestants}");
-        
+
         // Afficher le mot à deviner avec les lettres trouvées
         Console.Write("Mot à deviner : ");
         AfficherMot(motADeviner, lettresTrouvees);
-        
+
         // Afficher les lettres déjà essayées
         Console.WriteLine($"Lettres essayées : {lettresEssayees}");
-        
+
         // Demander au joueur de proposer une lettre
         Console.Write("Proposez une lettre : ");
         string saisie = Console.ReadLine().ToUpperInvariant();
-        
+
         // ==================== VALIDATION DE LA SAISIE ====================
         // Vérifier que la saisie est valide (une seule lettre)
         if (string.IsNullOrWhiteSpace(saisie) || saisie.Length != 1 || !char.IsLetter(saisie[0]))
@@ -282,9 +282,9 @@ void JouerPendu()
             Console.ReadKey(); // Attendre que le joueur appuie sur une touche
             continue; // Recommencer la boucle
         }
-        
+
         char lettre = saisie[0]; // Extraire la lettre saisie
-        
+
         // Vérifier si la lettre a déjà été essayée
         if (lettresEssayees.Contains(lettre))
         {
@@ -292,10 +292,10 @@ void JouerPendu()
             Console.ReadKey(); // Attendre que le joueur appuie sur une touche
             continue; // Recommencer la boucle
         }
-        
+
         // Ajouter la lettre à la liste des lettres essayées
         lettresEssayees += lettre + " ";
-        
+
         // ==================== VÉRIFICATION DE LA LETTRE ====================
         bool trouve = false; // Variable pour indiquer si la lettre a été trouvée
         char lettreNorm = NormalizeChar(lettre);
@@ -309,15 +309,15 @@ void JouerPendu()
                 trouve = true; // La lettre a été trouvée au moins une fois
             }
         }
-        
+
         // Si la lettre n'a pas été trouvée, décrémenter le nombre d'essais
         if (!trouve)
             essaisRestants--;
-        
+
         // ==================== VÉRIFICATION DE LA VICTOIRE ====================
         // Vérifier si toutes les lettres ont été trouvées
         gagne = true; // On suppose que le joueur a gagné
-        
+
         // Parcourir le mot pour vérifier si toutes les lettres sont trouvées
         for (int i = 0; i < motADeviner.Length; i++)
         {
@@ -329,11 +329,11 @@ void JouerPendu()
             }
         }
     }
-    
+
     // ==================== FIN DE PARTIE ====================
     // Effacer l'écran pour afficher le résultat final
     Console.Clear();
-    
+
     if (gagne)
     {
         // Le joueur a gagné : toutes les lettres ont été trouvées
@@ -353,11 +353,11 @@ while (true)
 {
     // Lancer une partie du jeu
     JouerPendu();
-    
+
     // Demander au joueur s'il veut rejouer
     Console.WriteLine("Voulez-vous rejouer ? (O/N)");
     string reponse = Console.ReadLine().Trim().ToUpperInvariant();
-    
+
     // Si la réponse n'est pas "O" (Oui), sortir de la boucle
     if (reponse != "O")
         break;
