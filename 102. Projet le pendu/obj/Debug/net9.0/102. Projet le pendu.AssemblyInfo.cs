@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("102. Projet le pendu")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c94afb907bfab82fe6826b037fe1966d4e33db8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e757b84191447b4d4c846c27953499fb1ee85fce")]
 [assembly: System.Reflection.AssemblyProductAttribute("102. Projet le pendu")]
 [assembly: System.Reflection.AssemblyTitleAttribute("102. Projet le pendu")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

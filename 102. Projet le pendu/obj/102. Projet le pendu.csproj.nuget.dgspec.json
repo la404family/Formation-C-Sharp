@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj": {}
+    "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj": {}
   },
   "projects": {
-    "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj": {
+    "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj",
+        "projectUniqueName": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj",
         "projectName": "102. Projet le pendu",
-        "projectPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj",
+        "projectPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\102. Projet le pendu.csproj",
         "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-        "outputPath": "C:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\obj\\",
+        "outputPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\102. Projet le pendu\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -65,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
