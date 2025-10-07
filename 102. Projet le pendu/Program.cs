@@ -11,6 +11,7 @@ using System;        // Bibliothèque de base : Console (pour afficher du texte)
 using System.Linq;   // Bibliothèque LINQ : permet d'utiliser des méthodes comme Contains(), Distinct(), etc.
 using System.IO;     // Bibliothèque pour les fichiers : lire et écrire des fichiers sur le disque dur
 using System.Text.Json; // Bibliothèque JSON : pour sauvegarder nos statistiques dans un fichier texte structuré
+using System.Text.Json.Serialization; // Pour le générateur de code source JSON (Source Generator)
 
 // ==================== PROGRAMME PRINCIPAL ====================
 // Ici commence le code qui s'exécute quand on lance le programme
@@ -130,6 +131,16 @@ Console.WriteLine("\nAppuyez sur une touche pour quitter...");
 Console.ReadKey();  // Attend qu'une touche soit pressée, puis le programme se termine
 
 
+// ==================== CONTEXTE DE SÉRIALISATION JSON ====================
+// Cette classe définit le contexte pour la génération de code source JSON
+// Elle permet d'éviter les avertissements IL2026 et IL3050 en utilisant
+// la génération de code au moment de la compilation au lieu de la réflexion
+[JsonSerializable(typeof(StatistiquesJeu))]
+[JsonSerializable(typeof(string[]))]
+[JsonSourceGenerationOptions(WriteIndented = true)]
+internal partial class JsonContext : JsonSerializerContext
+{
+}
 
 // ==================== CLASSES POUR LES STATISTIQUES ====================
 // Une CLASSE en C# = un "modèle" ou "plan" pour créer des objets
@@ -251,7 +262,8 @@ public class StatistiquesJeu
             // Convertir nos statistiques en format JSON (un format de fichier très courant)
             // JSON ressemble à ça : {"PartiesJouees": 5, "PartiesGagnees": 3, ...}
             // "WriteIndented = true" = mettre en forme pour que ce soit lisible par un humain
-            string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+            string json = JsonSerializer.Serialize(this, JsonContext.Default.StatistiquesJeu);
 
             // Écrire ce texte JSON dans un fichier sur le disque dur
             File.WriteAllText(cheminFichier, json);
@@ -279,7 +291,8 @@ public class StatistiquesJeu
                 string json = File.ReadAllText(cheminFichier);
 
                 // Convertir le texte JSON en objet StatistiquesJeu
-                var stats = JsonSerializer.Deserialize<StatistiquesJeu>(json);
+                // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+                var stats = JsonSerializer.Deserialize(json, JsonContext.Default.StatistiquesJeu);
 
                 // "?? new StatistiquesJeu()" = "si stats est null, créer un objet vide à la place"
                 return stats ?? new StatistiquesJeu();
@@ -356,7 +369,8 @@ public static class UtilitairesPendu
                 // ÉTAPE 2 : Désérialiser (= convertir) le texte JSON en tableau C#
                 // JsonSerializer.Deserialize transforme du texte JSON en objets C# utilisables
                 // Le <string[]> indique qu'on attend un tableau de chaînes de caractères
-                string[]? mots = JsonSerializer.Deserialize<string[]>(contenuJson);
+                // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+                string[]? mots = JsonSerializer.Deserialize(contenuJson, JsonContext.Default.StringArray);
 
                 // ÉTAPE 3 : Vérification de sécurité
                 // Si la désérialisation a réussi ET que le tableau n'est pas vide
@@ -408,12 +422,8 @@ public static class UtilitairesPendu
         {
             // Convertir le tableau de mots en format JSON
             // WriteIndented = true rend le fichier lisible (avec indentation et retours à la ligne)
-            string json = JsonSerializer.Serialize(mots, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                // Encoder = null permet d'écrire les caractères accentués correctement (é, è, à, etc.)
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
+            // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+            string json = JsonSerializer.Serialize(mots, JsonContext.Default.StringArray);
 
             // Écrire le texte JSON dans le fichier sur le disque dur
             File.WriteAllText(cheminFichier, json);

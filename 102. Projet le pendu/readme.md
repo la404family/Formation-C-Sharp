@@ -254,136 +254,6 @@ Ce projet est idéal pour **apprendre C#** car il couvre :
 └── Verifier-DotNet.ps1             # Vérificateur .NET Runtime
 ```
 
-### 🏗️ Classes principales
-
-#### 1. `ResultatPartie`
-
-Encapsule les résultats d'une partie :
-
-- `bool Gagne` : Victoire ou défaite
-- `int NombreLettresUtilisees` : Efficacité
-- `string MotADeviner` : Mot de la partie
-
-#### 2. `StatistiquesJeu`
-
-Gère toutes les statistiques :
-
-- Propriétés : `PartiesJouees`, `PartiesGagnees`, etc.
-- Méthodes : `EnregistrerVictoire()`, `SauvegarderStatistiques()`
-- Calculs automatiques : Taux de réussite, moyennes
-
-#### 3. `UtilitairesPendu` (classe statique)
-
-Contient toute la logique du jeu :
-
-- `ChargerMotsDepuisJson()` : Chargement des mots
-- `NormalizeChar()` : Gestion des accents
-- `AfficherPendu()` : Dessin ASCII du pendu
-- `AfficherMot()` : Affichage avec underscores
-- `JouerPendu()` : Boucle principale du jeu
-
-## 🔧 Personnalisation
-
-### 📝 Ajouter vos propres mots
-
-1. **Ouvrez** `mots.json`
-2. **Ajoutez vos mots** au tableau JSON :
-   ```json
-   ["Pomme", "Banane", "VotreMot", "AutreMot"]
-   ```
-3. **Sauvegardez** le fichier
-4. **Relancez** le jeu !
-
-### 🎨 Modifier les couleurs
-
-Dans `Program.cs`, lignes 24-26 :
-
-```csharp
-Console.BackgroundColor = ConsoleColor.DarkRed;   // Fond
-Console.ForegroundColor = ConsoleColor.White;     // Texte
-```
-
-Couleurs disponibles : `Black`, `DarkBlue`, `DarkGreen`, `DarkCyan`, `DarkRed`, `DarkMagenta`, `DarkYellow`, `Gray`, `DarkGray`, `Blue`, `Green`, `Cyan`, `Red`, `Magenta`, `Yellow`, `White`
-
-### ⚙️ Modifier le nombre d'essais
-
-Dans `UtilitairesPendu.JouerPendu()`, ligne ~650 :
-
-```csharp
-int essaisRestants = 6;  // Changez cette valeur (3-10 recommandé)
-```
-
-### 🎯 Ajuster la difficulté
-
-**Facile** : 10 essais, mots courts
-
-```csharp
-int essaisRestants = 10;
-// Filtrer mots.json pour garder seulement mots de 3-6 lettres
-```
-
-**Normal** : 6 essais (par défaut)
-
-**Difficile** : 4 essais, mots longs
-
-```csharp
-int essaisRestants = 4;
-// Filtrer mots.json pour garder seulement mots de 8+ lettres
-```
-
-## 💾 Gestion des fichiers
-
-### `mots.json` - Base de données
-
-Format :
-
-```json
-["Mot1", "Mot2", "Mot3"]
-```
-
-- **Taille actuelle** : 109 282 mots français
-- **Encodage** : UTF-8 (support des accents)
-- **Auto-création** : Généré avec 60 mots si absent
-- **Validation** : Vérification au chargement
-
-### `statistiques_pendu.json` - Sauvegarde
-
-Format :
-
-```json
-{
-  "PartiesJouees": 15,
-  "PartiesGagnees": 10,
-  "PartiesPerdues": 5,
-  "TotalLettresTentees": 127,
-  "TotalMotsTrouves": 10
-}
-```
-
-- **Emplacement** : Même dossier que l'exécutable
-- **Création** : Automatique au premier lancement
-- **Mise à jour** : Après chaque partie
-- **Réinitialisation** : Supprimez le fichier pour repartir à zéro
-
-## 🚀 Performances
-
-### ⚡ Optimisations implémentées
-
-- **Chargement unique** : Les mots sont chargés une seule fois au démarrage
-- **Normalisation efficace** : Switch case optimisé pour les accents
-- **Validation rapide** : Vérifications immédiates des saisies
-- **Mémoire minimale** : Utilisation de tableaux statiques
-
-### 📊 Métriques
-
-| Métrique                | Valeur                                 |
-| ----------------------- | -------------------------------------- |
-| **Temps de démarrage**  | < 1 seconde                            |
-| **Mémoire RAM**         | ~15-20 Mo                              |
-| **Taille exécutable**   | ~200 Ko (sans .NET)                    |
-| **Taille installateur** | ~5-10 Mo (léger) / 60-80 Mo (autonome) |
-| **Mots chargés**        | 109 282 en ~100 ms                     |
-
 ## 🧪 Tests et qualité
 
 ### ✅ Fonctionnalités testées
@@ -397,10 +267,6 @@ Format :
 - ✅ Affichage du pendu (7 étapes)
 - ✅ Calcul des statistiques
 - ✅ Gestion des erreurs fichiers
-
-### 🐛 Bugs connus
-
-Aucun bug majeur connu. Si vous en trouvez un, n'hésitez pas à [créer une issue](https://github.com/la404family/Formation-C-Sharp/issues) !
 
 ## 📖 Code source complet
 
@@ -418,6 +284,7 @@ using System;        // Bibliothèque de base : Console (pour afficher du texte)
 using System.Linq;   // Bibliothèque LINQ : permet d'utiliser des méthodes comme Contains(), Distinct(), etc.
 using System.IO;     // Bibliothèque pour les fichiers : lire et écrire des fichiers sur le disque dur
 using System.Text.Json; // Bibliothèque JSON : pour sauvegarder nos statistiques dans un fichier texte structuré
+using System.Text.Json.Serialization; // Pour le générateur de code source JSON (Source Generator)
 
 // ==================== PROGRAMME PRINCIPAL ====================
 // Ici commence le code qui s'exécute quand on lance le programme
@@ -537,6 +404,16 @@ Console.WriteLine("\nAppuyez sur une touche pour quitter...");
 Console.ReadKey();  // Attend qu'une touche soit pressée, puis le programme se termine
 
 
+// ==================== CONTEXTE DE SÉRIALISATION JSON ====================
+// Cette classe définit le contexte pour la génération de code source JSON
+// Elle permet d'éviter les avertissements IL2026 et IL3050 en utilisant
+// la génération de code au moment de la compilation au lieu de la réflexion
+[JsonSerializable(typeof(StatistiquesJeu))]
+[JsonSerializable(typeof(string[]))]
+[JsonSourceGenerationOptions(WriteIndented = true)]
+internal partial class JsonContext : JsonSerializerContext
+{
+}
 
 // ==================== CLASSES POUR LES STATISTIQUES ====================
 // Une CLASSE en C# = un "modèle" ou "plan" pour créer des objets
@@ -658,7 +535,8 @@ public class StatistiquesJeu
             // Convertir nos statistiques en format JSON (un format de fichier très courant)
             // JSON ressemble à ça : {"PartiesJouees": 5, "PartiesGagnees": 3, ...}
             // "WriteIndented = true" = mettre en forme pour que ce soit lisible par un humain
-            string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+            string json = JsonSerializer.Serialize(this, JsonContext.Default.StatistiquesJeu);
 
             // Écrire ce texte JSON dans un fichier sur le disque dur
             File.WriteAllText(cheminFichier, json);
@@ -686,7 +564,8 @@ public class StatistiquesJeu
                 string json = File.ReadAllText(cheminFichier);
 
                 // Convertir le texte JSON en objet StatistiquesJeu
-                var stats = JsonSerializer.Deserialize<StatistiquesJeu>(json);
+                // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+                var stats = JsonSerializer.Deserialize(json, JsonContext.Default.StatistiquesJeu);
 
                 // "?? new StatistiquesJeu()" = "si stats est null, créer un objet vide à la place"
                 return stats ?? new StatistiquesJeu();
@@ -763,7 +642,8 @@ public static class UtilitairesPendu
                 // ÉTAPE 2 : Désérialiser (= convertir) le texte JSON en tableau C#
                 // JsonSerializer.Deserialize transforme du texte JSON en objets C# utilisables
                 // Le <string[]> indique qu'on attend un tableau de chaînes de caractères
-                string[]? mots = JsonSerializer.Deserialize<string[]>(contenuJson);
+                // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+                string[]? mots = JsonSerializer.Deserialize(contenuJson, JsonContext.Default.StringArray);
 
                 // ÉTAPE 3 : Vérification de sécurité
                 // Si la désérialisation a réussi ET que le tableau n'est pas vide
@@ -815,12 +695,8 @@ public static class UtilitairesPendu
         {
             // Convertir le tableau de mots en format JSON
             // WriteIndented = true rend le fichier lisible (avec indentation et retours à la ligne)
-            string json = JsonSerializer.Serialize(mots, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                // Encoder = null permet d'écrire les caractères accentués correctement (é, è, à, etc.)
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
+            // Utilisation du contexte JsonContext pour éviter les avertissements AOT/trimming
+            string json = JsonSerializer.Serialize(mots, JsonContext.Default.StringArray);
 
             // Écrire le texte JSON dans le fichier sur le disque dur
             File.WriteAllText(cheminFichier, json);
@@ -1212,39 +1088,6 @@ public static class UtilitairesPendu
 
 ---
 
-## 📦 Distribution
-
-### 🚀 Créer votre propre installateur
-
-Vous pouvez créer un installateur Windows professionnel pour distribuer ce jeu :
-
-1. **Publiez l'application** :
-
-   ```powershell
-   dotnet publish -c Release -r win-x64 --self-contained false -o publish
-   ```
-
-2. **Installez Inno Setup** : [Télécharger ici](https://jrsoftware.org/isdl.php)
-
-3. **Compilez l'installateur** :
-   - Ouvrez `Setup_Pendu.iss` avec Inno Setup Compiler
-   - Appuyez sur F9
-   - Récupérez `Setup_PENDU_1.5.18.exe` dans le dossier `Output`
-
-📚 **Documentation complète** : Consultez `DISTRIBUTION_GUIDE.md` pour plus de détails
-
-### 📄 Fichiers de configuration
-
-| Fichier                   | Description                                        |
-| ------------------------- | -------------------------------------------------- |
-| `Setup_Pendu.iss`         | Configuration de l'installateur Inno Setup         |
-| `Publier-Application.ps1` | Script PowerShell de publication automatique       |
-| `Verifier-DotNet.ps1`     | Vérificateur de dépendances .NET Runtime           |
-| `mots.json`               | Base de données des mots (109 282 mots)            |
-| `statistiques_pendu.json` | Sauvegarde des statistiques (créé automatiquement) |
-
----
-
 ## ❓ FAQ (Foire Aux Questions)
 
 ### 📥 Installation et lancement
@@ -1280,163 +1123,9 @@ Vous pouvez créer un installateur Windows professionnel pour distribuer ce jeu 
 **Q : Les statistiques sont-elles partagées entre ordinateurs ?**  
 **R :** Non, elles sont sauvegardées localement dans `statistiques_pendu.json`. Copiez ce fichier pour les transférer.
 
-### 🛠️ Personnalisation
-
-**Q : Comment ajouter mes propres mots ?**  
-**R :** Éditez `mots.json` avec un éditeur de texte :
-
-```json
-["MonMot", "AutreMot", "TroisiemeMot"]
-```
-
-**Q : Puis-je changer les couleurs ?**  
-**R :** Oui ! Modifiez `Console.BackgroundColor` et `Console.ForegroundColor` dans `Program.cs` (lignes 24-26).
-
-**Q : Comment réinitialiser mes statistiques ?**  
-**R :** Supprimez simplement le fichier `statistiques_pendu.json` du dossier d'installation.
-
-### 🐛 Problèmes techniques
-
-**Q : Le jeu ne trouve pas `mots.json`**  
-**R :** Le fichier sera créé automatiquement au premier lancement avec 60 mots par défaut. Ou copiez `mots.json` dans le même dossier que l'exécutable.
-
-**Q : Message d'erreur au démarrage**  
-**R :** Vérifiez que :
-
-- .NET 9.0 Runtime est installé
-- Vous avez les droits de lecture/écriture dans le dossier
-- Le fichier `Program.cs` n'est pas corrompu
-
-**Q : Le jeu lag ou rame**  
-**R :** Impossible, c'est une application console ultra-légère (~15 Mo RAM). Si ça arrive, redémarrez votre ordinateur.
-
-### 💻 Développement
-
-**Q : Puis-je utiliser ce code pour apprendre ?**  
-**R :** Absolument ! C'est l'objectif. Le code contient 800+ lignes de commentaires pour les débutants.
-
-**Q : Comment compiler le projet ?**  
-**R :**
-
-```bash
-dotnet build        # Compilation simple
-dotnet run          # Compilation + exécution
-dotnet publish      # Création exécutable
-```
-
-**Q : Puis-je contribuer au projet ?**  
-**R :** Oui ! Fork le projet, faites vos modifications, et créez une Pull Request.
-
-## 🔮 Améliorations futures
-
-### �🎯 Fonctionnalités envisagées
-
-#### Version 2.0 (Court terme)
-
-- [ ] **Mode multijoueur local** : Deux joueurs sur le même PC
-- [ ] **Niveaux de difficulté** : Facile (10 essais) / Normal (6) / Difficile (4)
-- [ ] **Catégories de mots** : Animaux, Pays, Métiers, etc.
-- [ ] **Indices** : Système d'aide (définition du mot, première lettre)
-- [ ] **Chronomètre** : Course contre la montre
-- [ ] **Achievements** : Badges de réussite (10 victoires consécutives, etc.)
-- [ ] **Sons** : Effets sonores pour victoires/défaites
-- [ ] **Thèmes** : Plusieurs palettes de couleurs au choix
-
-#### Version 3.0 (Moyen terme)
-
-- [ ] **Interface graphique (WPF)** : Version avec fenêtres et boutons
-- [ ] **Mode en ligne** : Défier d'autres joueurs sur Internet
-- [ ] **Classement mondial** : Tableau des meilleurs scores
-- [ ] **Mode histoire** : Progression avec niveaux débloquables
-- [ ] **Langues multiples** : Anglais, Espagnol, Allemand
-- [ ] **API REST** : Récupérer des mots depuis Internet
-- [ ] **Mode IA** : L'ordinateur devine vos mots
-- [ ] **Statistiques avancées** : Graphiques de progression
-
-#### Version 4.0 (Long terme)
-
-- [ ] **Application mobile** : Version iOS/Android avec Xamarin
-- [ ] **Reconnaissance vocale** : Dicter les lettres
-- [ ] **Mode réalité augmentée** : Dessiner le pendu en 3D
-- [ ] **Intégration Discord** : Bot pour jouer sur Discord
-- [ ] **Mode éducatif** : Apprendre le vocabulaire en jouant
-- [ ] **Support Twitch** : Streaming avec interaction chat
-
-### 🔧 Améliorations techniques
-
-- [ ] **Tests unitaires** : Couverture de code à 80%+
-- [ ] **CI/CD** : Déploiement automatique via GitHub Actions
-- [ ] **Docker** : Containerisation de l'application
-- [ ] **Base de données** : Migration vers SQLite pour les stats
-- [ ] **Logging** : Système de logs détaillés
-- [ ] **Configuration** : Fichier settings.json pour paramètres
-- [ ] **Internationalisation** : Support multi-langues avec ressources
-- [ ] **Accessibilité** : Lecteur d'écran pour malvoyants
-
 ### 💡 Idées de la communauté
 
 Vous avez une idée ? [Créez une issue](https://github.com/la404family/Formation-C-Sharp/issues) avec le tag `enhancement` !
-
-## 📚 Ressources d'apprentissage
-
-### 🎓 Tutoriels recommandés
-
-Pour aller plus loin avec C# :
-
-1. **Microsoft Learn** : [Documentation officielle C#](https://learn.microsoft.com/fr-fr/dotnet/csharp/)
-2. **C# Yellow Book** : [Livre gratuit Rob Miles](http://www.csharpcourse.com/)
-3. **Exercism** : [Exercices C# interactifs](https://exercism.org/tracks/csharp)
-4. **Pluralsight** : Cours vidéo professionnels
-5. **Stack Overflow** : Communauté d'entraide
-
-### 📖 Concepts à approfondir
-
-Après avoir compris ce projet, étudiez :
-
-- **LINQ avancé** : Requêtes complexes sur collections
-- **Async/Await** : Programmation asynchrone
-- **Entity Framework** : ORM pour bases de données
-- **ASP.NET Core** : Développement web
-- **Blazor** : Applications web en C#
-- **MAUI** : Applications mobiles cross-platform
-- **Design Patterns** : Singleton, Factory, Repository
-- **Tests unitaires** : xUnit, NUnit, MSTest
-
-### 🎯 Défis pour progresser
-
-Essayez d'implémenter ces fonctionnalités par vous-même :
-
-1. **Niveau Débutant** :
-
-   - Ajouter un compteur de temps par partie
-   - Créer une catégorie "Animaux" uniquement
-   - Changer les couleurs du jeu
-
-2. **Niveau Intermédiaire** :
-
-   - Ajouter un mode 2 joueurs
-   - Implémenter un système d'indices
-   - Créer une interface graphique simple
-
-3. **Niveau Avancé** :
-   - Sauvegarder dans une base de données SQL
-   - Créer une version web avec ASP.NET
-   - Ajouter des tests unitaires complets
-
-## 🎯 Prérequis
-
-### Pour jouer (installateur)
-
-- Windows 10/11 (64 bits)
-- .NET 9.0 Runtime (installé automatiquement par l'installateur)
-
-### Pour développer
-
-- .NET 9.0 SDK
-- Visual Studio Code ou Visual Studio 2022
-- Git (optionnel)
-
----
 
 ## 🤝 Contribution
 
@@ -1455,69 +1144,6 @@ Ce projet est un projet éducatif open source. Libre d'utilisation et de modific
 
 ---
 
-## � Liens utiles
-
-### 📦 Téléchargements
-
-- [📥 Dernière version (Installateur Windows)](https://github.com/la404family/Formation-C-Sharp/releases/latest)
-- [📁 Code source complet](https://github.com/la404family/Formation-C-Sharp/tree/main/102.%20Projet%20le%20pendu)
-- [🐛 Signaler un bug](https://github.com/la404family/Formation-C-Sharp/issues/new?labels=bug&template=bug_report.md)
-- [💡 Proposer une fonctionnalité](https://github.com/la404family/Formation-C-Sharp/issues/new?labels=enhancement&template=feature_request.md)
-
-### 📚 Documentation
-
-- [📖 Guide des mots personnalisés](./GUIDE_MOTS_JSON.md)
-- [📦 Guide création installateur](./GUIDE_CREATION_INSTALLATEUR.md)
-- [🌐 Guide de distribution](./DISTRIBUTION_GUIDE.md)
-- [⚡ Aide-mémoire installation](./INSTALLER_QUICKSTART.md)
-
-### 🛠️ Ressources externes
-
-- [.NET 9.0 Download](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [C# Documentation Microsoft](https://learn.microsoft.com/fr-fr/dotnet/csharp/)
-- [Inno Setup](https://jrsoftware.org/isinfo.php)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Git for Windows](https://git-scm.com/download/win)
-
-## 🙏 Remerciements
-
-### 💖 Crédits
-
-Ce projet a été possible grâce à :
-
-- **Microsoft** : Pour .NET et C#, des technologies exceptionnelles
-- **Communauté francophone** : Pour les 109 282 mots de la base de données
-- **Jordan Russell** : Créateur d'Inno Setup, outil formidable
-- **VS Code Team** : Pour cet éditeur fantastique
-- **Stack Overflow** : Pour l'aide sur les problèmes techniques
-- **Vous** : Pour utiliser et potentiellement contribuer à ce projet ! 🌟
-
-### 🎓 Contexte éducatif
-
-Ce projet fait partie du dépôt **Formation C-Sharp**, une collection de projets pédagogiques pour apprendre la programmation C# de manière progressive et pratique.
-
-**Autres projets de la formation :**
-
-- `000. Les bases du C-Sharp` - Fondamentaux du langage
-- `001. Les Applications en Console` - Premiers programmes
-- `002-009. Variables, types, opérateurs, boucles` - Concepts de base
-- `010. Programmation Orientée Objet` - POO avancée
-- `101. Projet console simple` - Premier projet complet
-- `102. Projet le pendu` - **Vous êtes ici !** 🎯
-
-### 📊 Statistiques du projet
-
-| Métrique                      | Valeur                                                |
-| ----------------------------- | ----------------------------------------------------- |
-| **Lignes de code**            | 837 (Program.cs)                                      |
-| **Lignes de commentaires**    | 800+                                                  |
-| **Classes**                   | 3 (ResultatPartie, StatistiquesJeu, UtilitairesPendu) |
-| **Méthodes**                  | 12+                                                   |
-| **Fichiers de documentation** | 6 (README + guides)                                   |
-| **Mots dans le dictionnaire** | 109 282                                               |
-| **Temps de développement**    | ~20 heures                                            |
-| **Version**                   | 1.5.18                                                |
-
 ### 🌟 Soutenez le projet
 
 Si ce projet vous a aidé ou vous a plu :
@@ -1528,36 +1154,6 @@ Si ce projet vous a aidé ou vous a plu :
 - 🔀 **Forkez et contribuez** au code
 - 📢 **Partagez** avec vos amis développeurs
 - 📝 **Laissez un commentaire** sur votre expérience
-
-Chaque contribution, aussi petite soit-elle, est **grandement appréciée** ! 💙
-
-## 📜 Historique des versions
-
-### Version 1.5.18 (Actuelle - Octobre 2025)
-
-✨ **Nouvelles fonctionnalités :**
-
-- Interface console colorée (fond rouge, texte blanc)
-- Saisie en un seul caractère (Console.ReadKey)
-- Messages d'erreur colorés (rouge/jaune)
-- Installateur Windows professionnel avec Inno Setup
-- Documentation complète (6 fichiers de guides)
-
-🔧 **Améliorations :**
-
-- Chargement des mots depuis JSON (109 282 mots)
-- Normalisation avancée des accents français
-- Système de statistiques complet avec persistance
-- Architecture du code optimisée et commentée
-- Gestion d'erreurs robuste
-
-### Versions antérieures
-
-**Version 1.0** : Version de base du jeu
-
-- Fonctionnalités minimales
-- Tableau de mots statique
-- Pas de statistiques
 
 ## �👨‍💻 Auteur
 
@@ -1570,11 +1166,10 @@ Chaque contribution, aussi petite soit-elle, est **grandement appréciée** ! �
 
 ### 💬 Contact
 
-Pour toute question, suggestion ou collaboration :
+Pour toute question ou suggestion :
 
 - 📧 **GitHub Issues** : [Créer une issue](https://github.com/la404family/Formation-C-Sharp/issues)
-- 💬 **Discussions** : [GitHub Discussions](https://github.com/la404family/Formation-C-Sharp/discussions)
-- 🐦 **Réseaux sociaux** : Suivez [@la404family](https://github.com/la404family)
+- 🐦 **Réseaux sociaux** : Suivez @la404family
 
 ---
 
@@ -1585,5 +1180,4 @@ Pour toute question, suggestion ou collaboration :
   <br><br>
   <em>Développé avec ❤️ en C# • © 2025 Kevin Du Chevreuil</em>
   <br>
-  <a href="#-projet-du-pendu">⬆️ Retour en haut</a>
 </p>
