@@ -18,8 +18,8 @@ using System.Text.Json; // Bibliothèque JSON : pour sauvegarder nos statistique
 
 // ÉTAPE 1 : Configuration de l'apparence de la console (la fenêtre noire)
 Console.Title = "Le Pendu";                     // Change le titre de la fenêtre
-Console.BackgroundColor = ConsoleColor.Green;   // Met un fond vert (plus joli que noir !)
-Console.ForegroundColor = ConsoleColor.White;   // Met le texte en blanc (contraste avec le vert)
+Console.BackgroundColor = ConsoleColor.DarkRed;   // Met un fond rouge (plus joli que noir !)
+Console.ForegroundColor = ConsoleColor.White;   // Met le texte en blanc (contraste avec le rouge)
 Console.Clear();                                // Efface tout ce qui était affiché avant
 
 // ÉTAPE 2 : Charger les statistiques des parties précédentes
@@ -33,9 +33,9 @@ StatistiquesJeu statistiques = StatistiquesJeu.ChargerStatistiques();
 Console.WriteLine(@"
 ╔═══════════════════════════════════════════════════════════════╗
 ║                                                               ║
-║   ░█░░░█▀▀░░░▀▀█░█▀▀░█░█░░░█▀▄░█░█░░░█▀█░█▀▀░█▀█░█▀▄░█░█      ║
+║   ░█░░░█▀▀░░░▀▀█░█▀▀░█░█░░░█▀▄░█░█░░░█▀█░█▀▀░█▀█░█▀▄░█░█ ++   ║
 ║   ░█░░░█▀▀░░░░░█░█▀▀░█░█░░░█░█░█░█░░░█▀▀░█▀▀░█░█░█░█░█░█      ║
-║   ░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░░░▀░░░▀▀▀░▀░▀░▀▀░░▀▀▀      ║
+║ ++░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░░░▀░░░▀▀▀░▀░▀░▀▀░░▀▀▀      ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
 ");
@@ -69,7 +69,7 @@ while (true)
         statistiques.EnregistrerVictoire(resultat.NombreLettresUtilisees);
 
         // On change la couleur du texte en vert pour fêter la victoire
-        Console.ForegroundColor = ConsoleColor.Green;
+        Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine("\n*** VICTOIRE ! Vous avez gagné cette partie ! ***");
     }
     else  // Sinon (le joueur a perdu)...
@@ -95,14 +95,29 @@ while (true)
     // Demander au joueur s'il veut refaire une partie
     Console.WriteLine("\nVoulez-vous rejouer ? (O/N)");
 
-    // Lire la réponse du joueur au clavier
-    string? reponseInput = Console.ReadLine();  // Peut être null si problème
+    // Boucle pour attendre UNIQUEMENT la touche O ou N (rien d'autre n'est accepté)
+    char reponse;
+    while (true)
+    {
+        // Lire UNE SEULE touche du clavier (pas besoin d'appuyer sur Entrée)
+        // "true" = ne pas afficher la touche à l'écran (on l'affichera nous-mêmes)
+        ConsoleKeyInfo touchePressee = Console.ReadKey(true);
 
-    // Sécuriser la réponse : enlever les espaces, mettre en majuscules, ou "N" par défaut
-    string reponse = reponseInput?.Trim().ToUpperInvariant() ?? "N";
+        // Convertir la touche en majuscule pour accepter o/O et n/N
+        reponse = char.ToUpperInvariant(touchePressee.KeyChar);
+
+        // Vérifier si c'est bien O ou N
+        if (reponse == 'O' || reponse == 'N')
+        {
+            // Afficher la touche choisie pour donner un feedback à l'utilisateur
+            Console.WriteLine(reponse);
+            break; // Sortir de la boucle, la réponse est valide
+        }
+        // Si ce n'est ni O ni N, la boucle recommence (on attend une touche valide)
+    }
 
     // Si la réponse n'est pas "O" (pour "Oui"), on arrête le jeu
-    if (reponse != "O")
+    if (reponse != 'O')
         break;  // "break" = sortir de la boucle while = arrêter le jeu
 
     // Si on arrive ici, c'est que le joueur a tapé "O", donc on recommence une partie !
@@ -557,7 +572,7 @@ public static class UtilitairesPendu
     |              
     +------------- 
     | 
-    |   Plus que 2 chances ! 
+    |   Plus qu'une seule chance ! 
     ", 
      
     // 6 erreurs : pendu complet 
@@ -712,7 +727,7 @@ public static class UtilitairesPendu
             // Vérifier si la lettre a déjà été essayée
             if (lettresEssayees.Contains(lettre))
             {
-                // Afficher un message d'avertissement en orange/jaune
+                // Afficher un message d'avertissement
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"\n⚠️  Vous avez déjà essayé la lettre '{lettre}' !");
                 Console.ForegroundColor = ConsoleColor.White;

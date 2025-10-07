@@ -6,6 +6,8 @@
     <RootNamespace>_102._Projet_le_pendu</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Icône de l'application (fichier .ico pour Windows) -->
+    <ApplicationIcon>icons.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
