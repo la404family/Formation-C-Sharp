@@ -31,20 +31,11 @@
 
 > **Note :** L'installateur vérifie automatiquement si .NET 9.0 Runtime est installé et vous guide pour le télécharger si nécessaire.
 
-### Option 2 : Exécution depuis le code source
+Pensez à bien ouvrir avec les droits d'administrateur une fois l'installation terminée.
 
-```bash
-# Cloner le dépôt
-git clone https://github.com/la404family/Formation-C-Sharp.git
+![Ouverture du jeu](./readme04.png)
 
-# Naviguer vers le projet
-cd "Formation-C-Sharp/102. Projet le pendu"
-
-# Exécuter le jeu
-dotnet run
-```
-
----
+![Ouverture des parametres](./readme05.png)
 
 ## 📖 Description
 
@@ -58,21 +49,13 @@ Le but est simple : **devinez le mot mystère** en proposant des lettres une par
 
 - ✅ **Plus de 100 000 mots** : Base de données exhaustive en français
 - ✅ **Statistiques détaillées** : Suivez votre progression et améliorez-vous
-- ✅ **Personnalisable** : Ajoutez vos propres mots via JSON
 - ✅ **Interface moderne** : Console colorée avec feedback visuel
 - ✅ **Support complet du français** : Gestion des accents et caractères spéciaux
-- ✅ **Installateur professionnel** : Installation en un clic sur Windows
+- ✅ **Installateur professionnel** : Installation sur Windows
 
 ### 📜 Contexte historique du jeu
 
 Le **jeu du pendu** est un jeu de devinettes de mots classique qui existe depuis le 19ème siècle. Traditionnellement joué sur papier, ce jeu a été adapté sur de nombreuses plateformes informatiques au fil des décennies.
-
-**Évolution numérique :**
-
-- **Années 1970-80** : Premières versions sur ordinateurs mainframe et micro-ordinateurs
-- **Années 1990** : Versions graphiques sur Windows 95/98
-- **Années 2000** : Jeux en ligne et applications mobiles
-- **Aujourd'hui** : Versions modernes avec IA, multi-joueurs, et statistiques avancées
 
 Cette implémentation en C# combine **la simplicité du jeu original** avec **les technologies modernes** (.NET 9.0, JSON, console colorée) pour créer une expérience à la fois nostalgique et actuelle.
 
