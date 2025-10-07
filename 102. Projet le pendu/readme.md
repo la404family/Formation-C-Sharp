@@ -24,7 +24,7 @@
 
 **Téléchargez et installez en 1 clic !**
 
-1. 📦 **[Télécharger Setup_PENDU_1.5.18.exe](https://github.com/la404family/Formation-C-Sharp/releases/latest)**
+1. 📦 **[Télécharger Setup_PENDU_1.5.18.exe](https://github.com/la404family/Formation-C-Sharp/releases/download/Pendu/Setup_PENDU_1.5.18.exe)**
 2. ▶️ Double-cliquez sur le fichier téléchargé
 3. 🎮 Suivez l'assistant d'installation
 4. 🚀 Lancez le jeu depuis le menu Démarrer !
