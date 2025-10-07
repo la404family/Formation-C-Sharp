@@ -19,7 +19,7 @@ using System.Text.Json; // Bibliothèque JSON : pour sauvegarder nos statistique
 // ÉTAPE 1 : Configuration de l'apparence de la console (la fenêtre noire)
 Console.Title = "Le Pendu";                     // Change le titre de la fenêtre
 Console.BackgroundColor = ConsoleColor.Green;   // Met un fond vert (plus joli que noir !)
-Console.ForegroundColor = ConsoleColor.Black;   // Met le texte en noir (contraste avec le vert)
+Console.ForegroundColor = ConsoleColor.White;   // Met le texte en blanc (contraste avec le vert)
 Console.Clear();                                // Efface tout ce qui était affiché avant
 
 // ÉTAPE 2 : Charger les statistiques des parties précédentes
@@ -28,7 +28,17 @@ Console.Clear();                                // Efface tout ce qui était aff
 StatistiquesJeu statistiques = StatistiquesJeu.ChargerStatistiques();
 
 // ÉTAPE 3 : Afficher un message de bienvenue sympa
-Console.WriteLine("*** Bienvenue dans le Jeu du Pendu ! ***");
+// Le @ devant la chaîne crée un "verbatim string literal" qui préserve les sauts de ligne
+// et permet d'écrire du texte multi-lignes facilement (utile pour l'ASCII art)
+Console.WriteLine(@"
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   ░█░░░█▀▀░░░▀▀█░█▀▀░█░█░░░█▀▄░█░█░░░█▀█░█▀▀░█▀█░█▀▄░█░█      ║
+║   ░█░░░█▀▀░░░░░█░█▀▀░█░█░░░█░█░█░█░░░█▀▀░█▀▀░█░█░█░█░█░█      ║
+║   ░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░░░▀░░░▀▀▀░▀░▀░▀▀░░▀▀▀      ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+");
 
 // Si le joueur a déjà joué avant (PartiesJouees > 0), on lui montre ses anciens résultats
 if (statistiques.PartiesJouees > 0)
@@ -67,13 +77,13 @@ while (true)
         // On enregistre cette défaite dans nos statistiques
         statistiques.EnregistrerDefaite(resultat.NombreLettresUtilisees);
 
-        // On change la couleur du texte en rouge pour montrer la défaite
-        Console.ForegroundColor = ConsoleColor.Red;
+        // On change la couleur du texte en jaune pour montrer la défaite
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\n:( Dommage ! Vous avez perdu cette partie.");
     }
 
-    // Remettre la couleur du texte en noir (couleur par défaut de notre jeu)
-    Console.ForegroundColor = ConsoleColor.Black;
+    // Remettre la couleur du texte en blanc (couleur par défaut de notre jeu)
+    Console.ForegroundColor = ConsoleColor.White;
 
     // Afficher un tableau avec toutes les statistiques du joueur
     statistiques.AfficherStatistiques();
@@ -210,7 +220,7 @@ public class StatistiquesJeu
         // Finir avec une ligne jaune et remettre la couleur par défaut
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(new string('=', 50));
-        Console.ForegroundColor = ConsoleColor.Black; // Retour à la couleur de notre jeu
+        Console.ForegroundColor = ConsoleColor.White; // Retour à la couleur de notre jeu
     }
 
     /// <summary>
@@ -282,308 +292,125 @@ public static class UtilitairesPendu
     // "readonly" = on peut lire ce tableau mais pas le modifier (protection)
     // "string[]" = tableau de chaînes de caractères (mots)
     // Ce tableau contient tous les mots que le joueur peut avoir à deviner
-    public static readonly string[] Aliments = new string[]
-{
-    // On range les mots par catégories pour que ce soit plus organisé
-    
-    // Fruits (des mots plutôt faciles pour commencer)
-    "Pomme", "Banane", "Orange", "Raisin", "Fraise", "Cerise", "Mangue", "Ananas", "Melon", "Pastèque",
-    "Poire", "Pêche", "Abricot", "Prune", "Kiwi", "Citron", "Pamplemousse", "Clémentine", "Mandarine", "Figue",
-    "Datte", "Grenade", "Papaye", "Litchi", "Fruit de la passion", "Noix de coco", "Goyave", "Cassis", "Groseille", "Myrtille",
-    "Framboise", "Mûre", "Airelle", "Nectarine", "Brugnon", "Mirabelle", "Quetsche", "Reine-claude", "Coing", "Nèfle",
-    "Avocat", "Olive", "Tomate cerise", "Physalis", "Kumquat", "Bergamote", "Yuzu", "Carambole", "Ramboutan", "Durian",
-    
-    // Légumes (un peu plus variés)
-    "Tomate", "Carotte", "Poivron", "Concombre", "Courgette", "Aubergine", "Brocoli", "Chou", "Laitue", "Épinards",
-    "Haricot", "Petit pois", "Artichaut", "Asperge", "Betterave", "Céleri", "Fenouil", "Radis", "Navet", "Panais",
-    "Potiron", "Courge", "Butternut", "Patate douce", "Topinambour", "Rutabaga", "Chou-fleur", "Chou de Bruxelles", "Chou rouge", "Chou-rave",
-    "Endive", "Cresson", "Roquette", "Mâche", "Chicorée", "Persil", "Coriandre", "Basilic", "Ciboulette", "Estragon",
-    "Oignon", "Échalote", "Ail", "Poireau", "Champignon", "Pleurote", "Shiitake", "Cèpe", "Morille", "Truffe",
-    
-    // Viandes et Poissons
-    "Poulet", "Bœuf", "Porc", "Agneau", "Veau", "Canard", "Dinde", "Lapin", "Gibier", "Sanglier",
-    "Saumon", "Thon", "Truite", "Cabillaud", "Sole", "Dorade", "Bar", "Maquereau", "Sardine", "Anchois",
-    "Crevette", "Homard", "Crabe", "Langouste", "Moule", "Huître", "Coquille Saint-Jacques", "Calmar", "Seiche", "Poulpe",
-    
-    // Produits laitiers
-    "Lait", "Fromage", "Yaourt", "Beurre", "Crème", "Camembert", "Roquefort", "Comté", "Brie", "Gruyère",
-    "Emmental", "Mozzarella", "Parmesan", "Feta", "Chèvre", "Ricotta", "Mascarpone", "Cheddar", "Reblochon", "Munster",
-    
-    // Céréales et Féculents
-    "Pain", "Riz", "Pâtes", "Blé", "Maïs", "Avoine", "Orge", "Seigle", "Quinoa", "Boulgour",
-    "Couscous", "Semoule", "Sarrasin", "Épeautre", "Millet", "Polenta", "Pomme de terre", "Tapioca", "Vermicelle", "Nouilles",
-    
-    // Sucreries et Desserts
-    "Chocolat", "Gâteau", "Tarte", "Biscuit", "Bonbon", "Caramel", "Glace", "Crêpe", "Gaufre", "Macaron",
-    "Éclair", "Profiterole", "Flan", "Tiramisu", "Brownie", "Muffin", "Cookie", "Cupcake", "Meringue", "Nougat",
-    "Praline", "Truffe au chocolat", "Fondant", "Financier", "Madeleine", "Cannelé", "Clafoutis", "Millefeuille", "Paris-Brest", "Saint-Honoré",
-    
-    // Boissons
-    "Eau", "Café", "Thé", "Jus", "Soda", "Limonade", "Sirop", "Chocolat chaud", "Smoothie", "Milkshake",
-    "Vin", "Bière", "Cidre", "Champagne", "Cognac", "Whisky", "Rhum", "Vodka", "Gin", "Pastis",
-    
-    // Épices et Condiments
-    "Sel", "Poivre", "Paprika", "Cumin", "Curry", "Safran", "Cannelle", "Muscade", "Gingembre", "Clou de girofle",
-    "Vanille", "Cardamome", "Anis", "Curcuma", "Piment", "Moutarde", "Ketchup", "Mayonnaise", "Vinaigre", "Huile",
-    
-    // Métiers (mots plus longs et complexes)
-    "Médecin", "Professeur", "Ingénieur", "Avocat", "Architecte", "Cuisinier", "Électricien", "Plombier", "Menuisier", "Boulanger",
-    "Infirmier", "Dentiste", "Pharmacien", "Vétérinaire", "Chirurgien", "Pompier", "Policier", "Gendarme", "Militaire", "Pilote",
-    "Journaliste", "Écrivain", "Artiste", "Musicien", "Chanteur", "Acteur", "Danseur", "Peintre", "Sculpteur", "Photographe",
-    "Mécanicien", "Chauffeur", "Facteur", "Coiffeur", "Esthéticien", "Maçon", "Peintre en bâtiment", "Couvreur", "Charpentier", "Serrurier",
-    "Comptable", "Banquier", "Agent immobilier", "Vendeur", "Commerçant", "Caissier", "Serveur", "Barman", "Réceptionniste", "Secrétaire",
-    "Informaticien", "Développeur", "Designer", "Graphiste", "Webmaster", "Community manager", "Marketeur", "Commercial", "Consultant", "Manager",
-    
-    // Animaux (mots amusants pour les enfants)
-    "Chien", "Chat", "Lion", "Tigre", "Éléphant", "Girafe", "Zèbre", "Cheval", "Lapin", "Écureuil",
-    "Ours", "Loup", "Renard", "Cerf", "Sanglier", "Hérisson", "Souris", "Rat", "Hamster", "Cochon d'Inde",
-    "Vache", "Mouton", "Chèvre", "Cochon", "Poule", "Coq", "Canard", "Oie", "Dindon", "Pigeon",
-    "Aigle", "Faucon", "Hibou", "Chouette", "Corbeau", "Pie", "Moineau", "Hirondelle", "Merle", "Rouge-gorge",
-    "Perroquet", "Toucan", "Flamant rose", "Autruche", "Manchot", "Pingouin", "Mouette", "Albatros", "Pélican", "Cygne",
-    "Crocodile", "Alligator", "Serpent", "Lézard", "Tortue", "Grenouille", "Crapaud", "Salamandre", "Caméléon", "Iguane",
-    "Requin", "Baleine", "Dauphin", "Orque", "Phoque", "Otarie", "Morse", "Hippopotame", "Rhinocéros", "Kangourou",
-    "Koala", "Panda", "Singe", "Gorille", "Chimpanzé", "Orang-outan", "Léopard", "Guépard", "Panthère", "Jaguar",
-    "Chameau", "Dromadaire", "Lama", "Alpaga", "Renne", "Élan", "Bison", "Buffle", "Yak", "Antilope",
-    
-    // Pays (pour apprendre la géographie en jouant !)
-    "France", "Allemagne", "Espagne", "Italie", "Portugal", "Belgique", "Suisse", "Canada", "Brésil", "Japon",
-    "Angleterre", "Irlande", "Écosse", "Pays de Galles", "Pays-Bas", "Luxembourg", "Autriche", "Pologne", "Tchéquie", "Hongrie",
-    "Roumanie", "Bulgarie", "Grèce", "Turquie", "Russie", "Ukraine", "Norvège", "Suède", "Finlande", "Danemark",
-    "Islande", "Croatie", "Slovénie", "Serbie", "Albanie", "Macédoine", "Bosnie", "Monténégro", "Slovaquie", "Lituanie",
-    "Lettonie", "Estonie", "Biélorussie", "Moldavie", "Arménie", "Géorgie", "Azerbaïdjan", "Kazakhstan", "Ouzbékistan", "Kirghizistan",
-    "États-Unis", "Mexique", "Argentine", "Chili", "Pérou", "Colombie", "Venezuela", "Équateur", "Bolivie", "Paraguay",
-    "Uruguay", "Costa Rica", "Panama", "Cuba", "Jamaïque", "Haïti", "République dominicaine", "Guatemala", "Honduras", "Nicaragua",
-    "Chine", "Inde", "Corée du Sud", "Corée du Nord", "Thaïlande", "Vietnam", "Cambodge", "Laos", "Myanmar", "Malaisie",
-    "Singapour", "Indonésie", "Philippines", "Taïwan", "Mongolie", "Népal", "Bangladesh", "Pakistan", "Afghanistan", "Iran",
-    "Irak", "Syrie", "Liban", "Israël", "Jordanie", "Arabie saoudite", "Émirats arabes unis", "Qatar", "Koweït", "Oman",
-    "Yémen", "Égypte", "Libye", "Tunisie", "Algérie", "Maroc", "Mauritanie", "Mali", "Niger", "Tchad",
-    "Soudan", "Éthiopie", "Kenya", "Tanzanie", "Ouganda", "Rwanda", "Burundi", "Somalie", "Sénégal", "Côte d'Ivoire",
-    "Ghana", "Nigeria", "Cameroun", "Gabon", "Congo", "Angola", "Namibie", "Botswana", "Zimbabwe", "Mozambique",
-    "Madagascar", "Afrique du Sud", "Zambie", "Malawi", "Australie", "Nouvelle-Zélande", "Papouasie", "Fidji", "Tonga", "Samoa",
-    
-    // Villes
-    "Paris", "Londres", "Madrid", "Rome", "Berlin", "Bruxelles", "Genève", "Montréal", "Tokyo", "Sydney",
-    "Lyon", "Marseille", "Toulouse", "Nice", "Nantes", "Strasbourg", "Bordeaux", "Lille", "Rennes", "Reims",
-    "Barcelone", "Séville", "Valence", "Bilbao", "Milan", "Naples", "Florence", "Venise", "Turin", "Bologne",
-    "Munich", "Hambourg", "Cologne", "Francfort", "Stuttgart", "Düsseldorf", "Dortmund", "Essen", "Leipzig", "Dresde",
-    "Amsterdam", "Rotterdam", "La Haye", "Vienne", "Varsovie", "Prague", "Budapest", "Bucarest", "Athènes", "Lisbonne",
-    "Dublin", "Édimbourg", "Manchester", "Liverpool", "Glasgow", "Copenhague", "Stockholm", "Oslo", "Helsinki", "Moscou",
-    "Saint-Pétersbourg", "New York", "Los Angeles", "Chicago", "San Francisco", "Boston", "Miami", "Las Vegas", "Seattle", "Washington",
-    "Pékin", "Shanghai", "Hong Kong", "Séoul", "Bangkok", "Singapour", "Dubaï", "Le Caire", "Istanbul", "Johannesburg",
-    "Rio de Janeiro", "Buenos Aires", "Mexico", "Lima", "Bogota", "Santiago", "Caracas", "Quito", "La Paz", "Asuncion",
-    
-    // Objets du quotidien
-    "Table", "Chaise", "Lit", "Armoire", "Canapé", "Fauteuil", "Bureau", "Lampe", "Miroir", "Horloge",
-    "Téléphone", "Ordinateur", "Tablette", "Télévision", "Radio", "Appareil photo", "Caméra", "Clavier", "Souris", "Écran",
-    "Livre", "Cahier", "Stylo", "Crayon", "Gomme", "Règle", "Ciseaux", "Colle", "Agrafeuse", "Trombone",
-    "Sac", "Valise", "Portefeuille", "Montre", "Lunettes", "Chapeau", "Écharpe", "Gants", "Parapluie", "Canne",
-    
-    // Vêtements
-    "Pantalon", "Jean", "Short", "Jupe", "Robe", "Chemise", "T-shirt", "Pull", "Gilet", "Veste",
-    "Manteau", "Blouson", "Imperméable", "Parka", "Cardigan", "Sweat", "Polo", "Débardeur", "Bustier", "Combinaison",
-    "Chaussette", "Collant", "Bas", "Caleçon", "Slip", "Culotte", "Soutien-gorge", "Maillot de bain", "Bikini", "Pyjama",
-    "Chaussure", "Basket", "Botte", "Bottine", "Sandale", "Tong", "Escarpin", "Mocassin", "Ballerine", "Sabot",
-    
-    // Sports et Loisirs
-    "Football", "Basketball", "Tennis", "Volleyball", "Handball", "Rugby", "Golf", "Natation", "Cyclisme", "Athlétisme",
-    "Ski", "Snowboard", "Patinage", "Hockey", "Boxe", "Judo", "Karaté", "Taekwondo", "Escrime", "Lutte",
-    "Escalade", "Alpinisme", "Randonnée", "Course", "Marathon", "Triathlon", "Gymnastique", "Danse", "Yoga", "Pilates",
-    "Équitation", "Voile", "Surf", "Plongée", "Kayak", "Canoë", "Aviron", "Pêche", "Chasse", "Tir à l'arc",
-    
-    // Couleurs
-    "Rouge", "Bleu", "Vert", "Jaune", "Orange", "Violet", "Rose", "Noir", "Blanc", "Gris",
-    "Marron", "Beige", "Turquoise", "Cyan", "Magenta", "Bordeaux", "Pourpre", "Indigo", "Lavande", "Écarlate",
-    
-    // Transports
-    "Voiture", "Moto", "Vélo", "Trottinette", "Bus", "Tramway", "Métro", "Train", "Avion", "Hélicoptère",
-    "Bateau", "Yacht", "Ferry", "Sous-marin", "Camion", "Ambulance", "Taxi", "Scooter", "Tracteur", "Bulldozer",
-    // Fruits supplémentaires
-"Mangoustan", "Jujube", "Kaki", "Sureau", "Cynorhodon", "Arbouse", "Nashi", "Feijoa", "Pitaya", "Cherimoya",
-"Tamarillo", "Sapotille", "Jaboticaba", "Acérola", "Jaque", "Longane", "Açaï", "Cupuaçu", "Baobab", "Salak",
+    // On charge les mots depuis un fichier JSON au démarrage, avec des mots par défaut en secours
+    public static readonly string[] Aliments = ChargerMotsDepuisJson();
 
-// Légumes supplémentaires
-"Salsifis", "Crosne", "Oseille", "Pourpier", "Arroche", "Tétragone", "Mizuna", "Pak-choï", "Chou chinois", "Edamame",
-"Piment d'Espelette", "Okra", "Gingembre", "Galanga", "Citronnelle", "Wasabi", "Raifort", "Daikon", "Taro", "Igname",
+    /// <summary>
+    /// MÉTHODE : ChargerMotsDepuisJson
+    /// Cette méthode lit un fichier JSON contenant la liste des mots à deviner
+    /// Si le fichier n'existe pas ou est invalide, elle retourne une liste de mots par défaut
+    /// C'est une méthode "static" car elle est appelée avant même la création d'un objet
+    /// </summary>
+    /// <param name="cheminFichier">Le chemin vers le fichier JSON (optionnel, par défaut "mots.json")</param>
+    /// <returns>Un tableau de chaînes de caractères contenant les mots à deviner</returns>
+    private static string[] ChargerMotsDepuisJson(string cheminFichier = "mots.json")
+    {
+        // Liste de mots par défaut en cas de problème avec le fichier
+        // Ces mots garantissent que le jeu fonctionne toujours, même sans fichier JSON
+        string[] motsParDefaut = new string[]
+        {
+            // Fruits faciles
+            "Pomme", "Banane", "Orange", "Raisin", "Fraise", "Cerise", "Mangue", "Ananas", "Melon", "Pastèque",
+            
+            // Légumes courants
+            "Tomate", "Carotte", "Poivron", "Concombre", "Courgette", "Aubergine", "Brocoli", "Chou", "Laitue", "Épinards",
+            
+            // Animaux populaires
+            "Chien", "Chat", "Lion", "Tigre", "Éléphant", "Girafe", "Zèbre", "Cheval", "Lapin", "Écureuil",
+            
+            // Pays
+            "France", "Allemagne", "Espagne", "Italie", "Portugal", "Belgique", "Suisse", "Canada", "Brésil", "Japon",
+            
+            // Villes
+            "Paris", "Londres", "Madrid", "Rome", "Berlin", "Bruxelles", "Genève", "Montréal", "Tokyo", "Sydney",
+            
+            // Couleurs
+            "Rouge", "Bleu", "Vert", "Jaune", "Orange", "Violet", "Rose", "Noir", "Blanc", "Gris"
+        };
 
-// Viandes et Poissons supplémentaires
-"Brochet", "Perche", "Carpe", "Espadon", "Raie", "Turbot", "Merlu", "Lieu", "Rouget", "Grondin",
-"Caille", "Faisan", "Perdrix", "Pintade", "Chevreuil", "Cerf", "Biche", "Marcassin", "Lièvre", "Oie",
-"Anguille", "Limande", "Plie", "Flétan", "Carrelet", "Barbue", "Saint-Pierre", "Lotte", "Congre", "Roussette",
-"Écrevisse", "Langoustine", "Tourteau", "Araignée de mer", "Bulot", "Bigorneau", "Palourde", "Praire", "Couteau", "Ormeau",
+        // "try" = "Essaie de faire ça, mais si ça plante, ne casse pas le programme"
+        try
+        {
+            // Vérifier si le fichier JSON existe sur le disque dur
+            if (File.Exists(cheminFichier))
+            {
+                // ÉTAPE 1 : Lire tout le contenu du fichier en tant que texte
+                // File.ReadAllText() lit le fichier d'un coup et retourne une chaîne de caractères
+                string contenuJson = File.ReadAllText(cheminFichier);
 
-// Produits laitiers supplémentaires
-"Beaufort", "Abondance", "Tomme", "Raclette", "Fourme d'Ambert", "Bleu d'Auvergne", "Saint-Nectaire", "Cantal", "Salers", "Laguiole",
-"Ossau-Iraty", "Pélardon", "Picodon", "Rocamadour", "Cabécou", "Crottin de Chavignol", "Valençay", "Selles-sur-Cher", "Pouligny-Saint-Pierre", "Sainte-Maure",
-"Époisses", "Maroilles", "Livarot", "Pont-l'Évêque", "Neufchâtel", "Langres", "Chaource", "Coulommiers", "Brillat-Savarin", "Boursin",
+                // ÉTAPE 2 : Désérialiser (= convertir) le texte JSON en tableau C#
+                // JsonSerializer.Deserialize transforme du texte JSON en objets C# utilisables
+                // Le <string[]> indique qu'on attend un tableau de chaînes de caractères
+                string[]? mots = JsonSerializer.Deserialize<string[]>(contenuJson);
 
-// Céréales et Féculents supplémentaires
-"Farro", "Kamut", "Teff", "Amarante", "Fonio", "Sorgho", "Gnocchi", "Lasagne", "Ravioli", "Tortellini",
-"Cannelloni", "Macaroni", "Spaghetti", "Linguine", "Penne", "Fusilli", "Farfalle", "Rigatoni", "Tagliatelle", "Fettuccine",
+                // ÉTAPE 3 : Vérification de sécurité
+                // Si la désérialisation a réussi ET que le tableau n'est pas vide
+                if (mots != null && mots.Length > 0)
+                {
+                    // Afficher un message de confirmation (pour le débogage)
+                    Console.WriteLine($"✓ {mots.Length} mots chargés depuis {cheminFichier}");
 
-// Sucreries et Desserts supplémentaires
-"Panna cotta", "Crème brûlée", "Mousse au chocolat", "Bavarois", "Charlotte", "Soufflé", "Îles flottantes", "Baba au rhum", "Savarin", "Kouglof",
-"Brioche", "Pain d'épices", "Spéculoos", "Canistrelli", "Calisson", "Navette", "Bêtise de Cambrai", "Bergamote de Nancy", "Anis de Flavigny", "Violette de Toulouse",
-"Pâte de fruits", "Guimauve", "Marshmallow", "Réglisse", "Berlingot", "Sucre d'orge", "Dragée", "Nougat de Montélimar", "Touron", "Polvorone",
-"Churros", "Beignet", "Donut", "Pain perdu", "Pancake", "Blini", "Scone", "Cheesecake", "Strudel", "Baklava",
+                    // Retourner les mots chargés depuis le fichier
+                    return mots;
+                }
+                else
+                {
+                    // Le fichier existe mais est vide ou mal formaté
+                    Console.WriteLine($"! Le fichier {cheminFichier} est vide ou invalide. Utilisation des mots par défaut.");
+                }
+            }
+            else
+            {
+                // Le fichier n'existe pas, on va en créer un avec les mots par défaut
+                Console.WriteLine($"! Le fichier {cheminFichier} n'existe pas. Création d'un fichier avec les mots par défaut...");
 
-// Boissons supplémentaires
-"Tisane", "Infusion", "Cappuccino", "Expresso", "Latte", "Mokaccino", "Chai", "Maté", "Rooibos", "Kombucha",
-"Kéfir", "Lassi", "Horchata", "Sangria", "Mojito", "Caipirinha", "Piña colada", "Margarita", "Daiquiri", "Cosmopolitan",
-"Martini", "Manhattan", "Negroni", "Spritz", "Bloody Mary", "Long Island", "Tequila sunrise", "Sex on the beach", "Blue lagoon", "Mai tai",
-"Porto", "Sherry", "Vermouth", "Limoncello", "Amaretto", "Baileys", "Cointreau", "Grand Marnier", "Chartreuse", "Absinthe",
+                // Créer le fichier JSON avec les mots par défaut
+                CreerFichierMotsJson(cheminFichier, motsParDefaut);
+            }
+        }
+        catch (Exception ex)  // "catch" = "Si il y a eu un problème, faire ça"
+        {
+            // Afficher un message d'erreur explicatif (sans planter le programme)
+            Console.WriteLine($"! Erreur lors du chargement de {cheminFichier} : {ex.Message}");
+            Console.WriteLine($"! Utilisation des mots par défaut.");
+        }
 
-// Épices et Condiments supplémentaires
-"Sumac", "Za'atar", "Ras el hanout", "Garam masala", "Tandoori", "Piment de Cayenne", "Piment de la Jamaïque", "Baies roses", "Fenugrec", "Nigelle",
-"Coriandre en graines", "Fenouil en graines", "Moutarde en graines", "Sésame", "Pavot", "Carvi", "Aneth", "Laurier", "Thym", "Romarin",
-"Origan", "Marjolaine", "Sarriette", "Sauge", "Menthe", "Mélisse", "Verveine", "Tamarin", "Harissa", "Sambal",
-"Nuoc-mâm", "Sauce soja", "Sauce hoisin", "Sauce teriyaki", "Sauce worcestershire", "Tabasco", "Sriracha", "Chimichurri", "Pesto", "Tapenade",
+        // Si on arrive ici, c'est qu'il y a eu un problème
+        // On retourne les mots par défaut pour que le jeu fonctionne quand même
+        return motsParDefaut;
+    }
 
-// Métiers supplémentaires
-"Astrophysicien", "Biologiste", "Chimiste", "Physicien", "Mathématicien", "Géologue", "Botaniste", "Zoologiste", "Archéologue", "Anthropologue",
-"Psychologue", "Psychiatre", "Sociologue", "Économiste", "Historien", "Géographe", "Philosophe", "Théologien", "Linguiste", "Traducteur",
-"Interprète", "Bibliothécaire", "Archiviste", "Documentaliste", "Éditeur", "Imprimeur", "Relieur", "Libraire", "Galeriste", "Conservateur",
-"Restaurateur d'art", "Antiquaire", "Commissaire-priseur", "Notaire", "Huissier", "Greffier", "Magistrat", "Procureur", "Juge", "Commissaire",
-"Détective", "Agent secret", "Douanier", "Garde-côte", "Sauveteur", "Maître-nageur", "Moniteur de ski", "Guide de montagne", "Spéléologue", "Explorateur",
-"Astronaute", "Cosmonaute", "Pilote de chasse", "Pilote de ligne", "Contrôleur aérien", "Hôtesse de l'air", "Steward", "Marin", "Capitaine", "Amiral",
-"Bûcheron", "Forestier", "Agriculteur", "Viticulteur", "Arboriculteur", "Maraîcher", "Éleveur", "Berger", "Apiculteur", "Ostréiculteur",
-"Fromager", "Boucher", "Charcutier", "Poissonnier", "Caviste", "Sommelier", "Barista", "Pâtissier", "Chocolatier", "Glacier",
-"Traiteur", "Nutritionniste", "Diététicien", "Kinésithérapeute", "Ostéopathe", "Chiropracteur", "Acupuncteur", "Sophrologue", "Naturopathe", "Homéopathe",
-"Opticien", "Audioprothésiste", "Orthophoniste", "Orthoptiste", "Podologue", "Pédicure", "Prothésiste dentaire", "Radiologue", "Anesthésiste", "Cardiologue",
-"Dermatologue", "Gynécologue", "Pédiatre", "Gériatre", "Neurologue", "Ophtalmologue", "ORL", "Urologue", "Cancérologue", "Oncologue",
+    /// <summary>
+    /// MÉTHODE UTILITAIRE : CreerFichierMotsJson
+    /// Crée un fichier JSON avec une liste de mots
+    /// Utile pour générer automatiquement le fichier si l'utilisateur ne l'a pas
+    /// </summary>
+    /// <param name="cheminFichier">Le chemin où créer le fichier</param>
+    /// <param name="mots">Les mots à sauvegarder dans le fichier</param>
+    private static void CreerFichierMotsJson(string cheminFichier, string[] mots)
+    {
+        try
+        {
+            // Convertir le tableau de mots en format JSON
+            // WriteIndented = true rend le fichier lisible (avec indentation et retours à la ligne)
+            string json = JsonSerializer.Serialize(mots, new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                // Encoder = null permet d'écrire les caractères accentués correctement (é, è, à, etc.)
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
 
-// Animaux supplémentaires
-"Tatou", "Fourmilier", "Paresseux", "Tapir", "Capybara", "Loutreoutremur", "Putois", "Belette", "Hermine", "Vison",
-"Loutre", "Castor", "Ragondin", "Surmulot", "Musaraigne", "Taupe", "Chauve-souris", "Pipistrelle", "Hérisson d'Europe", "Blaireau",
-"Martre", "Fouine", "Lynx", "Chat sauvage", "Genette", "Mouflon", "Bouquetin", "Chamois", "Isard", "Marmotte",
-"Lémurien", "Tarsier", "Loris", "Babouin", "Mandrill", "Macaque", "Gibbon", "Siamang", "Ouistiti", "Capucin",
-"Tamanoir", "Numbat", "Wombat", "Diable de Tasmanie", "Quokka", "Wallaby", "Opossum", "Sarigue", "Kinkajou", "Coati",
-"Porc-épic", "Chinchilla", "Cobaye", "Agouti", "Paca", "Viscache", "Octodon", "Gerbille", "Lérot", "Loir",
-"Cachalot", "Narval", "Béluga", "Marsouin", "Dugong", "Lamantin", "Éléphant de mer", "Lion de mer", "Léopard de mer", "Rorqual",
-"Thon rouge", "Barracuda", "Piranha", "Murène", "Raie manta", "Poisson-clown", "Poisson-perroquet", "Poisson-chirurgien", "Rascasse", "Diable de mer",
-"Méduse", "Anémone de mer", "Corail", "Étoile de mer", "Oursin", "Concombre de mer", "Bernard-l'ermite", "Cloporte", "Mille-pattes", "Scolopendre",
-"Scorpion", "Araignée", "Tarentule", "Mygale", "Veuve noire", "Tique", "Puce", "Pou", "Punaise", "Cafard",
-"Termite", "Fourmi", "Abeille", "Bourdon", "Guêpe", "Frelon", "Libellule", "Demoiselle", "Éphémère", "Mante religieuse",
-"Sauterelle", "Criquet", "Grillon", "Cigale", "Puceron", "Coccinelle", "Scarabée", "Carabe", "Hanneton", "Lucane",
-"Papillon", "Chenille", "Chrysalide", "Sphinx", "Monarque", "Machaon", "Vulcain", "Paon du jour", "Citron", "Aurore",
-"Moustique", "Mouche", "Taon", "Tipule", "Moucheron", "Phrygane", "Perce-oreille", "Thrips", "Charançon", "Doryphore",
+            // Écrire le texte JSON dans le fichier sur le disque dur
+            File.WriteAllText(cheminFichier, json);
 
-// Pays supplémentaires
-"Belize", "Salvador", "Barbade", "Trinité-et-Tobago", "Bahamas", "Grenade", "Sainte-Lucie", "Dominique", "Saint-Vincent", "Antigua",
-"Guyana", "Suriname", "Guyane française", "Kirribati", "Tuvalu", "Nauru", "Palau", "Micronésie", "Vanuatu", "Salomon",
-"Comores", "Seychelles", "Maurice", "Maldives", "Cap-Vert", "Sao Tomé", "Guinée équatoriale", "Bénin", "Togo", "Burkina Faso",
-"Guinée", "Guinée-Bissau", "Sierra Leone", "Liberia", "Gambie", "Érythrée", "Djibouti", "Lesotho", "Swaziland", "Centrafrique",
-"Liechenstein", "Monaco", "Andorre", "Vatican", "Saint-Marin", "Malte", "Chypre", "Bhoutan", "Brunei", "Timor oriental",
-"Laos", "Sri Lanka", "Tadjikistan", "Turkménistan", "Bahreïn", "Palestine", "Mauritanie", "Érythrée", "Soudan du Sud", "Sahara occidental",
-
-// Villes supplémentaires
-"Zurich", "Lausanne", "Bâle", "Berne", "Lucerne", "Porto", "Cracovie", "Gdansk", "Bratislava", "Ljubljana",
-"Zagreb", "Belgrade", "Sofia", "Minsk", "Kiev", "Riga", "Tallinn", "Vilnius", "Reykjavik", "Tbilissi",
-"Bakou", "Tachkent", "Almaty", "Astana", "Bichkek", "Douchanbé", "Achgabat", "Oulan-Bator", "Katmandou", "Thimphou",
-"Dacca", "Islamabad", "Kaboul", "Téhéran", "Bagdad", "Damas", "Beyrouth", "Amman", "Jérusalem", "Tel-Aviv",
-"Riyad", "Abou Dhabi", "Doha", "Mascate", "Sanaa", "Alexandrie", "Casablanca", "Tunis", "Tripoli", "Alger",
-"Rabat", "Tanger", "Marrakech", "Fès", "Dakar", "Abidjan", "Accra", "Lagos", "Kinshasa", "Luanda",
-"Nairobi", "Dar es Salaam", "Kampala", "Kigali", "Addis-Abeba", "Mogadiscio", "Khartoum", "Pretoria", "Le Cap", "Durban",
-"Melbourne", "Brisbane", "Perth", "Adélaïde", "Canberra", "Wellington", "Auckland", "Christchurch", "Vancouver", "Toronto",
-"Ottawa", "Québec", "Calgary", "Edmonton", "Winnipeg", "Halifax", "Sao Paulo", "Brasilia", "Salvador", "Fortaleza",
-"Belo Horizonte", "Curitiba", "Recife", "Manaus", "Belém", "Porto Alegre", "Guadalajara", "Monterrey", "Puebla", "Tijuana",
-"Medellin", "Cali", "Quito", "Guayaquil", "La Paz", "Santa Cruz", "Montevideo", "Asuncion", "San José", "Panama City",
-"La Havane", "Kingston", "Port-au-Prince", "Saint-Domingue", "San Juan", "San Salvador", "Tegucigalpa", "Managua", "Belize City", "Guatemala City",
-"Guangzhou", "Shenzhen", "Chengdu", "Wuhan", "Chongqing", "Tianjin", "Hangzhou", "Nanjing", "Xi'an", "Suzhou",
-"Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow",
-"Manille", "Quezon City", "Jakarta", "Surabaya", "Bandung", "Medan", "Kuala Lumpur", "Penang", "Hanoï", "Hô Chi Minh-Ville",
-"Phnom Penh", "Vientiane", "Yangon", "Naypyidaw", "Karachi", "Lahore", "Faisalabad", "Rawalpindi", "Peshawar", "Multan",
-
-// Objets du quotidien supplémentaires
-"Réfrigérateur", "Congélateur", "Four", "Micro-ondes", "Lave-vaisselle", "Lave-linge", "Sèche-linge", "Aspirateur", "Fer à repasser", "Cafetière",
-"Bouilloire", "Grille-pain", "Mixeur", "Blender", "Robot", "Centrifugeuse", "Presse-agrumes", "Balance", "Thermomètre", "Minuteur",
-"Casserole", "Poêle", "Marmite", "Cocotte", "Wok", "Sauteuse", "Faitout", "Plat", "Saladier", "Passoire",
-"Fouet", "Spatule", "Louche", "Écumoire", "Couteau", "Fourchette", "Cuillère", "Assiette", "Bol", "Tasse",
-"Verre", "Carafe", "Théière", "Cafetière", "Sucrier", "Beurrier", "Salière", "Poivrière", "Huilier", "Vinaigrier",
-"Coussin", "Oreiller", "Couverture", "Drap", "Édredon", "Couette", "Traversin", "Plaid", "Tapis", "Rideau",
-"Store", "Volet", "Persienne", "Portière", "Tenture", "Tableau", "Cadre", "Poster", "Affiche", "Photographie",
-"Vase", "Pot", "Jardinière", "Cache-pot", "Cendrier", "Bougeoir", "Chandelier", "Lanterne", "Bougie", "Encens",
-"Brosse", "Peigne", "Sèche-cheveux", "Lisseur", "Fer à friser", "Rasoir", "Tondeuse", "Coupe-ongles", "Lime", "Pince à épiler",
-"Dentifrice", "Brosse à dents", "Fil dentaire", "Bain de bouche", "Savon", "Shampooing", "Gel douche", "Déodorant", "Parfum", "Crème",
-
-// Vêtements supplémentaires
-"Smoking", "Costume", "Tailleur", "Ensemble", "Survêtement", "Jogging", "Legging", "Tregging", "Salopette", "Tablier",
-"Poncho", "Cape", "Châle", "Étole", "Foulard", "Bandana", "Casquette", "Béret", "Bonnet", "Cagoule",
-"Bandeau", "Serre-tête", "Barrette", "Broche", "Épingle", "Bouton de manchette", "Cravate", "Nœud papillon", "Ceinture", "Bretelle",
-"Bague", "Collier", "Bracelet", "Gourmette", "Chaîne", "Pendentif", "Médaille", "Boucle d'oreille", "Anneau", "Piercing",
-"Mitaine", "Moufle", "Guêtre", "Jambière", "Manchette", "Genouillère", "Coudière", "Protège-tibias", "Attelle", "Bandage",
-
-// Sports et Loisirs supplémentaires
-"Badminton", "Squash", "Ping-pong", "Baseball", "Softball", "Cricket", "Polo", "Water-polo", "Beach-volley", "Pétanque",
-"Boules", "Billard", "Snooker", "Fléchettes", "Bowling", "Curling", "Biathlon", "Décathlon", "Heptathlon", "Pentathlon",
-"Saut en hauteur", "Saut en longueur", "Triple saut", "Saut à la perche", "Lancer du poids", "Lancer du disque", "Lancer du javelot", "Lancer du marteau", "Sprint", "Relais",
-"Haies", "Steeple", "Demi-fond", "Fond", "Cross-country", "Trail", "Ultra-trail", "Marche athlétique", "Marche nordique", "Jogging",
-"Cardio", "Musculation", "Fitness", "Crossfit", "Zumba", "Aérobic", "Step", "Spinning", "Body-combat", "Body-pump",
-"Aquagym", "Aquabike", "Hydrospeed", "Rafting", "Canyoning", "Via ferrata", "Parapente", "Deltaplane", "Planeur", "Montgolfière",
-"Parachutisme", "Saut à l'élastique", "Tyrolienne", "Accrobranche", "Paintball", "Laser game", "Airsoft", "Kart", "Quad", "Moto-cross",
-"BMX", "VTT", "Trial", "Roller", "Skateboard", "Longboard", "Waveboard", "Hoverboard", "Segway", "Gyropode",
-
-// Couleurs supplémentaires
-"Vermillon", "Cramoisi", "Grenat", "Rubis", "Carmin", "Cerise", "Framboise", "Fuchsia", "Mauve", "Lilas",
-"Prune", "Aubergine", "Améthyste", "Pervenche", "Bleu marine", "Bleu roi", "Bleu ciel", "Azur", "Cobalt", "Saphir",
-"Émeraude", "Jade", "Olive", "Kaki", "Chartreuse", "Citron", "Or", "Ambre", "Ocre", "Terre de Sienne",
-"Rouille", "Brique", "Terracotta", "Saumon", "Corail", "Pêche", "Abricot", "Crème", "Ivoire", "Perle",
-"Argent", "Platine", "Acier", "Ardoise", "Anthracite", "Charbon", "Jais", "Ébène", "Sépia", "Taupe",
-
-// Transports supplémentaires
-"Triporteur", "Pousse-pousse", "Rickshaw", "Calèche", "Diligence", "Cabriolet", "Berline", "Limousine", "Coupé", "Break",
-"Monospace", "SUV", "Pick-up", "Camping-car", "Caravane", "Remorque", "Semi-remorque", "Poids lourd", "Fourgon", "Fourgonnette",
-"Autobus", "Autocar", "Trolleybus", "Téléphérique", "Funiculaire", "Remonte-pente", "Télésiège", "Télécabine", "Gondole", "Nacelle",
-"Locomotive", "Wagon", "Rame", "TGV", "TER", "RER", "Intercité", "Eurostar", "Thalys", "Shinkansen",
-"Tramway", "Monorail", "Métro", "Omnibus", "Express", "Rapide", "Cargo", "Paquebot", "Transatlantique", "Croisière",
-"Voilier", "Catamaran", "Trimaran", "Goélette", "Péniche", "Barge", "Chaland", "Gabarre", "Vedette", "Canot",
-"Chaloupe", "Barque", "Pirogue", "Kayak", "Canoë", "Radeau", "Pédalo", "Jet-ski", "Scooter des mers", "Planche à voile",
-"Kitesurf", "Planche de surf", "Bodyboard", "Paddle", "Aviron", "Dériveur", "Optimist", "Laser", "Cargo", "Pétrolier",
-"Porte-conteneurs", "Brise-glace", "Remorqueur", "Chalutier", "Thonier", "Baleinier", "Dragueur", "Hydravion", "Planeur", "ULM",
-"Hélicoptère", "Autogire", "Drone", "Dirigeable", "Ballon", "Fusée", "Navette spatiale", "Satellite", "Sonde", "Rover",
-
-// Instruments de musique
-"Piano", "Guitare", "Violon", "Violoncelle", "Contrebasse", "Alto", "Harpe", "Flûte", "Clarinette", "Hautbois",
-"Basson", "Cor", "Trompette", "Trombone", "Tuba", "Saxophone", "Accordéon", "Harmonica", "Orgue", "Clavecin",
-"Batterie", "Tambour", "Cymbale", "Xylophone", "Marimba", "Vibraphone", "Glockenspiel", "Triangle", "Castagnettes", "Maracas",
-"Tambourin", "Djembé", "Bongo", "Conga", "Timbales", "Gong", "Cloche", "Carillon", "Lyre", "Mandoline",
-"Banjo", "Ukulélé", "Sitar", "Balalaïka", "Luth", "Cithare", "Cornemuse", "Didgeridoo", "Ocarina", "Kazoo",
-
-// Matières scolaires
-"Mathématiques", "Français", "Anglais", "Espagnol", "Allemand", "Italien", "Histoire", "Géographie", "Sciences", "Physique",
-"Chimie", "Biologie", "Géologie", "Astronomie", "Informatique", "Technologie", "Philosophie", "Économie", "Éducation civique", "Arts plastiques",
-"Musique", "Théâtre", "Éducation physique", "Sport", "Latin", "Grec", "Littérature", "Grammaire", "Orthographe", "Conjugaison",
-
-// Phénomènes naturels
-"Pluie", "Neige", "Grêle", "Verglas", "Givre", "Rosée", "Brouillard", "Brume", "Nuage", "Orage",
-"Éclair", "Foudre", "Tonnerre", "Arc-en-ciel", "Aurore boréale", "Vent", "Brise", "Tempête", "Ouragan", "Cyclone",
-"Typhon", "Tornade", "Trombe", "Mistral", "Tramontane", "Sirocco", "Harmattan", "Mousson", "Alizé", "Tsunami",
-"Raz-de-marée", "Séisme", "Tremblement de terre", "Éruption", "Volcan", "Lave", "Magma", "Geyser", "Avalanche", "Éboulement",
-"Glissement de terrain", "Inondation", "Crue", "Sécheresse", "Canicule", "Vague de froid", "Gel", "Dégel", "Marée", "Courant",
-
-// Émotions et sentiments
-"Joie", "Bonheur", "Gaieté", "Allégresse", "Euphorie", "Extase", "Ravissement", "Enchantement", "Enthousiasme", "Excitation",
-"Tristesse", "Chagrin", "Peine", "Mélancolie", "Nostalgie", "Cafard", "Déprime", "Désespoir", "Angoisse", "Anxiété",
-"Peur", "Crainte", "Frayeur", "Terreur", "Effroi", "Épouvante", "Panique", "Horreur", "Colère", "Rage",
-"Fureur", "Irritation", "Agacement", "Exaspération", "Amour", "Affection", "Tendresse", "Passion", "Adoration", "Dévotion",
-"Haine", "Aversion", "Répulsion", "Dégoût", "Mépris", "Jalousie", "Envie", "Convoitise", "Fierté", "Orgueil",
-"Humilité", "Modestie", "Honte", "Gêne", "Embarras", "Confusion", "Surprise", "Étonnement", "Stupéfaction", "Admiration",
-
-// Formes géométriques
-"Cercle", "Carré", "Triangle", "Rectangle", "Losange", "Trapèze", "Parallélogramme", "Pentagone", "Hexagone", "Heptagone",
-"Octogone", "Décagone", "Polygone", "Ellipse", "Ovale", "Sphère", "Cube", "Pyramide", "Prisme", "Cylindre",
-"Cône", "Tétraèdre", "Dodécaèdre", "Icosaèdre", "Tore", "Spirale", "Hélice", "Étoile", "Croissant", "Arc", "Segment",
-
-// Parties du corps
-"Tête", "Cerveau", "Crâne", "Cheveu", "Front", "Sourcil", "Œil", "Paupière", "Cil", "Pupille",
-"Iris", "Nez", "Narine", "Bouche", "Lèvre", "Dent", "Gencive", "Langue", "Palais", "Joue",
-"Menton", "Mâchoire", "Oreille", "Lobe", "Cou", "Nuque", "Gorge", "Larynx", "Trachée", "Épaule",
-"Bras", "Coude", "Avant-bras", "Poignet", "Main", "Paume", "Doigt", "Pouce", "Index", "Majeur",
-"Annulaire", "Auriculaire", "Ongle", "Torse", "Poitrine", "Sein", "Ventre", "Dos", "Colonne vertébrale", "Hanche", "Fesse", "Cuisse", "Genou",
-"Jambe", "Mollet", "Cheville", "Pied", "Plante", "Talons", "Orteil", "Cœur", "Poumon", "Foie",
-"Estomac", "Intestin", "Rein", "Vessie", "Cerveau", "Muscle", "Os", "Articulation", "Veine", "Artère",
-"Nerf", "Peau", "Poil", "Sang", "Lymphe", "Cellule", "ADN", "Gène", "Chromosome"
-
-};
+            Console.WriteLine($"✓ Fichier {cheminFichier} créé avec succès avec {mots.Length} mots !");
+        }
+        catch (Exception ex)
+        {
+            // Si la création échoue, afficher l'erreur mais continuer le jeu
+            Console.WriteLine($"! Impossible de créer le fichier {cheminFichier} : {ex.Message}");
+        }
+    }
 
     /// <summary>
     /// Normalise un caractère pour la comparaison (ex: ç => c, â/ä => a, etc.)
@@ -642,15 +469,113 @@ public static class UtilitairesPendu
         // Tableau contenant les différentes étapes du dessin du pendu
         // Chaque élément représente une étape de plus dans la construction du pendu
         string[] pendu = new string[]
-        {
-        "\n\n\n\n\n\n\n",                                    // 0 erreur : rien
-        "\n\n\n\n\n\n____\n",                               // 1 erreur : base
-        " |\n |\n |\n |\n |\n_|___\n",                     // 2 erreurs : potence
-        " _______\n |/      |\n |\n |\n |\n_|___\n",        // 3 erreurs : potence complète
-        " _______\n |/      |\n |      (_)\n |\n |\n_|___\n", // 4 erreurs : tête
-        " _______\n |/      |\n |      (_)\n |      /|\\\n |\n_|___\n", // 5 erreurs : corps
-        " _______\n |/      |\n |      (_)\n |      /|\\\n |      / \\\n_|___\n" // 6 erreurs : pendu complet
-        };
+    { 
+    // 0 erreur : potence vide 
+@" 
+    +-------------+
+    |             |
+    |              
+    |              
+    |              
+    |              
+    |              
+    |              
+    +------------- 
+    | 
+    |   Pret a jouer ? 
+    ", 
+     
+    // 1 erreur : base + corde 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |              
+    |              
+    |              
+    |              
+    |              
+    +------------- 
+    | 
+    |   1ere erreur... 
+    ", 
+     
+    // 2 erreurs : tête complète 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |            - - 
+    |              
+    |              
+    |              
+    |              
+    +------------- 
+    | 
+    |   Oups... 
+    ", 
+     
+    // 3 erreurs : torse 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |            - - 
+    |             # 
+    |             | 
+    |              
+    |              
+    +------------- 
+    | 
+    |   C'est pas gagné... 
+    ", 
+     
+    // 4 erreurs : bras gauche 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |            - - 
+    |             # 
+    |            /| 
+    |              
+    |              
+    +------------- 
+    | 
+    |   Aie aie aie ! 
+    ", 
+     
+    // 5 erreurs : bras droit 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |            - - 
+    |             # 
+    |            /|\ 
+    |              
+    |              
+    +------------- 
+    | 
+    |   Plus que 2 chances ! 
+    ", 
+     
+    // 6 erreurs : pendu complet 
+@" 
+    +-------------+
+    |             |
+    |             O 
+    |            X X 
+    |             # 
+    |            /|\ 
+    |            / \ 
+    |              
+    +------------- 
+    | 
+    |   PERDU !  
+    |   R.I.P (Repose en paix. Bro !) 
+    ",
+    };
 
         // Affiche le dessin correspondant au nombre d'erreurs
         // Math.Min garantit qu'on ne dépasse pas la taille du tableau
@@ -746,28 +671,54 @@ public static class UtilitairesPendu
             // Afficher les lettres déjà essayées
             Console.WriteLine($"Lettres essayées : {lettresEssayees}");
 
+            // ==================== SAISIE D'UNE SEULE LETTRE ====================
             // Demander au joueur de proposer une lettre
             Console.Write("Proposez une lettre : ");
-            string? saisieInput = Console.ReadLine();
-            string saisie = saisieInput?.ToUpperInvariant() ?? "";
+
+            // ReadKey() au lieu de ReadLine() = le joueur ne peut taper qu'UNE SEULE touche
+            // L'avantage : pas besoin d'appuyer sur Entrée, c'est plus rapide !
+            // "true" = ne pas afficher la touche pressée à l'écran (on l'affichera nous-mêmes)
+            ConsoleKeyInfo touchePressee = Console.ReadKey(true);
+
+            // Extraire le caractère de la touche pressée et le convertir en majuscule
+            // touchePressee.KeyChar donne le caractère correspondant à la touche
+            char caractereSaisi = char.ToUpperInvariant(touchePressee.KeyChar);
+
+            // Afficher la lettre saisie par l'utilisateur (en majuscule)
+            // Cela donne un feedback visuel : l'utilisateur voit ce qu'il a tapé
+            Console.WriteLine(caractereSaisi);
+
+            // Convertir le caractère en chaîne de caractères pour la suite du code
+            // (certaines méthodes ont besoin d'une string et pas d'un char)
+            string saisie = caractereSaisi.ToString();
 
             // ==================== VALIDATION DE LA SAISIE ====================
-            // Vérifier que la saisie est valide (une seule lettre)
-            if (string.IsNullOrWhiteSpace(saisie) || saisie.Length != 1 || !char.IsLetter(saisie[0]))
+            // Vérifier que la saisie est valide (une lettre alphabétique)
+            // char.IsLetter() vérifie si c'est bien une lettre (A-Z, a-z) et pas un chiffre ou symbole
+            if (!char.IsLetter(caractereSaisi))
             {
-                Console.WriteLine("Veuillez entrer une seule lettre.");
+                // Message d'erreur si l'utilisateur a tapé autre chose qu'une lettre
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n❌ Ce n'est pas une lettre ! Veuillez entrer une lettre (A-Z).");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nAppuyez sur une touche pour continuer...");
                 Console.ReadKey(); // Attendre que le joueur appuie sur une touche
-                continue; // Recommencer la boucle
+                continue; // Recommencer la boucle (retour au début du while)
             }
 
-            char lettre = saisie[0]; // Extraire la lettre saisie
+            // La lettre est valide, on peut continuer
+            char lettre = caractereSaisi;
 
             // Vérifier si la lettre a déjà été essayée
             if (lettresEssayees.Contains(lettre))
             {
-                Console.WriteLine("Vous avez déjà essayé cette lettre.");
+                // Afficher un message d'avertissement en orange/jaune
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"\n⚠️  Vous avez déjà essayé la lettre '{lettre}' !");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nAppuyez sur une touche pour continuer...");
                 Console.ReadKey(); // Attendre que le joueur appuie sur une touche
-                continue; // Recommencer la boucle
+                continue; // Recommencer la boucle (retour au début du while)
             }
 
             // Ajouter la lettre à la liste des lettres essayées

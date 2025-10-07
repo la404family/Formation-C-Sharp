@@ -1,9 +1,9 @@
 {
-  "PartiesJouees": 14,
-  "PartiesGagnees": 4,
-  "PartiesPerdues": 10,
-  "TotalLettresTentees": 117,
-  "TotalMotsTrouves": 4,
-  "PourcentageReussite": 28.57142857142857,
-  "MoyenneLettresParPartie": 8.357142857142858
+  "PartiesJouees": 24,
+  "PartiesGagnees": 5,
+  "PartiesPerdues": 19,
+  "TotalLettresTentees": 210,
+  "TotalMotsTrouves": 5,
+  "PourcentageReussite": 20.833333333333336,
+  "MoyenneLettresParPartie": 8.75
 }

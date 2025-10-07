@@ -9,11 +9,19 @@ Ce projet est un jeu de pendu en C# qui permet de jouer contre l'ordinateur.
 ### 🎮 **Jeu de base**
 
 - Le joueur doit deviner un mot en proposant des lettres une par une
+- **Saisie d'un seul caractère** : Utilise `Console.ReadKey()` - pas besoin d'appuyer sur Entrée !
 - 6 tentatives maximum avant d'être "pendu"
 - Affichage progressif du dessin du pendu selon les erreurs
 - Interface console colorée (fond vert, texte noir/blanc/rouge/vert selon le contexte)
 - Gestion des lettres déjà essayées (évite les doublons)
-- Base de données riche (1000+ mots)
+- **Messages d'erreur colorés** : Rouge pour erreur, jaune pour avertissement
+
+### 📁 **Gestion des mots personnalisable**
+
+- **Chargement depuis fichier JSON** : Les mots sont lus depuis `mots.json`
+- **Création automatique** : Si le fichier n'existe pas, il est créé avec 60 mots par défaut
+- **Personnalisation facile** : Ajoutez vos propres mots en éditant le fichier JSON
+- **Gestion d'erreurs robuste** : Utilisation de mots par défaut en cas de problème
 
 ### 🔤 **Gestion intelligente des caractères**
 
