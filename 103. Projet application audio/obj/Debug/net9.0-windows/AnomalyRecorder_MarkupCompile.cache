@@ -1,0 +1,20 @@
+﻿AnomalyRecorder
+
+
+winexe
+C#
+.cs
+D:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\103. Projet application audio\obj\Debug\net9.0-windows\
+AudioEditor
+none
+false
+TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+D:\Documents perso\0000Site internet\Du Chevreuil\Formation C-Sharp\103. Projet application audio\App.xaml
+5-1138334552
+
+21761973918
+2161242286321
+UI\Controls\AudioWaveformControl.xaml;UI\Controls\TrackControl.xaml;UI\Controls\TransportControl.xaml;UI\Windows\AboutWindow.xaml;UI\Windows\MainWindow.xaml;
+
+False
+

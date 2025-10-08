@@ -1,0 +1,104 @@
+<UserControl x:Class="AudioEditor.UI.Controls.AudioWaveformControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="WaveformCanvasStyle" TargetType="Canvas">
+            <Setter Property="Background" Value="#FF2D2D30"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+        
+        <Style x:Key="SelectionRectangleStyle" TargetType="Rectangle">
+            <Setter Property="Fill" Value="#4000BFFF"/>
+            <Setter Property="Stroke" Value="#FF00BFFF"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+        
+        <Style x:Key="PlayheadLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#FFFF6B6B"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Y1" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Barre d'outils du waveform -->
+        <Border Grid.Row="0" Background="#FF3E3E42" BorderBrush="#FF555555" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
+                <!-- Contrôles de zoom -->
+                <Label Content="Zoom:" Foreground="White" VerticalAlignment="Center"/>
+                <Button Name="ZoomInButton" Content="+" Width="25" Height="20" Margin="2,0" 
+                        Background="#FF505050" Foreground="White" BorderBrush="#FF707070"/>
+                <Button Name="ZoomOutButton" Content="−" Width="25" Height="20" Margin="2,0"
+                        Background="#FF505050" Foreground="White" BorderBrush="#FF707070"/>
+                <Button Name="ZoomFitButton" Content="Fit" Width="35" Height="20" Margin="5,0,2,0"
+                        Background="#FF505050" Foreground="White" BorderBrush="#FF707070"/>
+                
+                <Separator Margin="10,0" Background="#FF555555"/>
+                
+                <!-- Information audio -->
+                <Label Name="AudioInfoLabel" Content="No audio loaded" Foreground="#FFCCCCCC" VerticalAlignment="Center"/>
+                
+                <Separator Margin="10,0" Background="#FF555555"/>
+                
+                <!-- Contrôles de sélection -->
+                <Label Content="Selection:" Foreground="White" VerticalAlignment="Center"/>
+                <Label Name="SelectionInfoLabel" Content="None" Foreground="#FFCCCCCC" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Zone principale du waveform -->
+        <Border Grid.Row="1" Background="#FF2D2D30" BorderBrush="#FF555555" BorderThickness="1">
+            <ScrollViewer Name="WaveformScrollViewer" 
+                         HorizontalScrollBarVisibility="Auto" 
+                         VerticalScrollBarVisibility="Hidden"
+                         CanContentScroll="True"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch">
+                <Grid Name="WaveformContainer" Background="Transparent">
+                    <!-- Canvas pour dessiner la forme d'onde -->
+                    <Canvas Name="WaveformCanvas" 
+                            Style="{StaticResource WaveformCanvasStyle}"
+                            MouseLeftButtonDown="WaveformCanvas_MouseLeftButtonDown"
+                            MouseMove="WaveformCanvas_MouseMove"
+                            MouseLeftButtonUp="WaveformCanvas_MouseLeftButtonUp"
+                            MouseWheel="WaveformCanvas_MouseWheel">
+                        
+                        <!-- Grille de temps (sera générée dynamiquement) -->
+                        <Canvas Name="TimeGridCanvas" Panel.ZIndex="0"/>
+                        
+                        <!-- Forme d'onde (sera générée dynamiquement) -->
+                        <Canvas Name="AudioDataCanvas" Panel.ZIndex="1"/>
+                        
+                        <!-- Rectangle de sélection -->
+                        <Rectangle Name="SelectionRectangle" 
+                                  Style="{StaticResource SelectionRectangleStyle}"
+                                  Panel.ZIndex="2"/>
+                        
+                        <!-- Ligne de lecture (playhead) -->
+                        <Line Name="PlayheadLine" 
+                              Style="{StaticResource PlayheadLineStyle}"
+                              Panel.ZIndex="3"/>
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+        
+        <!-- Barre de temps -->
+        <Border Grid.Row="2" Background="#FF3E3E42" BorderBrush="#FF555555" BorderThickness="0,1,0,0">
+            <Canvas Name="TimeRulerCanvas" Background="Transparent">
+                <!-- Les marqueurs de temps seront ajoutés dynamiquement -->
+            </Canvas>
+        </Border>
+    </Grid>
+</UserControl>
