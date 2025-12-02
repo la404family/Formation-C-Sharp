@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\101. Projet console simple\\101. Projet console simple.csproj",
+      "projectUniqueName": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation-C-Sharp\\101. Projet console simple\\101. Projet console simple.csproj",
       "projectName": "101. Projet console simple",
-      "projectPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\101. Projet console simple\\101. Projet console simple.csproj",
+      "projectPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation-C-Sharp\\101. Projet console simple\\101. Projet console simple.csproj",
       "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation C-Sharp\\101. Projet console simple\\obj\\",
+      "outputPath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation-C-Sharp\\101. Projet console simple\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -73,7 +73,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
