@@ -314,7 +314,3 @@ if (y == 5) // Comparaison correcte
 }
 // if (y = 5) // Erreur : affectation au lieu de comparaison
 ```
-
----
-
-Ces notions avancées sur les variables vous permettront d'écrire un code plus robuste et plus lisible en C#.
