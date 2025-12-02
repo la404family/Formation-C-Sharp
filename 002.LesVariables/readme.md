@@ -26,6 +26,57 @@ double prix = 19.99;
 
 Dans cet exemple, nous avons initialisé les variables `age`, `nom` et `prix` avec les valeurs `30`, `"Jean"` et `19.99` respectivement.
 
+## Les types de variables en C-Sharp
+
+En C#, il existe plusieurs types de variables, chacun ayant des caractéristiques spécifiques. Voici les principaux types de variables classés par fréquence d'utilisation :
+
+### Types indispensables (à connaître absolument)
+
+| Type     | Description           | Exemple             |
+| -------- | --------------------- | ------------------- |
+| `int`    | Nombres entiers       | `42`, `-5`, `100`   |
+| `string` | Chaînes de caractères | `"Bonjour"`, `"C#"` |
+| `bool`   | Valeurs booléennes    | `true`, `false`     |
+| `double` | Nombres décimaux      | `3.14`, `-0.5`      |
+| `var`    | Type implicite        | `var x = 10;`       |
+
+```csharp
+int age = 25;                    // Nombre entier simple
+string nom = "Marie";            // Texte
+bool estActif = true;            // Condition
+double moyenne = 15.75;          // Calcul décimal
+var compteur = 0;                // Le compilateur déduit : int
+```
+
+### Types pour des besoins spécifiques
+
+| Type      | Description              | Exemple        |
+| --------- | ------------------------ | -------------- |
+| `decimal` | Haute précision décimale | `19.99m`       |
+| `long`    | Grands entiers           | `10000000000L` |
+| `float`   | Décimal simple précision | `3.14f`        |
+
+```csharp
+decimal prix = 19.99m;           // Prix exact, pas d'erreur d'arrondi
+long idUtilisateur = 9876543210; // ID de base de données
+float positionX = 1.5f;          // Coordonnée dans un jeu
+```
+
+### Types pour des cas très particuliers
+
+| Type                               | Description               |
+| ---------------------------------- | ------------------------- |
+| `char`                             | Caractère unique (`'A'`)  |
+| `short`, `byte`                    | Petits entiers            |
+| `sbyte`, `ushort`, `uint`, `ulong` | Entiers signés/non signés |
+
+```csharp
+char lettre = 'A';               // Un seul caractère
+byte octet = 255;                // Valeur 0-255 (données binaires)
+```
+
+**Note** : Plus de détails dans une prochaine section sur les types de données.
+
 ## Utilisation des variables en C-Sharp
 
 Une fois que vous avez déclaré et initialisé des variables, vous pouvez les utiliser dans votre programme. Voici un exemple d'utilisation de variables en C# :

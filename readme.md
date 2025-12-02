@@ -71,6 +71,10 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
   > Gestion des exceptions avec `try`, `catch`, `finally`, `throw`, et le bloc `using`.
 
+- [8a. Exceptions avancées](008a.%20Exceptions%20avancées/readme.md)
+
+  > Filtres d'exception (`when`), Exceptions de première chance, Création d'exceptions personnalisées, InnerException, AggregateException, Best practices.
+
 - [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
 
   > Définition, paramètres (valeur, référence, optionnels, nommés), valeurs de retour, `out`.
@@ -108,182 +112,222 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
 ## Partie 2 : Maîtriser le Framework .NET
 
-- [11. Expressions Lambda et Delegates avancés](011.%20Expressions%20Lambda%20et%20Delegates%20avancés/readme.md)
+- [11. Architecture du CLR et Gestion mémoire](011.%20Architecture%20du%20CLR%20et%20Gestion%20mémoire/readme.md)
+
+  > Fonctionnement du CLR, Compilation (MSIL/IL, JIT), Assemblies et chargement, Stack vs Heap, Types valeur vs référence, Boxing/Unboxing, Span<T> et Memory<T>.
+
+- [12. Expressions Lambda et Delegates avancés](012.%20Expressions%20Lambda%20et%20Delegates%20avancés/readme.md)
 
   > Syntaxe Lambda (`=>`), Func et Action, Predicate, Event handlers, Closures.
 
-- [12. Collections avancées et LINQ](012.%20Collections%20avancées%20et%20LINQ/readme.md)
+- [13. Collections avancées et LINQ](013.%20Collections%20avancées%20et%20LINQ/readme.md)
 
   > IEnumerable/ICollection/IList, HashSet/SortedSet, Stack/Queue avancées, Requêtes LINQ (Select, Where, OrderBy, GroupBy, Join, Aggregate).
 
-- [13. Programmation Asynchrone](013.%20Programmation%20Asynchrone/readme.md)
+- [14. Programmation Asynchrone](014.%20Programmation%20Asynchrone/readme.md)
 
   > Concepts de base (Thread vs Task), Mots-clés `async` et `await`, Task Parallel Library (TPL), CancellationToken, ConfigureAwait.
 
-- [14. Gestion de fichiers et Sérialisation](014.%20Gestion%20de%20fichiers%20et%20Sérialisation/readme.md)
+- [15. Gestion de fichiers et Sérialisation](015.%20Gestion%20de%20fichiers%20et%20Sérialisation/readme.md)
 
   > File/Directory, StreamReader/Writer, Paths, Sérialisation JSON (System.Text.Json, Newtonsoft.Json) et XML, Binary serialization.
 
-- [15. Attributs et Réflexion](015.%20Attributs%20et%20Réflexion/readme.md)
+- [16. Attributs et Réflexion](016.%20Attributs%20et%20Réflexion/readme.md)
 
   > Attributs prédéfinis et personnalisés, Réflexion (Type, MethodInfo), Activation dynamique, Performance considerations.
 
-- [16. Débogage avancé et Gestion de la mémoire](016.%20Débogage%20avancé%20et%20Gestion%20de%20la%20mémoire/readme.md)
-  > Débogueur Visual Studio, Breakpoints conditionnels, Watch/Immediate, Stack Trace, Garbage Collector, IDisposable et `using`, Memory Profiling.
+- [17. Débogage avancé et Garbage Collector](017.%20Débogage%20avancé%20et%20Garbage%20Collector/readme.md)
+
+  > Débogueur Visual Studio, Breakpoints conditionnels, Watch/Immediate, Stack Trace, Garbage Collector (générations, LOH), IDisposable et `using`, Finalizers, Memory Profiling.
+
+- [18. Outils CLI .NET](018.%20Outils%20CLI%20dotnet/readme.md)
+
+  > Commandes dotnet CLI (new, build, run, test, publish, pack, restore), Création de solutions et projets, NuGet (add package, nuget.org), Global tools.
 
 ## Partie 3 : Architecture et Qualité logicielle
 
-- [17. Principes SOLID et Clean Code](017.%20Principes%20SOLID%20et%20Clean%20Code/readme.md)
+- [19. Principes SOLID et Clean Code](019.%20Principes%20SOLID%20et%20Clean%20Code/readme.md)
 
   > Les 5 principes SOLID (SRP, OCP, LSP, ISP, DIP), Nommage, Commentaires, Formatting, DRY, KISS, YAGNI.
 
-- [18. Design Patterns Créationnels](018.%20Design%20Patterns%20Créationnels/readme.md)
+- [20. Design Patterns Créationnels](020.%20Design%20Patterns%20Créationnels/readme.md)
 
   > Singleton, Factory Method, Abstract Factory, Builder, Prototype.
 
-- [19. Design Patterns Structurels et Comportementaux](019.%20Design%20Patterns%20Structurels%20et%20Comportementaux/readme.md)
+- [21. Design Patterns Structurels et Comportementaux](021.%20Design%20Patterns%20Structurels%20et%20Comportementaux/readme.md)
 
   > Adapter, Decorator, Facade, Strategy, Observer, Command, Repository Pattern.
 
-- [20. Tests Unitaires et TDD](020.%20Tests%20Unitaires%20et%20TDD/readme.md)
+- [22. Tests Unitaires et TDD](022.%20Tests%20Unitaires%20et%20TDD/readme.md)
 
   > Frameworks de test (xUnit, NUnit, MSTest), Assertions, AAA Pattern, Mocking (Moq, NSubstitute), Cycle Red-Green-Refactor, Code Coverage.
 
-- [21. Injection de Dépendances et IoC](021.%20Injection%20de%20Dépendances%20et%20IoC/readme.md)
+- [23. Tests d'intégration et Performance](023.%20Tests%20intégration%20et%20Performance/readme.md)
 
-  > Inversion de contrôle (IoC), Conteneurs DI (Microsoft.Extensions.DependencyInjection), Durée de vie des services (Transient, Scoped, Singleton), Constructor Injection.
+  > Tests d'intégration (WebApplicationFactory, TestServer), Tests de base de données, Benchmark.NET, Tests de charge, Stratégies de test (Pyramide des tests).
 
-- [22. Logging et Monitoring](022.%20Logging%20et%20Monitoring/readme.md)
-  > ILogger, Serilog, NLog, Niveaux de log (Trace, Debug, Info, Warning, Error, Critical), Structured logging, Application Insights.
+- [24. Injection de Dépendances avancée](024.%20Injection%20de%20Dépendances%20avancée/readme.md)
+
+  > Cycles de vie (Transient, Scoped, Singleton), IServiceProvider, Service Factories, Keyed Services (.NET 8+), Options Pattern (IOptions<T>), Validation de configuration.
+
+- [25. Logging, Métriques et Diagnostics](025.%20Logging%20Métriques%20et%20Diagnostics/readme.md)
+
+  > ILogger et fournisseurs, Logging sémantique/structuré, Filtrage par catégorie/niveau, System.Diagnostics.Metrics, ActivitySource et Tracing distribué, OpenTelemetry.
 
 ## Partie 4 : Accès aux données
 
-- [23. Introduction aux Bases de données et SQL](023.%20Introduction%20aux%20Bases%20de%20données%20et%20SQL/readme.md)
+- [26. Introduction aux Bases de données et SQL](026.%20Introduction%20aux%20Bases%20de%20données%20et%20SQL/readme.md)
 
   > Concepts relationnels (Tables, Clés primaires/étrangères, Normalisation, Index), SQL Server/SQLite, Requêtes SQL (SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, HAVING, Sous-requêtes), Transactions.
 
-- [24. ADO.NET et Dapper](024.%20ADO.NET%20et%20Dapper/readme.md)
+- [27. ADO.NET et Dapper](027.%20ADO.NET%20et%20Dapper/readme.md)
 
   > Connexion ADO.NET, SqlConnection/SqlCommand, DataReader vs DataAdapter, Paramètres SQL (prévention SQL Injection), Sécurité des requêtes, Micro-ORM Dapper, Requêtes typées.
 
-- [25. Entity Framework Core](025.%20Entity%20Framework%20Core/readme.md)
+- [28. Entity Framework Core](028.%20Entity%20Framework%20Core/readme.md)
 
   > ORM complet, DbContext, DbSet, Entités et annotations, Code First vs Database First, Migrations, LINQ to Entities.
 
-- [26. Relations et requêtes avancées EF Core](026.%20Relations%20et%20requêtes%20avancées%20EF%20Core/readme.md)
+- [29. Relations et requêtes avancées EF Core](029.%20Relations%20et%20requêtes%20avancées%20EF%20Core/readme.md)
+
   > Relations (One-to-One, One-to-Many, Many-to-Many), Lazy vs Eager Loading (Include/ThenInclude), Explicit Loading, Navigation Properties, Query Filters.
+
+- [30. EF Core Optimisation et SQL brut](030.%20EF%20Core%20Optimisation%20et%20SQL%20brut/readme.md)
+
+  > AsNoTracking, Split Queries, Compiled Queries, FromSqlRaw/FromSqlInterpolated, ExecuteSqlRaw, Database.EnsureCreated vs Migrations, Interceptors, Performance tips.
+
+- [31. Caching et Performance données](031.%20Caching%20et%20Performance%20données/readme.md)
+
+  > IMemoryCache, IDistributedCache, Redis (StackExchange.Redis), Cache-aside pattern, Cache invalidation, Response caching, Output caching (.NET 7+).
 
 ## Partie 5 : Développement Desktop (WPF)
 
-- [27. Introduction à WPF et XAML](027.%20Introduction%20à%20WPF%20et%20XAML/readme.md)
+- [32. Introduction à WPF et XAML](032.%20Introduction%20à%20WPF%20et%20XAML/readme.md)
 
   > Architecture WPF, Langage XAML, Namespaces, Layouts (Grid, StackPanel, DockPanel, WrapPanel), Contrôles de base (Button, TextBox, Label, ComboBox).
 
-- [28. Styles, Templates et Ressources](028.%20Styles%20Templates%20et%20Ressources/readme.md)
+- [33. Styles, Templates et Ressources](033.%20Styles%20Templates%20et%20Ressources/readme.md)
 
   > ResourceDictionary, Styles (Setters, Triggers), ControlTemplates, DataTemplates, StaticResource vs DynamicResource, Thèmes.
 
-- [29. Le pattern MVVM](029.%20Le%20pattern%20MVVM/readme.md)
+- [34. Le pattern MVVM](034.%20Le%20pattern%20MVVM/readme.md)
 
   > Séparation des préoccupations, Model-View-ViewModel, INotifyPropertyChanged, ObservableCollection, Communication View-ViewModel, Community Toolkit MVVM ([ObservableProperty], [RelayCommand]).
 
-- [30. Data Binding et Commandes](030.%20Data%20Binding%20et%20Commandes/readme.md)
+- [35. Data Binding avancé et Commandes](035.%20Data%20Binding%20avancé%20et%20Commandes/readme.md)
 
-  > Liaison de données (OneWay, TwoWay, OneWayToSource, OneTime), Binding Path et ElementName, ICommand, RelayCommand, Value Converters, Validation.
+  > Liaison de données (OneWay, TwoWay, OneWayToSource, OneTime), Binding Path et ElementName, MultiBinding, PriorityBinding, ICommand, RelayCommand, Value Converters, IDataErrorInfo, INotifyDataErrorInfo.
 
-- [31. Applications WPF avancées](031.%20Applications%20WPF%20avancées/readme.md)
+- [36. Applications WPF avancées](036.%20Applications%20WPF%20avancées/readme.md)
+
   > Navigation (Frame, NavigationService), UserControls, Dialogs (MessageBox, OpenFileDialog), Animations, Drag & Drop, Multithreading et Dispatcher.
 
 ## Partie 6 : Développement Web (ASP.NET Core)
 
-- [32. Architecture Web et protocole HTTP](032.%20Architecture%20Web%20et%20protocole%20HTTP/readme.md)
+- [37. Architecture Web et protocole HTTP](037.%20Architecture%20Web%20et%20protocole%20HTTP/readme.md)
 
   > Fonctionnement du Web, Client-Serveur, Requêtes/Réponses HTTP, Verbes (GET, POST, PUT, PATCH, DELETE), Headers, Codes de statut (2xx, 3xx, 4xx, 5xx).
 
-- [33. Création d'API RESTful avec ASP.NET Core](033.%20Création%20API%20RESTful%20avec%20ASP.NET%20Core/readme.md)
+- [38. Configuration et Environnements](038.%20Configuration%20et%20Environnements/readme.md)
 
-  > Controllers et Actions, Routing (attributs et conventionnel), Model Binding, Validation, ActionResult, DTO (Data Transfer Objects), AutoMapper, Swagger/OpenAPI, Postman/Insomnia.
+  > IConfiguration, appsettings.json, Variables d'environnement, User Secrets, Azure Key Vault, Options Pattern, Configuration par environnement (Development, Staging, Production).
 
-- [34. Middleware et Pipeline ASP.NET Core](034.%20Middleware%20et%20Pipeline%20ASP.NET%20Core/readme.md)
+- [39. Création d'API RESTful avec ASP.NET Core](039.%20Création%20API%20RESTful%20avec%20ASP.NET%20Core/readme.md)
+
+  > Controllers et Actions, Routing avancé (attributs, conventionnel, contraintes), Model Binding, Validation, ActionResult, DTO (Data Transfer Objects), AutoMapper, Swagger/OpenAPI, Postman/Insomnia.
+
+- [40. Middleware et Pipeline ASP.NET Core](040.%20Middleware%20et%20Pipeline%20ASP.NET%20Core/readme.md)
 
   > Pipeline de requêtes, Middleware personnalisés, app.Use vs app.Run, Ordre d'exécution, CORS, Exception Handling, Static Files.
 
-- [35. ASP.NET Core MVC et Razor Pages](035.%20ASP.NET%20Core%20MVC%20et%20Razor%20Pages/readme.md)
+- [41. ASP.NET Core MVC et Razor Pages](041.%20ASP.NET%20Core%20MVC%20et%20Razor%20Pages/readme.md)
 
   > Pattern MVC (Model-View-Controller), Vues Razor (syntaxe @), Tag Helpers, Layouts et Sections, Partial Views, Validation de formulaires, TempData/ViewBag/ViewData.
 
-- [36. Sécurité et Authentification Web](036.%20Sécurité%20et%20Authentification%20Web/readme.md)
+- [42. Sécurité et Authentification Web](042.%20Sécurité%20et%20Authentification%20Web/readme.md)
 
-  > Authentification vs Autorisation, ASP.NET Core Identity, JWT (JSON Web Tokens), Bearer Authentication, Claims et Policies, Hashing de mots de passe, HTTPS/SSL.
+  > Authentification vs Autorisation, ClaimsPrincipal, IAuthorizationService, Policies et Requirements, ASP.NET Core Identity, JWT (JSON Web Tokens), Bearer Authentication, Data Protection API.
 
-- [37. SignalR et temps réel](037.%20SignalR%20et%20temps%20réel/readme.md)
-  > WebSockets, SignalR Hubs, Communication bidirectionnelle, Broadcasting, Groupes, Clients JavaScript et C#, Chat en temps réel.
+- [43. Cryptographie et Protection des données](043.%20Cryptographie%20et%20Protection%20des%20données/readme.md)
+
+  > System.Security.Cryptography, Hachage (SHA256, PBKDF2), Chiffrement symétrique (AES), Chiffrement asymétrique (RSA), Signatures numériques, Data Protection API ASP.NET Core.
+
+- [44. SignalR et gRPC](044.%20SignalR%20et%20gRPC/readme.md)
+
+  > WebSockets, SignalR Hubs, Broadcasting, Groupes, gRPC (Protocol Buffers, Services, Clients), Streaming, Comparaison REST vs gRPC.
+
+- [45. Health Checks et Hosted Services](045.%20Health%20Checks%20et%20Hosted%20Services/readme.md)
+
+  > IHealthCheck, Health Check UI, Liveness vs Readiness, IHostedService, BackgroundService, Tâches planifiées, Worker Services.
 
 ## Partie 7 : Développement Web Frontend (Blazor)
 
-- [38. Introduction à Blazor](038.%20Introduction%20à%20Blazor/readme.md)
+- [46. Introduction à Blazor](046.%20Introduction%20à%20Blazor/readme.md)
 
   > Blazor Server vs Blazor WebAssembly vs Blazor Web App (.NET 8+), Architecture et fonctionnement, Comparaison avec JavaScript frameworks, Première application Blazor.
 
-- [39. Composants Razor et syntaxe](039.%20Composants%20Razor%20et%20syntaxe/readme.md)
+- [47. Composants Razor et syntaxe](047.%20Composants%20Razor%20et%20syntaxe/readme.md)
 
   > Syntaxe Razor (@code, @if, @foreach), Création de composants (.razor), Paramètres de composants ([Parameter]), EventCallback, Cycle de vie des composants (OnInitialized, OnParametersSet).
 
-- [40. Communication et état dans Blazor](040.%20Communication%20et%20état%20dans%20Blazor/readme.md)
+- [48. Communication et état dans Blazor](048.%20Communication%20et%20état%20dans%20Blazor/readme.md)
 
   > Communication parent-enfant, Cascading Parameters, State Management, Injection de services (@inject), Scoped vs Singleton dans Blazor.
 
-- [41. Formulaires et validation Blazor](041.%20Formulaires%20et%20validation%20Blazor/readme.md)
+- [49. Formulaires et validation Blazor](049.%20Formulaires%20et%20validation%20Blazor/readme.md)
 
   > EditForm, InputText/InputNumber/InputSelect, Data Annotations, ValidationMessage, Custom validation, Gestion des soumissions.
 
-- [42. Interopérabilité JavaScript](042.%20Interopérabilité%20JavaScript/readme.md)
+- [50. Interopérabilité JavaScript](050.%20Interopérabilité%20JavaScript/readme.md)
+
   > IJSRuntime, InvokeAsync, Appeler JavaScript depuis C#, Appeler C# depuis JavaScript, Isolated JavaScript modules, Gestion des bibliothèques JS externes.
 
 ## Partie 8 : Développement 3D et temps réel (Unity)
 
-- [43. Interface Unity et GameObjects](043.%20Interface%20Unity%20et%20GameObjects/readme.md)
+- [51. Interface Unity et GameObjects](051.%20Interface%20Unity%20et%20GameObjects/readme.md)
 
   > Installation Unity Hub, Éditeur Unity (Scène, Game, Hierarchy, Project, Inspector), GameObjects, Components, Transform (Position, Rotation, Scale), Prefabs.
 
-- [44. Scripting C# pour Unity](044.%20Scripting%20C%23%20pour%20Unity/readme.md)
+- [52. Scripting C# pour Unity](052.%20Scripting%20C%23%20pour%20Unity/readme.md)
 
   > Classe MonoBehaviour, Cycle de vie (Awake, Start, Update, FixedUpdate, LateUpdate), Input System (ancien et nouveau), GetComponent, Communication entre scripts, Coroutines (IEnumerator, yield), Spécificités GC Unity (éviter les allocations).
 
-- [45. Physique et Collisions dans Unity](045.%20Physique%20et%20Collisions%20dans%20Unity/readme.md)
+- [53. Physique et Collisions dans Unity](053.%20Physique%20et%20Collisions%20dans%20Unity/readme.md)
 
   > Rigidbody (2D/3D), Colliders (Box, Sphere, Capsule, Mesh), Triggers vs Collisions, OnCollisionEnter/Stay/Exit, Matériaux physiques (Friction, Bounciness), Raycast.
 
-- [46. Animations et Sons](046.%20Animations%20et%20Sons/readme.md)
+- [54. Animations et Sons](054.%20Animations%20et%20Sons/readme.md)
 
   > Animator et Animation, State Machines, Transitions et Parameters, Animation Clips, AudioSource et AudioClip, 2D/3D Sound, Mixers audio.
 
-- [47. UI et Menus dans Unity](047.%20UI%20et%20Menus%20dans%20Unity/readme.md)
+- [55. UI et Menus dans Unity](055.%20UI%20et%20Menus%20dans%20Unity/readme.md)
 
   > Canvas (Screen Space, World Space), RectTransform, Anchors et Pivots, UI Elements (Text, TextMeshPro, Button, Image, Slider, Toggle), Event System, Création de menus (Main Menu, Pause, Game Over).
 
-- [48. Caméras et Éclairage](048.%20Caméras%20et%20Éclairage/readme.md)
+- [56. Caméras et Éclairage](056.%20Caméras%20et%20Éclairage/readme.md)
 
   > Caméra orthographique vs perspective, Cinemachine, Skybox, Types de lumières (Directional, Point, Spot), Baking, Post-processing.
 
-- [49. Architecture Unity avancée](049.%20Architecture%20Unity%20avancée/readme.md)
+- [57. Architecture Unity avancée](057.%20Architecture%20Unity%20avancée/readme.md)
+
   > Architecture par composants (ECS), ScriptableObjects, Singletons dans Unity, Object Pooling, Events et Observer Pattern dans Unity, Bonnes pratiques de performance.
 
 ## Partie 9 : Architecture globale et Déploiement
 
-- [50. Clean Architecture et CQRS](050.%20Clean%20Architecture%20et%20CQRS/readme.md)
+- [58. Clean Architecture et CQRS](058.%20Clean%20Architecture%20et%20CQRS/readme.md)
 
   > Principes de Clean Architecture (Domain, Application, Infrastructure, Presentation), Séparation des couches, CQRS (Command Query Responsibility Segregation), MediatR, Vertical Slice Architecture.
 
-- [51. Conteneurisation avec Docker](051.%20Conteneurisation%20avec%20Docker/readme.md)
+- [59. Conteneurisation avec Docker](059.%20Conteneurisation%20avec%20Docker/readme.md)
 
   > Concepts Docker (Images, Containers, Volumes), Dockerfile pour .NET, Docker Compose, Multi-stage builds, Registries (Docker Hub, Azure Container Registry).
 
-- [52. CI/CD et Automatisation](052.%20CI%20CD%20et%20Automatisation/readme.md)
+- [60. CI/CD et Automatisation](060.%20CI%20CD%20et%20Automatisation/readme.md)
 
   > Concepts CI/CD, GitHub Actions, Azure DevOps Pipelines, Build automatisé, Tests automatisés, Déploiement automatisé, Stratégies de déploiement (Blue-Green, Canary).
 
-- [53. Déploiement Cloud et Production](053.%20Déploiement%20Cloud%20et%20Production/readme.md)
+- [61. Déploiement Cloud et Production](061.%20Déploiement%20Cloud%20et%20Production/readme.md)
+
   > Azure App Service, Azure Functions, AWS Lambda, Configuration d'environnements (Development, Staging, Production), Secrets management, Health checks, Monitoring en production.
 
 ## Les projets
