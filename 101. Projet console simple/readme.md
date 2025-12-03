@@ -1,14 +1,107 @@
-# Projet console simple
+<h1 align="center">👋 Projet Console - Application Bonjour</h1>
 
-Ce projet est une application console simple en C# qui demande à l'utilisateur son nom et son âge, puis affiche un message de bienvenue avec ces informations. Il inclut des validations pour s'assurer que le nom contient au moins 3 lettres et que l'âge est un nombre entier positif.
+<p align="center">
+  <strong>Application console interactive avec validation des entrées utilisateur</strong>
+</p>
 
-J'ai utilisé des fonctions pour structurer le code et faciliter la validation des entrées utilisateur. Le programme est conçu pour être convivial et robuste, en gérant les erreurs de saisie de manière appropriée.
+<p align="center">
+  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#">
+  <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET">
+  <img src="https://img.shields.io/badge/Console-Application-blue?style=for-the-badge" alt="Console">
+  <img src="https://img.shields.io/badge/Niveau-Débutant-green?style=for-the-badge" alt="Débutant">
+</p>
 
-## Aperçu de l'application
+---
 
-![image](./readme.gif)
+## 📖 Description
 
-## Code
+Ce projet est une **application console interactive** développée en C# qui illustre les concepts fondamentaux de la programmation : saisie utilisateur, validation des données, fonctions et affichage formaté.
+
+L'application demande à l'utilisateur son **nom** et son **âge**, valide les entrées, puis affiche un message de bienvenue personnalisé avec une interface console colorée.
+
+### 🎯 Objectifs pédagogiques
+
+Ce projet permet d'apprendre et de pratiquer :
+
+- ✅ **Entrées/Sorties console** : `Console.ReadLine()`, `Console.WriteLine()`
+- ✅ **Validation de données** : Vérification des saisies utilisateur
+- ✅ **Fonctions et délégués** : Utilisation de `Func<T, bool>` pour la validation
+- ✅ **LINQ** : Méthodes `All()` et `Count()` sur les chaînes
+- ✅ **Interpolation de chaînes** : Syntaxe `$"Bonjour {nom}"`
+- ✅ **Personnalisation console** : Couleurs, titre de fenêtre
+
+---
+
+## 📸 Aperçu de l'application
+
+![Démonstration de l'application](./readme.gif)
+
+---
+
+## 🌟 Fonctionnalités
+
+### 🎨 Interface utilisateur
+
+- **Couleurs personnalisées** : Fond bleu avec texte jaune
+- **Titre de fenêtre** : "Application Bonjour !"
+- **ASCII Art** : Logo stylisé "1H04" au démarrage
+- **Support UTF-8** : Gestion correcte des accents français
+
+### ✅ Validation du nom
+
+| Règle | Description |
+| ----- | ----------- |
+| Longueur minimale | Au moins 3 lettres |
+| Caractères autorisés | Lettres et espaces uniquement |
+| Pas de chiffres | Les nombres sont refusés |
+| Pas vide | Les espaces seuls sont refusés |
+
+### ✅ Validation de l'âge
+
+| Règle | Description |
+| ----- | ----------- |
+| Format | Nombre entier uniquement |
+| Valeur | Doit être positif (≥ 0) |
+| Pas de texte | Les lettres sont refusées |
+
+### 🔄 Gestion des erreurs
+
+- **Messages d'erreur clairs** : Indique précisément le problème
+- **Boucle de ressaisie** : Redemande jusqu'à obtenir une valeur valide
+- **Robustesse** : Ne plante jamais, même avec des entrées incorrectes
+
+---
+
+## 🛠️ Concepts C# utilisés
+
+### Fonction générique de validation
+
+```csharp
+string DemanderSaisie(string message, string messageErreur, Func<string, bool> verifier)
+```
+
+Cette fonction réutilisable permet de :
+- Afficher un message de demande
+- Lire la saisie utilisateur
+- Valider avec une fonction passée en paramètre
+- Redemander en cas d'erreur
+
+### Validation avec LINQ
+
+```csharp
+bool tousCaracteresValides = nom.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+int nombreDeLettres = nom.Count(char.IsLetter);
+```
+
+### Conversion sécurisée
+
+```csharp
+int.TryParse(saisie, out int age)
+```
+
+---
+
+## 💻 Code source complet
 
 ```csharp
 // Configuration de la console pour afficher correctement les caractères spéciaux (accents, etc.)
@@ -20,9 +113,6 @@ Console.ForegroundColor = ConsoleColor.Yellow;
 
 // Effacer tout ce qui était affiché avant pour appliquer les couleurs sur toute la console
 Console.Clear();
-
-
-
 
 // On donne un titre à la fenêtre de la console
 Console.Title = "Application Bonjour !";
@@ -108,3 +198,42 @@ Console.WriteLine($"Bonjour {nomUtilisateur} !");
 Console.WriteLine($"Vous avez {ageUtilisateur} ans.");
 Console.WriteLine($"L'année prochaine, vous aurez {ageUtilisateur + 1} ans.");
 ```
+
+---
+
+## 🚀 Exécution
+
+### Prérequis
+
+- [.NET SDK](https://dotnet.microsoft.com/download) installé sur votre machine
+
+### Lancer le projet
+
+```bash
+cd "101. Projet console simple"
+dotnet run
+```
+
+---
+
+## 📚 Ce que vous apprendrez
+
+| Concept | Description |
+| ------- | ----------- |
+| `Console.ReadLine()` | Lire une entrée utilisateur |
+| `Console.WriteLine()` | Afficher du texte |
+| `Func<T, TResult>` | Délégué générique pour passer des fonctions |
+| `string.All()` | Vérifier une condition sur tous les caractères |
+| `int.TryParse()` | Conversion sécurisée string → int |
+| `$"..."` | Interpolation de chaînes |
+| Boucle `while` | Répéter jusqu'à condition remplie |
+
+---
+
+## 💡 Idées d'amélioration
+
+- [ ] Ajouter la validation de l'email
+- [ ] Calculer l'année de naissance
+- [ ] Sauvegarder les données dans un fichier
+- [ ] Ajouter un menu avec plusieurs options
+- [ ] Créer une version avec interface graphique (WPF)
