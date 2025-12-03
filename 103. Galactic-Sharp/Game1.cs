@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.IO;
 
 namespace _103._Galactic_Sharp;
 
@@ -8,6 +10,8 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private GameManager _gameManager;
+    private Starfield _starfield;
 
     public Game1()
     {
@@ -28,7 +32,6 @@ public class Game1 : Game
         _graphics.ApplyChanges();
 
         // Centrage de la fenêtre
-        // Note : GraphicsAdapter.DefaultAdapter.CurrentDisplayMode donne la résolution de l'écran principal
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
@@ -37,6 +40,15 @@ public class Game1 : Game
             (screenHeight - _graphics.PreferredBackBufferHeight) / 2
         );
 
+        // Initialisation du gestionnaire de texte
+        TextRenderer.Initialize(GraphicsDevice);
+
+        // Initialisation du champ d'étoiles (200 étoiles)
+        _starfield = new Starfield(GraphicsDevice, 200);
+
+        // Initialisation du gestionnaire de jeu
+        _gameManager = new GameManager(GraphicsDevice);
+
         base.Initialize();
     }
 
@@ -44,7 +56,24 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
+        // Chargement des textures de vaisseaux depuis le dossier assets
+        List<Texture2D> ships = new List<Texture2D>();
+
+        string[] shipFiles = { "ships_0.png", "ships_1.png", "ships_2.png" };
+
+        foreach (string file in shipFiles)
+        {
+            string path = Path.Combine("assets", file);
+            if (File.Exists(path))
+            {
+                using (FileStream stream = new FileStream(path, FileMode.Open))
+                {
+                    ships.Add(Texture2D.FromStream(GraphicsDevice, stream));
+                }
+            }
+        }
+
+        _gameManager.LoadContent(ships);
     }
 
     protected override void Update(GameTime gameTime)
@@ -52,16 +81,22 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
+        _starfield.Update(gameTime);
+        _gameManager.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
 
-        // TODO: Add your drawing code here
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        _starfield.Draw(_spriteBatch);
+        _gameManager.Draw(_spriteBatch);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
