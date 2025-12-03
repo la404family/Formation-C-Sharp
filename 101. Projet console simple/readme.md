@@ -49,19 +49,19 @@ Ce projet permet d'apprendre et de pratiquer :
 
 ### ✅ Validation du nom
 
-| Règle | Description |
-| ----- | ----------- |
-| Longueur minimale | Au moins 3 lettres |
-| Caractères autorisés | Lettres et espaces uniquement |
-| Pas de chiffres | Les nombres sont refusés |
-| Pas vide | Les espaces seuls sont refusés |
+| Règle                | Description                    |
+| -------------------- | ------------------------------ |
+| Longueur minimale    | Au moins 3 lettres             |
+| Caractères autorisés | Lettres et espaces uniquement  |
+| Pas de chiffres      | Les nombres sont refusés       |
+| Pas vide             | Les espaces seuls sont refusés |
 
 ### ✅ Validation de l'âge
 
-| Règle | Description |
-| ----- | ----------- |
-| Format | Nombre entier uniquement |
-| Valeur | Doit être positif (≥ 0) |
+| Règle        | Description               |
+| ------------ | ------------------------- |
+| Format       | Nombre entier uniquement  |
+| Valeur       | Doit être positif (≥ 0)   |
 | Pas de texte | Les lettres sont refusées |
 
 ### 🔄 Gestion des erreurs
@@ -81,6 +81,7 @@ string DemanderSaisie(string message, string messageErreur, Func<string, bool> v
 ```
 
 Cette fonction réutilisable permet de :
+
 - Afficher un message de demande
 - Lire la saisie utilisateur
 - Valider avec une fonction passée en paramètre
@@ -218,15 +219,15 @@ dotnet run
 
 ## 📚 Ce que vous apprendrez
 
-| Concept | Description |
-| ------- | ----------- |
-| `Console.ReadLine()` | Lire une entrée utilisateur |
-| `Console.WriteLine()` | Afficher du texte |
-| `Func<T, TResult>` | Délégué générique pour passer des fonctions |
-| `string.All()` | Vérifier une condition sur tous les caractères |
-| `int.TryParse()` | Conversion sécurisée string → int |
-| `$"..."` | Interpolation de chaînes |
-| Boucle `while` | Répéter jusqu'à condition remplie |
+| Concept               | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| `Console.ReadLine()`  | Lire une entrée utilisateur                    |
+| `Console.WriteLine()` | Afficher du texte                              |
+| `Func<T, TResult>`    | Délégué générique pour passer des fonctions    |
+| `string.All()`        | Vérifier une condition sur tous les caractères |
+| `int.TryParse()`      | Conversion sécurisée string → int              |
+| `$"..."`              | Interpolation de chaînes                       |
+| Boucle `while`        | Répéter jusqu'à condition remplie              |
 
 ---
 
