@@ -50,6 +50,7 @@ namespace _103._Galactic_Sharp
 
         // Vie
         public float Health { get; private set; } = 100f;
+        public bool IsDead => Health <= 0;
         private float _displayedHealth = 100f;
         private float _healthDisplayTimer = 3.0f; // Affiche au démarrage
         private const float HealthDisplayDuration = 3.0f;
@@ -131,6 +132,23 @@ namespace _103._Galactic_Sharp
             // Joueur 1 (Gauche) regarde à Droite (0)
             // Joueur 2 (Droite) regarde à Gauche (PI)
             Rotation = (Index == PlayerIndex.One) ? 0f : (float)System.Math.PI;
+        }
+
+        public void Reset(Vector2 position, float rotation)
+        {
+            Position = position;
+            Rotation = rotation;
+            Velocity = Vector2.Zero;
+            Health = 100f;
+            _displayedHealth = 100f;
+            _healthDisplayTimer = HealthDisplayDuration + HealthFadeDuration;
+            _leftShieldTimer = 0f;
+            _rightShieldTimer = 0f;
+            _disorientationTimer = 0f;
+            _spinVelocity = 0f;
+            _fireCooldown = 0f;
+            _leftThrust = 0f;
+            _rightThrust = 0f;
         }
 
         public void Update(GameTime gameTime, System.Collections.Generic.List<Projectile> projectiles)

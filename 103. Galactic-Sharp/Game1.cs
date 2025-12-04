@@ -126,7 +126,12 @@ public class Game1 : Game
 
         _starfield.Update(gameTime);
         _gameManager.Update(gameTime);
-        _collisionManager.Update(_gameManager.Players, _gameManager.Projectiles);
+
+        // Collisions seulement pendant la phase de jeu
+        if (_gameManager.CurrentState == GameState.Playing)
+        {
+            _collisionManager.Update(_gameManager.Players, _gameManager.Projectiles);
+        }
 
         base.Update(gameTime);
     }

@@ -337,4 +337,8 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
   > Application demandant nom et âge avec validation des entrées et affichage coloré.
 
 - [102. Projet le pendu](102.%20Projet%20le%20pendu/readme.md)
+
   > Jeu du pendu complet avec gestion de mots (JSON), statistiques persistantes, interface console riche et gestion des erreurs.
+
+- [103. Galactic Sharp](103.%20Galactic-Sharp/readme.md)
+  > Jeu de combat spatial en 2D avec MonoGame, gestion des manettes, effets visuels et sonores, système de vie et boucliers.
