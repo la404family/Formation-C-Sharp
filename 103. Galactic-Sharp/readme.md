@@ -22,7 +22,7 @@
 ## 📸 Aperçu du jeu
 
 <p align="center">
-  <video src="video_test.mp4" alt="Démonstration de Galactic-Sharp" width="800" autoplay loop muted></video>
+  <video src="assets/video_test.mp4" alt="Démonstration de Galactic-Sharp" width="800" autoplay loop muted></video>
 </p>
 
 ---
