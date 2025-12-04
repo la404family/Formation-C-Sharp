@@ -22,7 +22,7 @@
 ## 📸 Aperçu du jeu
 
 <p align="center">
-  <video src="assets/video_test.mp4" alt="Démonstration de Galactic-Sharp" width="800" autoplay loop muted></video>
+  <video src="assets/Video_test.mp4" alt="Démonstration de Galactic-Sharp" width="800" ></video>
 </p>
 
 ---
@@ -135,7 +135,7 @@ Le vaisseau utilise un système de **double propulseur** :
 
 ## 👥 Crédits
 
-Développé dans le cadre de la **Formation C#** par [Du Chevreuil](https://github.com/la404family).
+Développé dans le cadre de la **Formation C#**
 
 ---
 
