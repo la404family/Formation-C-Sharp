@@ -48,10 +48,21 @@ namespace _103._Galactic_Sharp
                 {'é', new[]{0,1,0, 1,1,1, 1,0,0, 1,1,0, 1,1,1}}, // Approx
                 {'è', new[]{0,1,0, 1,1,1, 1,0,0, 1,1,0, 1,1,1}}, // Same for simplicity
                 {'ê', new[]{0,1,0, 1,1,1, 1,0,0, 1,1,0, 1,1,1}}, // Same
+                {'0', new[]{0,1,0, 1,0,1, 1,0,1, 1,0,1, 0,1,0}},
+                {'1', new[]{0,1,0, 1,1,0, 0,1,0, 0,1,0, 1,1,1}},
+                {'2', new[]{0,1,0, 1,0,1, 0,0,1, 0,1,0, 1,1,1}},
+                {'3', new[]{1,1,0, 0,0,1, 0,1,0, 0,0,1, 1,1,0}},
+                {'4', new[]{1,0,1, 1,0,1, 1,1,1, 0,0,1, 0,0,1}},
+                {'5', new[]{1,1,1, 1,0,0, 1,1,0, 0,0,1, 1,1,0}},
+                {'6', new[]{0,1,1, 1,0,0, 1,1,0, 1,0,1, 0,1,0}},
+                {'7', new[]{1,1,1, 0,0,1, 0,1,0, 0,1,0, 0,1,0}},
+                {'8', new[]{0,1,0, 1,0,1, 0,1,0, 1,0,1, 0,1,0}},
+                {'9', new[]{0,1,0, 1,0,1, 0,1,1, 0,0,1, 0,1,0}},
+                {'%', new[]{1,0,1, 0,0,1, 0,1,0, 1,0,0, 1,0,1}}
             };
         }
 
-        public static void DrawText(SpriteBatch spriteBatch, string text, Vector2 position, int scale = 3, Color? color = null)
+        public static void DrawText(SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, int scale = 3)
         {
             if (_pixelTexture == null) return;
 

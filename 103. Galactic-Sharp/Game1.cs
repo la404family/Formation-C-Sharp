@@ -12,6 +12,9 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
     private Starfield _starfield;
+    private SoundManager _soundManager;
+    private Arena _arena;
+    private CollisionManager _collisionManager;
 
     public Game1()
     {
@@ -46,8 +49,14 @@ public class Game1 : Game
         // Initialisation du champ d'étoiles (200 étoiles)
         _starfield = new Starfield(GraphicsDevice, 200);
 
+        // Initialisation du gestionnaire de son
+        _soundManager = new SoundManager();
+
         // Initialisation du gestionnaire de jeu
         _gameManager = new GameManager(GraphicsDevice);
+
+        // Initialisation de l'arène
+        _arena = new Arena(GraphicsDevice);
 
         base.Initialize();
     }
@@ -74,6 +83,40 @@ public class Game1 : Game
         }
 
         _gameManager.LoadContent(ships);
+
+        // Chargement du son moteur
+        string soundPath = Path.Combine("assets", "propel_ships.wav");
+        if (File.Exists(soundPath))
+        {
+            _soundManager.LoadSound("engine", soundPath);
+            _gameManager.SetEngineSound(_soundManager.GetSound("engine"));
+        }
+
+        // Chargement du son de collision
+        string collisionSoundPath = Path.Combine("assets", "colision_ships.wav");
+        if (File.Exists(collisionSoundPath))
+        {
+            _soundManager.LoadSound("collision", collisionSoundPath);
+        }
+
+        // Chargement du son de tir
+        string fireSoundPath = Path.Combine("assets", "fire_ships.wav");
+        if (File.Exists(fireSoundPath))
+        {
+            _soundManager.LoadSound("fire", fireSoundPath);
+            _gameManager.SetFireSound(_soundManager.GetSound("fire"));
+        }
+
+        // Chargement du son de texte
+        string textSoundPath = Path.Combine("assets", "text_sound.wav");
+        if (File.Exists(textSoundPath))
+        {
+            _soundManager.LoadSound("text", textSoundPath);
+            _gameManager.SetTextSound(_soundManager.GetSound("text"));
+        }
+
+        // Initialisation du gestionnaire de collisions
+        _collisionManager = new CollisionManager(_arena.Bounds, _soundManager.GetSound("collision"));
     }
 
     protected override void Update(GameTime gameTime)
@@ -83,6 +126,7 @@ public class Game1 : Game
 
         _starfield.Update(gameTime);
         _gameManager.Update(gameTime);
+        _collisionManager.Update(_gameManager.Players, _gameManager.Projectiles);
 
         base.Update(gameTime);
     }
@@ -94,6 +138,7 @@ public class Game1 : Game
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         _starfield.Draw(_spriteBatch);
+        _arena.Draw(_spriteBatch);
         _gameManager.Draw(_spriteBatch);
 
         _spriteBatch.End();

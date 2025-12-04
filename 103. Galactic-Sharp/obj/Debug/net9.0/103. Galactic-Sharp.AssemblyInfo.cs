@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("103. Galactic-Sharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1886b4247c7f0b005d16bbf6b57cac11aa39b492")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13ec407f0a3717d538dee0bbc38e09e6143510bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("103. Galactic-Sharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("103. Galactic-Sharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

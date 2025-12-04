@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,10 @@ namespace _103._Galactic_Sharp
     public class GameManager
     {
         private List<Player> _players;
+        public List<Player> Players => _players;
+        private List<Projectile> _projectiles;
+        public List<Projectile> Projectiles => _projectiles;
+        private Texture2D _projectileTexture;
         private List<Texture2D> _availableShips;
         private string _statusMessage;
         private GraphicsDevice _graphicsDevice;
@@ -16,6 +21,41 @@ namespace _103._Galactic_Sharp
         public GameManager(GraphicsDevice graphicsDevice)
         {
             _graphicsDevice = graphicsDevice;
+            _projectiles = new List<Projectile>();
+
+            // Création texture projectile (Cercle avec Halo)
+            int projSize = 32; // Texture plus grande pour le halo
+            _projectileTexture = new Texture2D(graphicsDevice, projSize, projSize);
+            Color[] projData = new Color[projSize * projSize];
+            Vector2 projCenter = new Vector2(projSize / 2f, projSize / 2f);
+            float maxRadius = projSize / 2f;
+
+            for (int y = 0; y < projSize; y++)
+            {
+                for (int x = 0; x < projSize; x++)
+                {
+                    float dist = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), projCenter);
+                    float normalizedDist = dist / maxRadius;
+
+                    if (normalizedDist < 1f)
+                    {
+                        // Cœur solide (20% du rayon)
+                        // Halo dégradé (reste)
+                        float alpha = 1f;
+                        if (normalizedDist > 0.2f)
+                        {
+                            alpha = 1f - (normalizedDist - 0.2f) / 0.8f;
+                            alpha = alpha * alpha; // Atténuation quadratique
+                        }
+                        projData[y * projSize + x] = Color.White * alpha;
+                    }
+                    else
+                    {
+                        projData[y * projSize + x] = Color.Transparent;
+                    }
+                }
+            }
+            _projectileTexture.SetData(projData);
 
             // Création texture lumière (Gradient radial)
             int size = 64;
@@ -37,21 +77,80 @@ namespace _103._Galactic_Sharp
             }
             lightTexture.SetData(data);
 
+            // Création texture bouclier (Arc de cercle)
+            Texture2D shieldTexture = new Texture2D(graphicsDevice, size, size);
+            Color[] shieldData = new Color[size * size];
+            float shieldRadius = size / 2f - 4f; // Marge
+            float thickness = 4f;
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    Vector2 pos = new Vector2(x, y);
+                    float dist = Vector2.Distance(pos, center);
+
+                    // Angle pour faire un arc (Côté Droit ')' )
+                    // Atan2(y, x) : 0 est à droite.
+                    float angle = (float)System.Math.Atan2(y - center.Y, x - center.X);
+
+                    // On veut un arc entre -45 et +45 degrés (-PI/4 et PI/4)
+                    if (System.Math.Abs(angle) < System.Math.PI / 4f)
+                    {
+                        // Distance check with soft edges
+                        float distFromRing = System.Math.Abs(dist - shieldRadius);
+                        if (distFromRing < thickness)
+                        {
+                            float alpha = 1f - (distFromRing / thickness);
+                            // Halo effect
+                            shieldData[y * size + x] = Color.White * alpha;
+                        }
+                    }
+                }
+            }
+            shieldTexture.SetData(shieldData);
+
             _players = new List<Player>
             {
                 new Player(PlayerIndex.One),
                 new Player(PlayerIndex.Two)
             };
 
-            // Assigner la texture de lumière aux joueurs
+            // Assigner les textures aux joueurs
             foreach (var p in _players)
             {
                 p.SetLightTexture(lightTexture);
+                p.SetShieldTexture(shieldTexture);
             }
 
             _availableShips = new List<Texture2D>();
             _statusMessage = "Initialisation...";
         }
+
+        public void SetEngineSound(SoundEffect sound)
+        {
+            foreach (var player in _players)
+            {
+                player.SetEngineSound(sound);
+            }
+        }
+
+        public void SetFireSound(SoundEffect sound)
+        {
+            foreach (var player in _players)
+            {
+                player.SetFireSound(sound);
+            }
+        }
+
+        public void SetTextSound(SoundEffect sound)
+        {
+            foreach (var player in _players)
+            {
+                player.SetTextSound(sound);
+            }
+        }
+
         public void LoadContent(List<Texture2D> ships)
         {
             _availableShips = ships;
@@ -65,7 +164,17 @@ namespace _103._Galactic_Sharp
             // Mise à jour physique des joueurs
             foreach (var player in _players)
             {
-                player.Update(gameTime);
+                player.Update(gameTime, _projectiles);
+            }
+
+            // Mise à jour des projectiles
+            for (int i = _projectiles.Count - 1; i >= 0; i--)
+            {
+                _projectiles[i].Update(gameTime);
+                if (!_projectiles[i].IsActive)
+                {
+                    _projectiles.RemoveAt(i);
+                }
             }
 
             // Vérifier l'état des manettes
@@ -99,7 +208,7 @@ namespace _103._Galactic_Sharp
             }
             else
             {
-                _statusMessage = "Pret au combat !";
+                _statusMessage = "";
             }
         }
 
@@ -142,6 +251,12 @@ namespace _103._Galactic_Sharp
             foreach (var player in _players)
             {
                 player.Draw(spriteBatch);
+            }
+
+            // Affichage des projectiles
+            foreach (var proj in _projectiles)
+            {
+                proj.Draw(spriteBatch, _projectileTexture);
             }
 
             // Dessiner le message en haut au centre
