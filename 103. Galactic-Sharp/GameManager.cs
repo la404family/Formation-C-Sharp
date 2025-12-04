@@ -16,7 +16,7 @@ namespace _103._Galactic_Sharp
         public GameManager(GraphicsDevice graphicsDevice)
         {
             _graphicsDevice = graphicsDevice;
-            
+
             // Création texture lumière (Gradient radial)
             int size = 64;
             Texture2D lightTexture = new Texture2D(graphicsDevice, size, size);
@@ -51,7 +51,8 @@ namespace _103._Galactic_Sharp
 
             _availableShips = new List<Texture2D>();
             _statusMessage = "Initialisation...";
-        }        public void LoadContent(List<Texture2D> ships)
+        }
+        public void LoadContent(List<Texture2D> ships)
         {
             _availableShips = ships;
         }

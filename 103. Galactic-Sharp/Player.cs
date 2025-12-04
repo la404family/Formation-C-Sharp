@@ -119,10 +119,10 @@ namespace _103._Galactic_Sharp
             float scale = 0.2f + (thrust * 0.3f);
 
             // Dessin en deux couches pour un effet de "cœur" chaud
-            
+
             // 1. Halo extérieur (Orange/Rouge)
             spriteBatch.Draw(_lightTexture, lightPos, null, Color.OrangeRed * thrust, Rotation, lightOrigin, scale, SpriteEffects.None, 0f);
-            
+
             // 2. Cœur intérieur (Jaune/Blanc, plus petit)
             spriteBatch.Draw(_lightTexture, lightPos, null, Color.LightYellow * thrust, Rotation, lightOrigin, scale * 0.5f, SpriteEffects.None, 0f);
         }
