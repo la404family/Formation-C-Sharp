@@ -34,10 +34,11 @@ namespace _103._Galactic_Sharp
 
         // Boucliers
         private Texture2D _shieldTexture;
-        private float _leftShieldTimer = 0f;
-        private float _rightShieldTimer = 0f;
+        private float _shieldActiveTimer = 0f;
+        private float _shieldCooldownTimer = 0f;
         private const float ShieldDuration = 2.0f;
-        private const float ShieldFadeIn = 0.5f;
+        private const float ShieldCooldown = 5.0f;
+        private float _electricEffectTimer = 0f; // Pour l'effet visuel
 
         // Sons
         private SoundEffectInstance _leftEngineSound;
@@ -99,12 +100,9 @@ namespace _103._Galactic_Sharp
             _shieldTexture = texture;
         }
 
-        public bool IsShieldActive(int side)
+        public bool IsShieldActive()
         {
-            // side: -1 (Left), 1 (Right)
-            if (side == -1) return _leftShieldTimer > 0;
-            if (side == 1) return _rightShieldTimer > 0;
-            return false;
+            return _shieldActiveTimer > 0;
         }
 
         public void SetEngineSound(SoundEffect sound)
@@ -142,8 +140,8 @@ namespace _103._Galactic_Sharp
             Health = 100f;
             _displayedHealth = 100f;
             _healthDisplayTimer = HealthDisplayDuration + HealthFadeDuration;
-            _leftShieldTimer = 0f;
-            _rightShieldTimer = 0f;
+            _shieldActiveTimer = 0f;
+            _shieldCooldownTimer = 0f;
             _disorientationTimer = 0f;
             _spinVelocity = 0f;
             _fireCooldown = 0f;
@@ -201,13 +199,14 @@ namespace _103._Galactic_Sharp
                     _rightThrust = state.Triggers.Right;
 
                     // Gestion des boucliers (LB / RB)
-                    if (state.Buttons.LeftShoulder == ButtonState.Pressed && _leftShieldTimer <= 0)
+                    // Activation si cooldown terminé et pas déjà actif
+                    if ((state.Buttons.LeftShoulder == ButtonState.Pressed || state.Buttons.RightShoulder == ButtonState.Pressed)
+                        && _shieldCooldownTimer <= 0 && _shieldActiveTimer <= 0)
                     {
-                        _leftShieldTimer = ShieldDuration;
-                    }
-                    if (state.Buttons.RightShoulder == ButtonState.Pressed && _rightShieldTimer <= 0)
-                    {
-                        _rightShieldTimer = ShieldDuration;
+                        _shieldActiveTimer = ShieldDuration;
+                        _shieldCooldownTimer = ShieldDuration + ShieldCooldown; // Cooldown commence après l'activation (ou pendant, selon la règle)
+                        // Règle : "ne peut être réactivée qu’après un délai de 5 secondes" (après utilisation)
+                        // Donc on met le cooldown total à Duration + 5s, et on décrémente tout.
                     }
 
                     // Gestion des tirs
@@ -248,8 +247,15 @@ namespace _103._Galactic_Sharp
             }
 
             // Mise à jour des timers boucliers
-            if (_leftShieldTimer > 0) _leftShieldTimer -= dt;
-            if (_rightShieldTimer > 0) _rightShieldTimer -= dt;
+            if (_shieldActiveTimer > 0)
+            {
+                _shieldActiveTimer -= dt;
+                _electricEffectTimer += dt * 20f; // Vitesse de l'effet électrique
+            }
+            if (_shieldCooldownTimer > 0)
+            {
+                _shieldCooldownTimer -= dt;
+            }
 
             // Friction
             Velocity *= Friction;            // Mise à jour position
@@ -294,10 +300,9 @@ namespace _103._Galactic_Sharp
                 }
 
                 // Dessin des boucliers
-                if (_shieldTexture != null)
+                if (_shieldTexture != null && _shieldActiveTimer > 0)
                 {
-                    DrawShield(spriteBatch, _leftShieldTimer, -1);
-                    DrawShield(spriteBatch, _rightShieldTimer, 1);
+                    DrawShield(spriteBatch);
                 }
 
                 // Dessin du vaisseau
@@ -343,52 +348,41 @@ namespace _103._Galactic_Sharp
             TextRenderer.DrawText(spriteBatch, text, textPos, Color.White * alpha, 2); // Scale 2 for small text
         }
 
-        private void DrawShield(SpriteBatch spriteBatch, float timer, int side)
+        private void DrawShield(SpriteBatch spriteBatch)
         {
-            if (timer <= 0) return;
+            if (_shieldActiveTimer <= 0) return;
 
             float alpha = 1f;
-            // Fade In (0.5s)
-            if (timer > (ShieldDuration - ShieldFadeIn))
+            // Fade In (0.2s)
+            if (_shieldActiveTimer > (ShieldDuration - 0.2f))
             {
-                alpha = (ShieldDuration - timer) / ShieldFadeIn;
+                alpha = (ShieldDuration - _shieldActiveTimer) / 0.2f;
             }
-            // Fade Out (last 0.2s)
-            else if (timer < 0.2f)
+            // Fade Out (last 0.5s)
+            else if (_shieldActiveTimer < 0.5f)
             {
-                alpha = timer / 0.2f;
+                alpha = _shieldActiveTimer / 0.5f;
             }
 
             Vector2 origin = new Vector2(_shieldTexture.Width / 2f, _shieldTexture.Height / 2f);
 
-            // Calcul de la rotation du bouclier
-            // La texture est une parenthèse ')' orientée vers la Droite (0 rad).
-            // Side -1 (Gauche du vaisseau) -> Doit être orienté vers le Haut (-PI/2) par rapport au vaisseau.
-            // Side 1 (Droite du vaisseau) -> Doit être orienté vers le Bas (+PI/2) par rapport au vaisseau.
-            float rotationOffset = side * MathHelper.PiOver2;
-            float shieldRotation = Rotation + rotationOffset;
+            // Effet électrique :
+            // 1. Rotation aléatoire ou rapide
+            float electricRotation = Rotation + _electricEffectTimer;
 
-            // Calcul de la position
-            // On veut que l'arc du bouclier soit juste à l'extérieur du vaisseau.
-            // Rayon de l'arc dans la texture ~ 28px (32 - 4).
-            float shieldTextureRadius = _shieldTexture.Width / 2f - 4f;
-            float shipRadius = ShipTexture.Width / 2f;
-            float margin = 5f;
+            // 2. Scale jitter (pulsation rapide)
+            // Utilise Sin pour une pulsation régulière + Random pour le bruit
+            float jitter = (float)System.Math.Sin(_electricEffectTimer * 10f) * 0.05f;
+            float scale = 1.2f + jitter; // 1.2 pour être plus large que le vaisseau
 
-            // On doit décaler le centre de la texture pour que l'arc tombe au bon endroit
-            float distOffset = (shipRadius + margin) - shieldTextureRadius;
+            // 3. Couleur violette avec variation d'intensité
+            Color shieldColor = Color.MediumPurple * alpha;
 
-            // Le décalage se fait sur l'axe Y local (Gauche/Droite du vaisseau)
-            // Side -1 (Gauche) -> Y négatif
-            // Side 1 (Droite) -> Y positif
-            Vector2 localOffset = new Vector2(0, side * distOffset);
+            // Dessin couche principale
+            spriteBatch.Draw(_shieldTexture, Position, null, shieldColor, electricRotation, origin, scale, SpriteEffects.None, 0f);
 
-            // Rotation du décalage selon l'orientation du vaisseau
-            Vector2 worldOffset = Vector2.Transform(localOffset, Matrix.CreateRotationZ(Rotation));
-
-            Vector2 pos = Position + worldOffset;
-
-            spriteBatch.Draw(_shieldTexture, pos, null, Color.Purple * alpha, shieldRotation, origin, 1f, SpriteEffects.None, 0f);
+            // Dessin couche secondaire (halo interne/externe inversé) pour effet électrique
+            spriteBatch.Draw(_shieldTexture, Position, null, Color.Violet * (alpha * 0.5f), -electricRotation * 1.5f, origin, scale * 0.9f, SpriteEffects.None, 0f);
         }
         private void DrawEngineLight(SpriteBatch spriteBatch, float thrust, int side)
         {

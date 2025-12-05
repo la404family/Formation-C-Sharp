@@ -19,14 +19,6 @@
 
 ---
 
-## 📸 Aperçu du jeu
-
-<p align="center">
-  <video src="assets/Video_test.mp4" alt="Démonstration de Galactic-Sharp" width="800" ></video>
-</p>
-
----
-
 ## 📥 Lancer le jeu
 
 ### Prérequis
@@ -59,8 +51,8 @@ Chaque joueur contrôle un vaisseau avec des **propulseurs indépendants** (gauc
 | **Rejoindre la partie**    | Start                |
 | **Propulseur gauche**      | LT (Gâchette gauche) |
 | **Propulseur droit**       | RT (Gâchette droite) |
-| **Bouclier gauche**        | LB (Épaule gauche)   |
-| **Bouclier droit**         | RB (Épaule droite)   |
+| **Bouclier**               | LB                   |
+| **Bouclier**               | RB                   |
 | **Tir Vert** (oscillant)   | A                    |
 | **Tir Rouge** (dispersé)   | B                    |
 | **Tir Bleu** (orbital)     | X                    |
@@ -88,7 +80,7 @@ Le vaisseau utilise un système de **double propulseur** :
 
 ### 🛡️ Défense
 
-- **Boucliers latéraux** (gauche et droit)
+- **Boucliers**
 - **Protection temporaire** contre les projectiles
 - **Durée limitée** avec temps de recharge
 

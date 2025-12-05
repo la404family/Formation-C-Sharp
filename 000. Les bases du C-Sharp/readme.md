@@ -35,7 +35,7 @@ Vous pouvez également utiliser Visual Studio Code (VScode) avec l'extension C# 
 
 ### 🎯 C# - Le langage
 
-**C#** (prononcé "C-Sharp") est un langage de programmation moderne, orienté objet, créé par Microsoft en 2000. Il combine la puissance du C++ avec la simplicité de langages comme Java.
+**C#** (prononcé "Ci-Sharp") est un langage de programmation moderne, orienté objet, créé par Microsoft en 2000. Il combine la puissance du C++ avec la simplicité de langages comme Java.
 
 **Caractéristiques principales :**
 
@@ -55,7 +55,7 @@ Vous pouvez également utiliser Visual Studio Code (VScode) avec l'extension C# 
 | **.NET Core** | 2016-2020 | Multiplateforme, open-source |
 | **.NET 5/6/7/8+** | 2020+ | Unification, version moderne à utiliser |
 
-> 💡 **Aujourd'hui**, utilisez simplement **.NET 8** (ou la dernière version LTS). Les termes "Core" et "Framework" sont historiques.
+> 💡 **Aujourd'hui**, utilisez simplement **.NET X** (la dernière version LTS). Les termes "Core" et "Framework" sont historiques.
 
 ### 🌐 Ce que vous pouvez créer avec C# et .NET
 
@@ -70,15 +70,4 @@ Vous pouvez également utiliser Visual Studio Code (VScode) avec l'extension C# 
 | **Applications mobiles**          | .NET MAUI, Xamarin            | Apps iOS et Android                      |
 | **Microservices**                 | ASP.NET Core, gRPC            | Architecture distribuée                  |
 | **Cloud & Serverless**            | Azure Functions               | Fonctions cloud événementielles          |
-
-### 🔧 ASP.NET Core - Le framework web
-
-**ASP.NET Core** est le framework moderne pour créer des applications web avec C#.
-
-**Il permet de créer :**
-
-- **Web API** : Services REST pour alimenter des applications frontend (React, Angular, Vue, mobile)
-- **MVC** : Sites web avec le pattern Model-View-Controller
-- **Razor Pages** : Pages web simplifiées (idéal pour débuter)
-- **Blazor** : Applications web interactives en C# (alternative à JavaScript)
-- **SignalR** : Communication temps réel (chat, notifications)
+| **IoT & Embedded**                | .NET nanoFramework            | Applications embarquées                  |

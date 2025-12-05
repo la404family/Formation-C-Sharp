@@ -219,27 +219,8 @@ namespace _103._Galactic_Sharp
 
         private bool IsShielded(Player player, Vector2 hitDirection)
         {
-            // Transform hit direction to local space
-            // Rotate by -Rotation
-            float cos = (float)System.Math.Cos(-player.Rotation);
-            float sin = (float)System.Math.Sin(-player.Rotation);
-
-            float localX = hitDirection.X * cos - hitDirection.Y * sin;
-            float localY = hitDirection.X * sin + hitDirection.Y * cos;
-
-            // Local Y < 0 is Left, > 0 is Right
-            // (Assuming standard XNA coordinates where Y is Down, and 0 rot is Right)
-            // Left of ship (facing Right) is Up (-Y).
-            // Right of ship is Down (+Y).
-
-            if (localY < 0) // Hit on Left
-            {
-                return player.IsShieldActive(-1);
-            }
-            else // Hit on Right
-            {
-                return player.IsShieldActive(1);
-            }
+            // Le bouclier est maintenant omnidirectionnel
+            return player.IsShieldActive();
         }
     }
 }

@@ -62,6 +62,14 @@ long idUtilisateur = 9876543210; // ID de base de données
 float positionX = 1.5f;          // Coordonnée dans un jeu
 ```
 
+**note** : Le suffixe `m` pour `decimal`, `L` pour `long` et `f` pour `float` est obligatoire lors de l'initialisation.
+
+la différence principale entre `float`, `double` et `decimal` réside dans la précision et l'utilisation prévue :
+
+- `float` : simple précision, utilisé pour les graphiques et les jeux.
+- `double` : double précision, utilisé pour la plupart des calculs scientifiques.
+- `decimal` : très haute précision, utilisé pour les calculs financiers où les erreurs d'arrondi sont inacceptables.
+
 ### Types pour des cas très particuliers
 
 | Type                               | Description               |
@@ -201,23 +209,180 @@ La portée d'une variable détermine où elle peut être utilisée dans le code.
 - **Champ de classe** : déclarée dans une classe mais en dehors des méthodes, accessible dans toute la classe.
 - **Variable statique** : partagée par toutes les instances de la classe.
 
+### Exemple 1 : Variables locales vs champs de classe
+
 ```csharp
 using System;
 
-class ExemplePortee
+class Compteur
 {
-    int champClasse = 5; // Champ de classe
-    static int champStatique = 10; // Champ statique
+    // Champ de classe (accessible dans toute la classe)
+    private int total = 0;
 
-    void Methode()
+    public void Incrementer()
     {
-        int variableLocale = 2; // Variable locale
-        Console.WriteLine(variableLocale);
-        Console.WriteLine(champClasse);
-        Console.WriteLine(champStatique);
+        // Variable locale (accessible uniquement dans cette méthode)
+        int increment = 1;
+        total = total + increment;
+        Console.WriteLine($"Total après incrément : {total}");
+        // increment disparaît à la fin de la méthode
+    }
+
+    public void AfficherTotal()
+    {
+        Console.WriteLine($"Total actuel : {total}");
+        // Console.WriteLine(increment); // ERREUR : increment n'existe pas ici
+    }
+}
+
+// Utilisation
+class Program
+{
+    static void Main()
+    {
+        Compteur c = new Compteur();
+        c.Incrementer(); // Affiche : Total après incrément : 1
+        c.Incrementer(); // Affiche : Total après incrément : 2
+        c.AfficherTotal(); // Affiche : Total actuel : 2
     }
 }
 ```
+
+**résumé** : Les variables locales sont temporaires et limitées à la méthode, tandis que les champs de classe persistent tant que l'objet existe.
+
+### Exemple 2 : Variables statiques partagées
+
+```csharp
+using System;
+
+class Joueur
+{
+    // Champ de classe (propre à chaque instance)
+    private string nom;
+    private int score;
+
+    // Champ statique (partagé par TOUS les joueurs)
+    private static int nombreJoueurs = 0;
+
+    public Joueur(string nom)
+    {
+        this.nom = nom;
+        this.score = 0;
+        nombreJoueurs++; // Incrémente pour tous les joueurs
+    }
+
+    public void AjouterPoints(int points)
+    {
+        score += points;
+        Console.WriteLine($"{nom} a maintenant {score} points");
+    }
+
+    public static void AfficherNombreJoueurs()
+    {
+        Console.WriteLine($"Nombre total de joueurs : {nombreJoueurs}");
+        // Console.WriteLine(nom); // ERREUR : une méthode statique ne peut pas accéder aux champs d'instance
+    }
+}
+
+// Utilisation
+class Program
+{
+    static void Main()
+    {
+        Joueur j1 = new Joueur("Alice");
+        Joueur j2 = new Joueur("Bob");
+        Joueur j3 = new Joueur("Charlie");
+
+        j1.AjouterPoints(10); // Alice a maintenant 10 points
+        j2.AjouterPoints(5);  // Bob a maintenant 5 points
+
+        Joueur.AfficherNombreJoueurs(); // Nombre total de joueurs : 3
+    }
+}
+```
+
+### Exemple 3 : Portée des variables dans les blocs
+
+```csharp
+using System;
+
+class ExempleBlocs
+{
+    public void DemonstrationPortee()
+    {
+        int x = 10; // Variable de la méthode
+
+        if (x > 5)
+        {
+            int y = 20; // Variable du bloc if
+            Console.WriteLine($"x = {x}, y = {y}"); // OK
+        }
+
+        // Console.WriteLine(y); // ERREUR : y n'existe plus ici
+
+        for (int i = 0; i < 3; i++)
+        {
+            int z = i * 2; // Variable du bloc for
+            Console.WriteLine($"i = {i}, z = {z}");
+        }
+
+        // Console.WriteLine(i); // ERREUR : i n'existe plus ici
+        // Console.WriteLine(z); // ERREUR : z n'existe plus ici
+
+        Console.WriteLine($"x = {x}"); // OK : x existe toujours
+    }
+}
+```
+
+### Exemple 4 : Masquage de variables (shadowing)
+
+```csharp
+using System;
+
+class ExempleMasquage
+{
+    private int valeur = 100; // Champ de classe
+
+    public void Methode1()
+    {
+        Console.WriteLine($"Valeur de classe : {valeur}"); // 100
+    }
+
+    public void Methode2()
+    {
+        int valeur = 50; // Variable locale qui "masque" le champ
+        Console.WriteLine($"Valeur locale : {valeur}"); // 50
+        Console.WriteLine($"Valeur de classe : {this.valeur}"); // 100 (accès avec 'this')
+    }
+
+    public void Methode3(int valeur) // Paramètre qui masque le champ
+    {
+        Console.WriteLine($"Paramètre : {valeur}"); // Valeur passée en paramètre
+        Console.WriteLine($"Champ de classe : {this.valeur}"); // 100
+    }
+}
+
+// Utilisation
+class Program
+{
+    static void Main()
+    {
+        ExempleMasquage ex = new ExempleMasquage();
+        ex.Methode1(); // Valeur de classe : 100
+        ex.Methode2(); // Valeur locale : 50, Valeur de classe : 100
+        ex.Methode3(75); // Paramètre : 75, Champ de classe : 100
+    }
+}
+```
+
+### Résumé des portées
+
+| Type de variable | Déclarée dans       | Accessible dans                              | Durée de vie                 |
+| ---------------- | ------------------- | -------------------------------------------- | ---------------------------- |
+| Locale           | Méthode/Bloc        | Méthode/Bloc uniquement                      | Jusqu'à la fin du bloc       |
+| Champ d'instance | Classe (hors méth.) | Toute la classe                              | Tant que l'objet existe      |
+| Champ statique   | Classe (static)     | Toute la classe + partout via `Classe.Champ` | Toute la durée du programme  |
+| Paramètre        | Signature méthode   | Corps de la méthode                          | Jusqu'à la fin de la méthode |
 
 ## Variables implicites : `var` et `dynamic`
 

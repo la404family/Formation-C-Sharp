@@ -106,11 +106,11 @@ namespace _103._Galactic_Sharp
             }
             lightTexture.SetData(data);
 
-            // Création texture bouclier (Arc de cercle)
+            // Création texture bouclier (Cercle fin)
             Texture2D shieldTexture = new Texture2D(graphicsDevice, size, size);
             Color[] shieldData = new Color[size * size];
-            float shieldRadius = size / 2f - 4f; // Marge
-            float thickness = 4f;
+            float shieldRadius = size / 2f - 2f; // Marge
+            float thickness = 2f; // Très fin
 
             for (int y = 0; y < size; y++)
             {
@@ -119,21 +119,17 @@ namespace _103._Galactic_Sharp
                     Vector2 pos = new Vector2(x, y);
                     float dist = Vector2.Distance(pos, center);
 
-                    // Angle pour faire un arc (Côté Droit ')' )
-                    // Atan2(y, x) : 0 est à droite.
-                    float angle = (float)System.Math.Atan2(y - center.Y, x - center.X);
-
-                    // On veut un arc entre -45 et +45 degrés (-PI/4 et PI/4)
-                    if (System.Math.Abs(angle) < System.Math.PI / 4f)
+                    // Cercle complet
+                    float distFromRing = System.Math.Abs(dist - shieldRadius);
+                    if (distFromRing < thickness)
                     {
-                        // Distance check with soft edges
-                        float distFromRing = System.Math.Abs(dist - shieldRadius);
-                        if (distFromRing < thickness)
-                        {
-                            float alpha = 1f - (distFromRing / thickness);
-                            // Halo effect
-                            shieldData[y * size + x] = Color.White * alpha;
-                        }
+                        float alpha = 1f - (distFromRing / thickness);
+                        // Halo effect
+                        shieldData[y * size + x] = Color.White * alpha;
+                    }
+                    else
+                    {
+                        shieldData[y * size + x] = Color.Transparent;
                     }
                 }
             }

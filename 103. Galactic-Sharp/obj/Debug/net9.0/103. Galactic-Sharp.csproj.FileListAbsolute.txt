@@ -36,3 +36,4 @@ D:\Documents perso\0000Site internet\Du Chevreuil\Formation-C-Sharp\103. Galacti
 D:\Documents perso\0000Site internet\Du Chevreuil\Formation-C-Sharp\103. Galactic-Sharp\bin\Debug\net9.0\assets\fire_ships.mp3
 D:\Documents perso\0000Site internet\Du Chevreuil\Formation-C-Sharp\103. Galactic-Sharp\bin\Debug\net9.0\assets\fire_ships.wav
 D:\Documents perso\0000Site internet\Du Chevreuil\Formation-C-Sharp\103. Galactic-Sharp\bin\Debug\net9.0\assets\text_sound.wav
+D:\Documents perso\0000Site internet\Du Chevreuil\Formation-C-Sharp\103. Galactic-Sharp\bin\Debug\net9.0\assets\Video_test.mp4
