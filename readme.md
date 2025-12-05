@@ -112,7 +112,11 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
 ## Partie 2 : Maîtriser le Framework .NET
 
-- [11. Architecture du CLR et Gestion mémoire](011.%20Architecture%20du%20CLR%20et%20Gestion%20mémoire/readme.md)
+- [11. Les bases du framework .NET](011.%20Les%20bases%20du%20framework%20.NET/readme.md)
+
+  > Architecture .NET, CLR, CTS, BCL, Assemblies, Compilation (MSIL/IL, JIT), Stack vs Heap, Types valeur vs référence, Boxing/Unboxing.
+
+- [11b. Architecture du CLR et Gestion mémoire](011b.%20Architecture%20du%20CLR%20et%20Gestion%20mémoire/readme.md)
 
   > Fonctionnement du CLR, Compilation (MSIL/IL, JIT), Assemblies et chargement, Stack vs Heap, Types valeur vs référence, Boxing/Unboxing, Span<T> et Memory<T>.
 
