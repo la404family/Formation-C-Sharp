@@ -35,7 +35,14 @@
 4. ⚔️ **Combattez !**
 
 ---
+## 📹 Vidéo du jeu
 
+<video controls width="640">
+  <source src="Video_test.mp4" type="video/mp4">
+  Votre navigateur ne supporte pas la vidéo.
+</video>
+
+---
 ## 📖 Description
 
 **Galactic-Sharp** est un jeu de combat spatial en **1 contre 1** développé en C# avec MonoGame. Affrontez votre ami dans une arène spatiale et soyez le dernier vaisseau en vol !
