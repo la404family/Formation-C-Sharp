@@ -286,51 +286,21 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
   > IJSRuntime, InvokeAsync, Appeler JavaScript depuis C#, Appeler C# depuis JavaScript, Isolated JavaScript modules, Gestion des bibliothèques JS externes.
 
-## Partie 8 : Développement 3D et temps réel (Unity)
+## Partie 8 : Architecture globale et Déploiement
 
-- [51. Interface Unity et GameObjects](051.%20Interface%20Unity%20et%20GameObjects/readme.md)
-
-  > Installation Unity Hub, Éditeur Unity (Scène, Game, Hierarchy, Project, Inspector), GameObjects, Components, Transform (Position, Rotation, Scale), Prefabs.
-
-- [52. Scripting C# pour Unity](052.%20Scripting%20C%23%20pour%20Unity/readme.md)
-
-  > Classe MonoBehaviour, Cycle de vie (Awake, Start, Update, FixedUpdate, LateUpdate), Input System (ancien et nouveau), GetComponent, Communication entre scripts, Coroutines (IEnumerator, yield), Spécificités GC Unity (éviter les allocations).
-
-- [53. Physique et Collisions dans Unity](053.%20Physique%20et%20Collisions%20dans%20Unity/readme.md)
-
-  > Rigidbody (2D/3D), Colliders (Box, Sphere, Capsule, Mesh), Triggers vs Collisions, OnCollisionEnter/Stay/Exit, Matériaux physiques (Friction, Bounciness), Raycast.
-
-- [54. Animations et Sons](054.%20Animations%20et%20Sons/readme.md)
-
-  > Animator et Animation, State Machines, Transitions et Parameters, Animation Clips, AudioSource et AudioClip, 2D/3D Sound, Mixers audio.
-
-- [55. UI et Menus dans Unity](055.%20UI%20et%20Menus%20dans%20Unity/readme.md)
-
-  > Canvas (Screen Space, World Space), RectTransform, Anchors et Pivots, UI Elements (Text, TextMeshPro, Button, Image, Slider, Toggle), Event System, Création de menus (Main Menu, Pause, Game Over).
-
-- [56. Caméras et Éclairage](056.%20Caméras%20et%20Éclairage/readme.md)
-
-  > Caméra orthographique vs perspective, Cinemachine, Skybox, Types de lumières (Directional, Point, Spot), Baking, Post-processing.
-
-- [57. Architecture Unity avancée](057.%20Architecture%20Unity%20avancée/readme.md)
-
-  > Architecture par composants (ECS), ScriptableObjects, Singletons dans Unity, Object Pooling, Events et Observer Pattern dans Unity, Bonnes pratiques de performance.
-
-## Partie 9 : Architecture globale et Déploiement
-
-- [58. Clean Architecture et CQRS](058.%20Clean%20Architecture%20et%20CQRS/readme.md)
+- [51. Clean Architecture et CQRS](051.%20Clean%20Architecture%20et%20CQRS/readme.md)
 
   > Principes de Clean Architecture (Domain, Application, Infrastructure, Presentation), Séparation des couches, CQRS (Command Query Responsibility Segregation), MediatR, Vertical Slice Architecture.
 
-- [59. Conteneurisation avec Docker](059.%20Conteneurisation%20avec%20Docker/readme.md)
+- [52. Conteneurisation avec Docker](052.%20Conteneurisation%20avec%20Docker/readme.md)
 
   > Concepts Docker (Images, Containers, Volumes), Dockerfile pour .NET, Docker Compose, Multi-stage builds, Registries (Docker Hub, Azure Container Registry).
 
-- [60. CI/CD et Automatisation](060.%20CI%20CD%20et%20Automatisation/readme.md)
+- [53. CI/CD et Automatisation](053.%20CI%20CD%20et%20Automatisation/readme.md)
 
   > Concepts CI/CD, GitHub Actions, Azure DevOps Pipelines, Build automatisé, Tests automatisés, Déploiement automatisé, Stratégies de déploiement (Blue-Green, Canary).
 
-- [61. Déploiement Cloud et Production](061.%20Déploiement%20Cloud%20et%20Production/readme.md)
+- [54. Déploiement Cloud et Production](054.%20Déploiement%20Cloud%20et%20Production/readme.md)
 
   > Azure App Service, Azure Functions, AWS Lambda, Configuration d'environnements (Development, Staging, Production), Secrets management, Health checks, Monitoring en production.
 
