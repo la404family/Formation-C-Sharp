@@ -217,24 +217,3 @@ dotnet run
 
 ---
 
-## 📚 Ce que vous apprendrez
-
-| Concept               | Description                                    |
-| --------------------- | ---------------------------------------------- |
-| `Console.ReadLine()`  | Lire une entrée utilisateur                    |
-| `Console.WriteLine()` | Afficher du texte                              |
-| `Func<T, TResult>`    | Délégué générique pour passer des fonctions    |
-| `string.All()`        | Vérifier une condition sur tous les caractères |
-| `int.TryParse()`      | Conversion sécurisée string → int              |
-| `$"..."`              | Interpolation de chaînes                       |
-| Boucle `while`        | Répéter jusqu'à condition remplie              |
-
----
-
-## 💡 Idées d'amélioration
-
-- [ ] Ajouter la validation de l'email
-- [ ] Calculer l'année de naissance
-- [ ] Sauvegarder les données dans un fichier
-- [ ] Ajouter un menu avec plusieurs options
-- [ ] Créer une version avec interface graphique (WPF)

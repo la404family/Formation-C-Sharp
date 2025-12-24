@@ -52,7 +52,7 @@ Le projet suit une architecture **N-Tier** stricte pour séparer les responsabil
 ### 📂 Structure des Dossiers
 
 ```
-HangmanSocial/
+104.HangmanSocialSharp/
 ├── HangmanSocial.sln                     # Le fichier solution global
 │
 ├── 1. Common/                            # COUCHE PARTAGÉE
