@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9yqqcow57NE=",
+  "success": true,
+  "projectFilePath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation-C-Sharp\\104.HangmanSocialSharp\\1. Common\\HangmanSocial.Shared\\HangmanSocial.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

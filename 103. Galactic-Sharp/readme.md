@@ -37,7 +37,9 @@
 ---
 ## 📹 Vidéo du jeu
 
+<p align="center">
 [![Le jeu Galactic-Sharp.exe en C#](https://img.youtube.com/vi/xTc7SD2C8G0/hqdefault.jpg)](https://www.youtube.com/watch?v=xTc7SD2C8G0)
+</p>
 
 ---
 ## 📖 Description

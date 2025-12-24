@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "t3NMso/sbvA=",
+  "success": true,
+  "projectFilePath": "D:\\Documents perso\\0000Site internet\\Du Chevreuil\\Formation-C-Sharp\\104.HangmanSocialSharp\\2. Backend\\HangmanSocial.Database\\HangmanSocial.Database.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\10.0.1\\microsoft.entityframeworkcore.tools.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -47,6 +47,10 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
   > Déclaration, initialisation, types (`int`, `string`, `double`, `bool`, `char`), constantes, concaténation, portée, `var`/`dynamic`, conversion de types.
 
+- [2a. Les mots clefs ref et out](002a.%20les%20mots%20clefs%20ref%20et%20out/readme.md)
+
+  > Passage d'arguments par référence (`ref`), retour de valeurs multiples (`out`), différence entre les deux.
+
 - [3. Les types de variables](003.%20Les%20types%20de%20variables/readme.md)
 
   > Types entiers (signés/non signés), flottants (`float`, `double`, `decimal`), `bool`, `char`, suffixes littéraux, manipulation de chaînes.
@@ -70,10 +74,6 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 - [8. La gestion des erreurs](008.%20La%20gestions%20des%20erreurs/readme.md)
 
   > Gestion des exceptions avec `try`, `catch`, `finally`, `throw`, et le bloc `using`.
-
-- [8a. Exceptions avancées](008a.%20Exceptions%20avancées/readme.md)
-
-  > Filtres d'exception (`when`), Exceptions de première chance, Création d'exceptions personnalisées, InnerException, AggregateException, Best practices.
 
 - [9. Les méthodes et fonctions](009.%20Les%20fonctions/readme.md)
 
