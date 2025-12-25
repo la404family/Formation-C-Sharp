@@ -35,10 +35,17 @@
 4. ⚔️ **Combattez !**
 
 ---
-## 📹 Vidéo du jeu
+## 📹 Images du jeu
 
 <p align="center">
-[![Le jeu Galactic-Sharp.exe en C#](https://img.youtube.com/vi/xTc7SD2C8G0/hqdefault.jpg)](https://www.youtube.com/watch?v=xTc7SD2C8G0)
+  <a href="https://youtu.be/xTc7SD2C8G0?si=RfmU6b41xeq_i8-P">
+    <img src="imageReadme.png" alt="Le jeu Galactic-Sharp.exe en C#">
+  </a>
+</p>
+<p align="center">
+  <a href="https://youtu.be/xTc7SD2C8G0?si=RfmU6b41xeq_i8-P">
+    <strong>📺 Cliquer ici pour voir la vidéo du jeu</strong>
+  </a>
 </p>
 
 ---
