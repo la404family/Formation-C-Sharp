@@ -316,3 +316,7 @@ Pour suivre cette formation dans les meilleures conditions, voici les outils rec
 
 - [103. Galactic Sharp](103.%20Galactic-Sharp/readme.md)
   > Jeu de combat spatial en 2D avec MonoGame, gestion des manettes, effets visuels et sonores, système de vie et boucliers.
+
+- [107. Hangman SocialSharp](107.%20Hangman%20SocialSharp/readme.md)
+  > Jeu du pendu social avec gestion des joueurs, statistiques persistantes, interface console riche et gestion des erreurs.
+
